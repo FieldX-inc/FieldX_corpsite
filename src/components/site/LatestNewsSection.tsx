@@ -24,7 +24,7 @@ export function LatestNewsSection({ sectionId, heading, emptyLabel, publishedLab
             <li key={post.slug}>
               <article className="fx-news-card">
                 <h3>
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  <Link href={`/column/${post.slug}`}>{post.title}</Link>
                 </h3>
                 <p>{post.description}</p>
                 {post.publishedAt ? (

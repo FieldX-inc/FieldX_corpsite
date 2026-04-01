@@ -144,7 +144,7 @@ export async function getLandingPageByCampaign(campaign: string): Promise<Landin
 }
 
 export async function getAllPublishedRoutes(): Promise<string[]> {
-  const routes: string[] = ["/", "/about", "/blog", "/contact", "/what-we-do", "/news"];
+  const routes: string[] = ["/", "/about", "/column", "/contact", "/what-we-do", "/news"];
 
   routes.push(
     ...siteContent.whatWeDo.services
@@ -154,7 +154,7 @@ export async function getAllPublishedRoutes(): Promise<string[]> {
   );
 
   const [posts, pages] = await Promise.all([getBlogPosts(), getLandingPages()]);
-  routes.push(...posts.map((post) => `/blog/${post.slug}`));
+  routes.push(...posts.map((post) => `/column/${post.slug}`));
   routes.push(...pages.map((page) => `/lp/${page.campaign}`));
 
   return routes;

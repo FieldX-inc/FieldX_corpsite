@@ -1,4 +1,5 @@
 export { AboutOrganism } from "./AboutOrganism";
+export { ColumnOrganism } from "./ColumnOrganism";
 export { CompanyProfileOrganism } from "./CompanyProfileOrganism";
 export { ContactOrganism } from "./ContactOrganism";
 export { ContactPageOrganism } from "./ContactPageOrganism";

@@ -1,4 +1,4 @@
-import { ContactOrganism, HeroOrganism, NewsOrganism, PoemOrganism, WhatWeDoOrganism } from "@/components/organisms";
+import { ColumnOrganism, ContactOrganism, HeroOrganism, NewsOrganism, PoemOrganism, WhatWeDoOrganism } from "@/components/organisms";
 import type { SiteLocaleContent } from "@/components/site/content";
 import type { BlogPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
@@ -9,6 +9,7 @@ const SECTION_IDS: Record<HomeSection, HomeSection> = {
   about: "about",
   mvv: "mvv",
   "what-we-do": "what-we-do",
+  column: "column",
   team: "team",
   "company-profile": "company-profile",
   news: "news",
@@ -40,6 +41,14 @@ export function HomeTemplate({ content, posts }: HomeTemplateProps) {
         featuredRows={content.whatWeDo.featuredRows}
         accentBackground={false}
         layout="featured"
+      />
+
+      <ColumnOrganism
+        sectionId={SECTION_IDS.column}
+        heading={content.column.heading}
+        emptyLabel={content.column.empty}
+        listAriaLabel={content.column.listAriaLabel}
+        posts={posts}
       />
 
       <NewsOrganism sectionId={SECTION_IDS.news} heading={content.news.heading} emptyLabel={content.news.empty} posts={posts} />

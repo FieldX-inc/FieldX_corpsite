@@ -7,6 +7,7 @@ type SiteHeaderProps = {
   nav: {
     about: string;
     whatWeDo: string;
+    column: string;
     news: string;
     contact: string;
   };

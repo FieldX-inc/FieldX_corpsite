@@ -1,9 +1,5 @@
-import { siteContent } from "@/components/site/content";
-import { BlogIndexTemplate } from "@/components/templates";
-import { getBlogPosts } from "@/lib/content/repository";
+import { redirect } from "next/navigation";
 
-export default async function BlogIndexPage() {
-  const posts = await getBlogPosts();
-
-  return <BlogIndexTemplate content={siteContent} posts={posts} />;
+export default function BlogIndexPage() {
+  redirect("/column");
 }

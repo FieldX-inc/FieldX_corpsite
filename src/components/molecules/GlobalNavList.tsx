@@ -4,6 +4,7 @@ type GlobalNavListProps = {
   nav: {
     about: string;
     whatWeDo: string;
+    column: string;
     news: string;
     contact: string;
   };
@@ -52,6 +53,9 @@ export function GlobalNavList({
       </li>
       <li>
         <NavItemLink href="/what-we-do" label={nav.whatWeDo} onClick={onNavigate} />
+      </li>
+      <li>
+        <NavItemLink href="/column" label={nav.column} onClick={onNavigate} />
       </li>
       <li>
         <NavItemLink href="/news" label={nav.news} onClick={onNavigate} />

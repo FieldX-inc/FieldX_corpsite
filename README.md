@@ -59,6 +59,15 @@ Recommended env for the Operates X project:
 NEXT_PUBLIC_SITE_URL=https://operatesx.example.com
 ```
 
+## GA4
+Set the GA4 Measurement ID in `.env.local` or Vercel environment variables.
+
+```bash
+NEXT_PUBLIC_GA_ID=G-2EJ0V2P6MZ
+```
+
+The root app injects the Google tag only when `NEXT_PUBLIC_GA_ID` is present.
+
 ## Scripts
 ```bash
 pnpm dev

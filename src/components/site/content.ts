@@ -5,6 +5,7 @@ export type SiteLocaleContent = {
   nav: {
     about: string;
     whatWeDo: string;
+    column: string;
     news: string;
     contact: string;
   };
@@ -63,6 +64,11 @@ export type SiteLocaleContent = {
     empty: string;
     publishedLabel: string;
   };
+  column: {
+    heading: string;
+    empty: string;
+    listAriaLabel: string;
+  };
   contact: {
     heading: string;
     body: string;
@@ -87,6 +93,7 @@ export const siteContent: SiteLocaleContent = {
     nav: {
       about: "About",
       whatWeDo: "What We Do",
+      column: "Column",
       news: "News",
       contact: "Contact"
     },
@@ -252,6 +259,11 @@ Field Xは、すべての事業領域・業界でAIが意思決定を支え、
       heading: "Latest News",
       empty: "公開中のニュースはまだありません。",
       publishedLabel: "Published"
+    },
+    column: {
+      heading: "Column",
+      empty: "公開中のコラムはまだありません。",
+      listAriaLabel: "コラム一覧"
     },
     contact: {
       heading: "Contact",

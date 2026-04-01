@@ -4,6 +4,7 @@ export type HomeSection =
   | "about"
   | "mvv"
   | "what-we-do"
+  | "column"
   | "team"
   | "company-profile"
   | "news"

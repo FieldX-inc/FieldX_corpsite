@@ -13,7 +13,7 @@ export function BlogPostTemplate({ content, post, body }: BlogPostTemplateProps)
   return (
     <Surface as="article" tone="light" labelledBy="blog-post-title" className="fx-page-section fx-article-shell">
       <div className="fx-shell fx-article-inner">
-        <SectionHeader title={post.title} titleId="blog-post-title" kicker="Blog" level="h1" />
+        <SectionHeader title={post.title} titleId="blog-post-title" kicker="Column" level="h1" />
         <BodyText>{post.description}</BodyText>
         {post.publishedAt ? (
           <MetaText>

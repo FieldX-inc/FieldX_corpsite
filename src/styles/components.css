@@ -431,10 +431,21 @@
 
 .fx-section-organism[aria-labelledby="about-page-who-we-are-title"] .fx-section-header,
 .fx-section-organism[aria-labelledby="what-we-do-page-title"] .fx-section-header,
+.fx-section-organism[aria-labelledby="column-page-title"] .fx-section-header,
 .fx-section-organism[aria-labelledby="news-page-title"] .fx-section-header,
 .fx-section-organism[aria-labelledby="contact-page-title"] .fx-section-header {
   justify-items: center;
   text-align: center;
+}
+
+.fx-section-organism[aria-labelledby="column-page-title"] .fx-column-page-description,
+.fx-section-organism[aria-labelledby="column-page-title"] .fx-column-page-empty {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.fx-section-organism[aria-labelledby="column-page-title"] .fx-column-page-description {
+  max-width: 40ch;
 }
 
 .fx-section-organism[aria-labelledby="about-page-mvv-title"] .fx-section-header,

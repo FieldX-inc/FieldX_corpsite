@@ -15,7 +15,7 @@ export function NewsCard({ post }: NewsCardProps) {
       </div>
       <p className="fx-news-tag">{tagLabel}</p>
       <SectionTitle as="h3" className="fx-card-title">
-        <TextAnchor href={`/blog/${post.slug}`}>{post.title}</TextAnchor>
+        <TextAnchor href={`/column/${post.slug}`}>{post.title}</TextAnchor>
       </SectionTitle>
       {post.publishedAt ? (
         <MetaText>
