@@ -39,26 +39,6 @@ When you are ready to open the full site, change it back to:
 SITE_RELEASE_PHASE=full
 ```
 
-## Separate Domain Deployment (`apps/operates-x`)
-When you want to run Operates X on a different domain permanently, use the standalone app at `apps/operates-x`.
-
-- Corporate main site: deploy repository root (`/`)
-- Operates X site: deploy `apps/operates-x` as a separate Vercel project (Root Directory)
-
-Local run for Operates X app:
-
-```bash
-cd apps/operates-x
-pnpm install
-pnpm dev
-```
-
-Recommended env for the Operates X project:
-
-```bash
-NEXT_PUBLIC_SITE_URL=https://operatesx.example.com
-```
-
 ## GA4
 Set the GA4 Measurement ID in `.env.local` or Vercel environment variables.
 

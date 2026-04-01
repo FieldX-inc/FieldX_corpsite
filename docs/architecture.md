@@ -20,11 +20,10 @@ Deliver a flexible corporate site that supports rapid publishing of blogs and la
 - Add new content types by introducing a new folder under `content/` and a corresponding schema.
 - Add shared UI by extending `src/components`.
 
-## Multi-Domain Structure
-- Primary corporate app lives at repository root (`src/app`).
-- Operates X standalone app lives at `apps/operates-x`.
-- Deploy them as two different Vercel projects using different Root Directory settings.
-- This keeps both codebases in one repository while allowing separate domains and release cadence.
+## Application Structure
+- The primary corporate app lives at repository root (`src/app`).
+- Operates X pages are implemented inside the same root application and share the same deployment target.
+- Content, routing, and release controls are managed from the root app only.
 
 ## Release Phase Control
 - Runtime mode is controlled by `SITE_RELEASE_PHASE`.
