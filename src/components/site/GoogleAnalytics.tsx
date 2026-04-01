@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 
@@ -55,7 +55,9 @@ export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
           gtag('config', '${gaId}', { send_page_view: false });
         `}
       </Script>
-      <GoogleAnalyticsPageView gaId={gaId} />
+      <Suspense fallback={null}>
+        <GoogleAnalyticsPageView gaId={gaId} />
+      </Suspense>
     </>
   );
 }
