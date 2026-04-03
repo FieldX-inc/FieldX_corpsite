@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { siteContent } from "@/components/site/content";
 import { getMicrocmsClient, getMicrocmsColumnEndpoint } from "@/lib/content/microcms";
-import type { BlogPost, LandingPage, LandingPageFrontmatter } from "@/types/content";
+import type { ColumnPost, LandingPage, LandingPageFrontmatter } from "@/types/content";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const isoDateSchema = z
@@ -53,6 +53,12 @@ function ensureSlugMatches(filePath: string, expected: string, actual: string, l
   }
 }
 
+const microcmsCategorySchema = z.object({
+  id: z.string().min(1).optional(),
+  name: z.string().min(1).optional(),
+  title: z.string().min(1).optional()
+});
+
 const microcmsBlogSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -64,20 +70,8 @@ const microcmsBlogSchema = z.object({
     })
     .optional(),
   category: z
-    .union([
-      z.object({
-        id: z.string().min(1).optional(),
-        name: z.string().min(1).optional(),
-        title: z.string().min(1).optional()
-      }),
-      z.array(
-        z.object({
-          id: z.string().min(1).optional(),
-          name: z.string().min(1).optional(),
-          title: z.string().min(1).optional()
-        })
-      )
-    ])
+    .union([microcmsCategorySchema, z.array(microcmsCategorySchema)])
+    .nullable()
     .optional()
 });
 
@@ -114,7 +108,7 @@ function normalizeCategoryTags(category: MicrocmsBlogResponse["category"]): stri
   return tags.length > 0 ? tags : undefined;
 }
 
-const loadBlogPosts = cache(async (): Promise<BlogPost[]> => {
+const loadColumnPosts = cache(async (): Promise<ColumnPost[]> => {
   const client = getMicrocmsClient();
   const endpoint = getMicrocmsColumnEndpoint();
   const posts: MicrocmsBlogResponse[] = [];
@@ -184,13 +178,13 @@ const loadLandingPages = cache(async (): Promise<LandingPage[]> => {
   return pages;
 });
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
-  const allPosts = await loadBlogPosts();
+export async function getColumnPosts(): Promise<ColumnPost[]> {
+  const allPosts = await loadColumnPosts();
   return sortByPublishedDate(allPosts);
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  const allPosts = await loadBlogPosts();
+export async function getColumnPostBySlug(slug: string): Promise<ColumnPost | null> {
+  const allPosts = await loadColumnPosts();
   const post = allPosts.find((entry) => entry.slug === slug);
   return post ?? null;
 }
@@ -222,7 +216,7 @@ export async function getAllPublishedRoutes(): Promise<string[]> {
       .map((slug) => `/what-we-do/${slug}`)
   );
 
-  const [posts, pages] = await Promise.all([getBlogPosts(), getLandingPages()]);
+  const [posts, pages] = await Promise.all([getColumnPosts(), getLandingPages()]);
   routes.push(...posts.map((post) => `/column/${post.slug}`));
   routes.push(...pages.map((page) => `/lp/${page.campaign}`));
 

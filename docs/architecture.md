@@ -21,15 +21,4 @@ Deliver a flexible corporate site that supports rapid publishing of Column conte
 
 ## Application Structure
 - The primary corporate app lives at repository root (`src/app`).
-- Operates X pages are implemented inside the same root application and share the same deployment target.
-- Content, routing, and release controls are managed from the root app only.
-
-## Release Phase Control
-- Runtime mode is controlled by `SITE_RELEASE_PHASE`.
-- `full` keeps the regular site behavior and route availability.
-- `prelaunch_operates_x` enables prelaunch mode:
-  - `/` renders Operates X as a standalone page.
-  - Global navigation/header/footer are hidden.
-  - Non-allowed routes are closed by middleware with `404` (files remain in repository).
-  - `sitemap.xml` only lists `/` and `/contact`.
-- Switch back to `SITE_RELEASE_PHASE=full` to restore all routes without code rollback.
+- Content and routing are managed from the root app only.

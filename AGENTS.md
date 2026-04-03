@@ -1,70 +1,139 @@
 # AGENTS.md
 
-## Purpose
-This repository is an AI-assisted corporate website foundation.
-The goal is to ship blog content and landing pages rapidly while keeping all source in Git.
+## 目的
+このリポジトリは、AI支援によるコーポレートサイト運用の基盤です。
+Column コンテンツとランディングページを素早く公開しつつ、すべてのソースを Git で管理することを目的とします。
 
-## Tech Stack
-- Framework: Next.js App Router + TypeScript
-- Package manager: pnpm
-- Hosting target: Vercel
-- Content source: MDX + frontmatter (no CMS)
-- Language: Japanese only
+## 技術スタック
+- フレームワーク: Next.js App Router + TypeScript
+- パッケージマネージャー: pnpm
+- ホスティング: Vercel
+- コンテンツソース: MDX + frontmatter+microCMS
+- 言語: 日本語のみ
 
-## Standard Commands
-- Install: `pnpm install`
-- Dev server: `pnpm dev`
+## 標準コマンド
+- インストール: `pnpm install`
+- 開発サーバー: `pnpm dev`
 - Lint: `pnpm lint`
-- Type check: `pnpm typecheck`
-- Build: `pnpm build`
-- Format check: `pnpm format:check`
+- 型チェック: `pnpm typecheck`
+- ビルド: `pnpm build`
+- フォーマット確認: `pnpm format:check`
 
-## Change Policy
-- Keep changes small and focused per PR.
-- Update docs together with structural or workflow changes.
-- If a change is breaking, document impact and migration steps in PR description.
+## 変更方針
+- 変更は PR ごとに小さく、焦点を絞る。
+- 構造や運用フローを変える場合は、ドキュメントも同時に更新する。
+- 破壊的変更がある場合は、影響範囲と移行手順を PR 説明に明記する。
 
-## Content Placement Rules
-- Blog content: `content/blog/*.mdx`
-- Landing pages: `content/lp/*.mdx`
-- Public images: `public/images/*`
+## コンテンツ配置ルール
+- ランディングページ: `content/lp/*.mdx`
+- 公開画像: `public/images/*`
 
-## Frontmatter Requirements
+## Column コンテンツのソース
+- 公開される `/column` ページは現在 `microCMS` をソースとしている。
+- AI を使って Column 原稿を作る場合、生成原稿は `microCMS` でレビュー・公開されるまでは素材として扱う。
+- `microCMS` と Git 管理 MDX の間で Column の保存先を切り替える場合は、関連ドキュメントと repository loader を必ず同時に更新する。
+
+## Frontmatter 要件
 ### Blog
-Required fields:
+必須項目:
 - `title`
 - `description`
 - `slug`
 - `status` (`draft` | `published`)
 
-Optional fields:
+任意項目:
 - `publishedAt` (ISO date)
 - `tags`
 - `ogImage`
 
-### Landing Page
-Required fields:
+### ランディングページ
+必須項目:
 - `title`
 - `description`
 - `campaign`
 - `status` (`draft` | `published`)
 
-Optional fields:
+任意項目:
 - `publishedAt` (ISO date)
 - `heroCta`
 - `ogImage`
 
-## Publication Rules
-- Only `status: published` appears in list/detail/sitemap output.
-- `draft` content is kept in Git but hidden from production output.
+## 公開ルール
+- `status: published` のコンテンツだけを一覧・詳細・sitemap に出す。
+- `draft` は Git 上には残すが、本番出力には含めない。
 
-## Routing Rules
-- Route format: `/...` (no locale prefix)
+## SEO コンテンツのガードレール
+- 公開コンテンツは日本語のみとする。元情報に明示的な必要がない限り、見出し、CTA、metadata に英語を混在させない。
+- 会社固有の不変コンテキストと、記事ごとの可変入力は分ける。会社コンテキストは各プロンプトではなく `AGENTS.md` に置く。
+- 事実主張には出所を持たせる。最新情報、統計、製品仕様、競合比較に依存する記事は、公開前に検証ステップを必須とする。
+- SEO、AIO、GEO は別レイヤーとして扱う。
+  - SEO: 検索意図、情報利得、metadata、内部リンク
+  - AIO: 結論先出し、抽出しやすい要約、明確な定義とエンティティ
+  - GEO: 引用されやすい主張、根拠付き比較、安全な要約
+- ポジショニング表現、顧客実績、法務・コンプライアンスに関わる記述、競合比較は、人間のレビューを必須とする。
 
-## Landing Page Checklist
-Before publishing an LP:
-- Confirm unique `campaign` value.
-- Confirm metadata fields (`title`, `description`, `ogImage`).
-- Confirm internal links are valid.
-- Confirm status is `published`.
-- Confirm page appears in `sitemap.xml` after build.
+## AI ワークフローの境界
+- `AGENTS.md` には、リポジトリルール、コンテンツ制約、metadata 要件、公開ゲートを書く。
+- 繰り返し使う作業手順は、keyword clustering、brief 生成、構成作成、本文執筆、QA、schema 確認などの skill に切り出す。
+- sub-agent は、SERP 調査、ソース検証、エンティティ抽出、内部リンク候補探索のように、責務が明確で並列化できる作業に限って使う。
+- 新しい AI 自動化フローを導入する場合は、手順、必要入力、出力契約を `docs/` に記録する。
+
+## 記事作成用の会社コンテキスト
+- 会社名: `Field X`
+- Mission: 「様々なFieldのXを解き、社会を次代につなげる。」
+- Vision: 「すべての事業領域・業界でAIが意思決定を支え、ヒトがヒトにしかできない業務に集中できる世界の実現」
+
+### 会社の基本スタンス
+- AI を単なるツールではなく、新しいインフラとして捉えている。
+- 表面的な非効率ではなく、業務構造そのものの課題を解く姿勢を持つ。
+- スピード、現場理解、実装後の運用定着を重視する。
+
+### 会社が行っていること
+- 業務フローを再設計し、実務の中に AI を実装する。
+- AI エージェント型のサービスや vertical AI product を作る。
+- サイト上で確認できる主な対象領域は、電話対応、書類業務、データ処理、マーケティング運用、ナレッジ / RAG システム。
+
+### Field Xのポジショニング
+- 現在は不動産賃貸管理会社に特定したAIエージェントを提案中
+  - AIコールエージェント／オーナーに対する営業支援AIエージェント　など
+  - パランティアのようなFDE型のビジネスモデル
+- 提案だけで終わる AI コンサルではなく、実装パートナーとして位置付けられている。
+- 中心メッセージは、PoC や勉強会で止まらず、AI を継続運用できる業務に組み込むこと。
+- サイト上の価値提案には次が含まれる。
+  - ヒアリングと課題整理による、導入優先度の可視化
+  - 既存ツールを活かした AI ワークフローの設計・実装
+  - 実装後の運用ルール整備とチーム定着支援
+- 単発支援ではなく、月額伴走型の支援モデルを採る。
+
+### 頻出する業務課題
+- 毎月ゼロから作り直しているレポートや資料
+- 手作業のデータ整形
+- 属人化した文章作成
+- 学習や PoC で止まり、本番業務に乗らない AI 活用
+
+### サイト上で確認できるユースケース
+- 採用 / 広報のワークフロー設計
+- 月次レポートや GA データ処理の自動化
+- 営業向け提案書ドラフト生成
+- 不動産賃貸管理会社向けの電話・書類業務の AI 支援
+
+### サイト文言から安全に推定できる対象読者
+- 反復的な業務を人手で回し続けている企業
+- オペレーション、レポーティング、営業支援、マーケティング運用、採用、バックオフィス改善に責任を持つ担当者
+- AI 導入には関心があるが、業務運用に乗せ切れていない組織
+
+### 記事執筆時の指針
+- 抽象的な AI トレンド論より、具体的な業務課題を優先して扱う。
+- アイデアや概念説明だけでなく、実装、定着、継続改善までつなげる。
+- AI を業務フロー、生産性、可処分時間の創出に結びつけて説明する。
+- 検証されていない市場優位性、成果数値、導入効果を断定しない。
+
+## ルーティングルール
+- ルート形式は `/...` とし、locale prefix は付けない。
+
+## ランディングページ公開前チェック
+- `campaign` が一意であることを確認する。
+- metadata 項目（`title`, `description`, `ogImage`）を確認する。
+- 内部リンクが正しいことを確認する。
+- `status` が `published` であることを確認する。
+- ビルド後に `sitemap.xml` へ出力されることを確認する。

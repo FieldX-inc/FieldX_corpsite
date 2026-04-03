@@ -43,24 +43,6 @@ Notes:
 - URL slug is currently derived from the `microCMS` content ID.
 - Description text is generated from the `content` body.
 
-## Release Phase
-Use `SITE_RELEASE_PHASE` to switch publication mode.
-
-- `full` (default): all routes are available.
-- `prelaunch_operates_x`: only `/` and `/contact` are public, and other routes return `404`.
-
-For Operates X prelaunch deployment on Vercel, set:
-
-```bash
-SITE_RELEASE_PHASE=prelaunch_operates_x
-```
-
-When you are ready to open the full site, change it back to:
-
-```bash
-SITE_RELEASE_PHASE=full
-```
-
 ## GA4
 Set the GA4 Measurement ID in `.env.local` or Vercel environment variables.
 
@@ -100,12 +82,11 @@ The form sends:
 ```text
 src/
   app/
-    blog/[slug]/page.tsx
+    column/[slug]/page.tsx
     lp/[campaign]/page.tsx
   lib/
     content/
 content/
-  blog/
   lp/
 docs/
 ```

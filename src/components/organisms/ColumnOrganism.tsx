@@ -1,7 +1,7 @@
 import { BodyText, Surface } from "@/components/atoms";
 import { NewsCard, SectionHeader } from "@/components/molecules";
 
-import type { BlogPost } from "@/types/content";
+import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
 
 type ColumnOrganismProps = {
@@ -9,7 +9,7 @@ type ColumnOrganismProps = {
   heading: string;
   emptyLabel: string;
   listAriaLabel: string;
-  posts: BlogPost[];
+  posts: ColumnPost[];
   titleId?: string;
 };
 

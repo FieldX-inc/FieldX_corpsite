@@ -1,14 +1,14 @@
 import { BodyText, Surface } from "@/components/atoms";
 import { NewsCard, SectionHeader } from "@/components/molecules";
 
-import type { BlogPost } from "@/types/content";
+import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
 
 type NewsOrganismProps = {
   sectionId: HomeSection;
   heading: string;
   emptyLabel: string;
-  posts: BlogPost[];
+  posts: ColumnPost[];
   titleId?: string;
   headingLevel?: "h1" | "h2" | "h3";
 };

@@ -1,6 +1,6 @@
 export type PublishStatus = "draft" | "published";
 
-export type BlogPost = {
+export type ColumnPost = {
   id: string;
   title: string;
   description: string;

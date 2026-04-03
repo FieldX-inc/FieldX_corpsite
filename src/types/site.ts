@@ -28,6 +28,6 @@ export type WhatWeDoFeatureRow = {
 
 export type SectionTone = "light" | "dark";
 
-export type TemplateVariant = "home" | "blog-index" | "blog-post" | "lp";
+export type TemplateVariant = "home" | "column-index" | "column-post" | "lp";
 
 export type CardDensity = "compact" | "comfortable";

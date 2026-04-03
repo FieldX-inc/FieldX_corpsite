@@ -75,7 +75,7 @@ export type SiteLocaleContent = {
     ctaLabel: string;
     ctaHref: string;
   };
-  blog: {
+  columnPage: {
     heading: string;
     description: string;
     empty: string;
@@ -188,16 +188,6 @@ Field Xは、すべての事業領域・業界でAIが意思決定を支え、
       services: [
         {
           category: "AI DX 事業",
-          name: "Operates X",
-          description: "業務フローを再設計し、AIを実装して現場に定着させる。",
-          slug: "operates-x",
-          image: {
-            src: "/images/services/operates-x.svg",
-            alt: "Operates X service visual"
-          }
-        },
-        {
-          category: "AI DX 事業",
           name: "Launch X",
           description: "企画から公開までを最短で。あなたのアイデア実装をAIでエンパワーメントします。",
           image: {
@@ -271,11 +261,11 @@ Field Xは、すべての事業領域・業界でAIが意思決定を支え、
       ctaLabel: "お問い合わせはこちら",
       ctaHref: "/contact"
     },
-    blog: {
-      heading: "Blog",
+    columnPage: {
+      heading: "Column",
       description: "公開中の記事のみ表示しています。",
       empty: "公開中の記事はありません。",
-      listAriaLabel: "ブログ記事一覧",
+      listAriaLabel: "コラム記事一覧",
       publishedLabel: "Published"
     },
     lp: {

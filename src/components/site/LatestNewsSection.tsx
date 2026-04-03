@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import type { BlogPost } from "@/types/content";
+import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
 
 type LatestNewsSectionProps = {
@@ -8,7 +8,7 @@ type LatestNewsSectionProps = {
   heading: string;
   emptyLabel: string;
   publishedLabel: string;
-  posts: BlogPost[];
+  posts: ColumnPost[];
 };
 
 export function LatestNewsSection({ sectionId, heading, emptyLabel, publishedLabel, posts }: LatestNewsSectionProps) {

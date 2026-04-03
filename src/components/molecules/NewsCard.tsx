@@ -1,8 +1,8 @@
 import { BodyText, MetaText, SectionTitle, TextAnchor } from "@/components/atoms";
-import type { BlogPost } from "@/types/content";
+import type { ColumnPost } from "@/types/content";
 
 type NewsCardProps = {
-  post: BlogPost;
+  post: ColumnPost;
 };
 
 export function NewsCard({ post }: NewsCardProps) {

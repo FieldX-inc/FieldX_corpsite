@@ -1,6 +1,6 @@
 import { ColumnOrganism, ContactOrganism, HeroOrganism, NewsOrganism, PoemOrganism, WhatWeDoOrganism } from "@/components/organisms";
 import type { SiteLocaleContent } from "@/components/site/content";
-import type { BlogPost } from "@/types/content";
+import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
 
 const SECTION_IDS: Record<HomeSection, HomeSection> = {
@@ -18,8 +18,8 @@ const SECTION_IDS: Record<HomeSection, HomeSection> = {
 
 type HomeTemplateProps = {
   content: SiteLocaleContent;
-  columnPosts: BlogPost[];
-  newsPosts: BlogPost[];
+  columnPosts: ColumnPost[];
+  newsPosts: ColumnPost[];
 };
 
 export function HomeTemplate({ content, columnPosts, newsPosts }: HomeTemplateProps) {

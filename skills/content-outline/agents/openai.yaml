@@ -1,0 +1,4 @@
+interface:
+  display_name: "構成設計"
+  short_description: "検索意図と事業文脈を踏まえて記事構成を設計する skill"
+  default_prompt: "$content-outline を使って、この brief から記事構成を作って。"

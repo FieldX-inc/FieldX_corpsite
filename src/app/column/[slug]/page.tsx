@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { siteContent } from "@/components/site/content";
-import { BlogPostTemplate } from "@/components/templates";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/content/repository";
+import { ColumnPostTemplate } from "@/components/templates";
+import { getColumnPostBySlug, getColumnPosts } from "@/lib/content/repository";
+
+export const revalidate = 300;
 
 export async function generateMetadata({
   params
@@ -11,7 +12,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getColumnPostBySlug(slug);
 
   if (!post) {
     return {};
@@ -29,7 +30,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
+  const posts = await getColumnPosts();
 
   return posts.map((post) => ({
     slug: post.slug
@@ -42,11 +43,11 @@ export default async function ColumnDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getColumnPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  return <BlogPostTemplate content={siteContent} post={post} />;
+  return <ColumnPostTemplate post={post} />;
 }

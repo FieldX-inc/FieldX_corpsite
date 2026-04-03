@@ -1,6 +1,6 @@
 export { AboutTemplate } from "./AboutTemplate";
-export { BlogIndexTemplate } from "./BlogIndexTemplate";
-export { BlogPostTemplate } from "./BlogPostTemplate";
+export { ColumnIndexTemplate } from "./ColumnIndexTemplate";
+export { ColumnPostTemplate } from "./ColumnPostTemplate";
 export { ContactTemplate } from "./ContactTemplate";
 export { HomeTemplate } from "./HomeTemplate";
 export { LandingPageTemplate } from "./LandingPageTemplate";
