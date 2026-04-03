@@ -36,7 +36,7 @@ export default async function HomePage() {
     );
   }
 
-  const posts = (await getBlogPosts()).slice(0, 3);
+  const columnPosts = (await getBlogPosts()).slice(0, 3);
 
-  return <HomeTemplate content={siteContent} posts={posts} />;
+  return <HomeTemplate content={siteContent} columnPosts={columnPosts} newsPosts={[]} />;
 }

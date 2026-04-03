@@ -18,10 +18,11 @@ const SECTION_IDS: Record<HomeSection, HomeSection> = {
 
 type HomeTemplateProps = {
   content: SiteLocaleContent;
-  posts: BlogPost[];
+  columnPosts: BlogPost[];
+  newsPosts: BlogPost[];
 };
 
-export function HomeTemplate({ content, posts }: HomeTemplateProps) {
+export function HomeTemplate({ content, columnPosts, newsPosts }: HomeTemplateProps) {
   return (
     <>
       <HeroOrganism sectionId={SECTION_IDS.hero} title={content.hero.title} body={content.hero.body} />
@@ -48,10 +49,10 @@ export function HomeTemplate({ content, posts }: HomeTemplateProps) {
         heading={content.column.heading}
         emptyLabel={content.column.empty}
         listAriaLabel={content.column.listAriaLabel}
-        posts={posts}
+        posts={columnPosts}
       />
 
-      <NewsOrganism sectionId={SECTION_IDS.news} heading={content.news.heading} emptyLabel={content.news.empty} posts={posts} />
+      <NewsOrganism sectionId={SECTION_IDS.news} heading={content.news.heading} emptyLabel={content.news.empty} posts={newsPosts} />
 
       <ContactOrganism
         sectionId={SECTION_IDS.contact}

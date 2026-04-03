@@ -1,15 +1,12 @@
 # Content Operations
 
-## Publish a Blog Post
-1. Add `content/blog/{slug}.mdx`
-2. Fill required frontmatter fields
-3. Set `status: published`
-4. Run `pnpm typecheck && pnpm build`
-5. Merge to `main`
-
-## Save Draft Content
-- Keep file in Git with `status: draft`
-- Draft files remain hidden in list/detail/sitemap output
+## Publish a Column Post
+1. Create or update the entry in `microCMS`
+2. Fill `title` and `content`
+3. Optionally set `eyecatch` and `category`
+4. Publish the entry in `microCMS`
+5. Run `pnpm typecheck && pnpm build`
+6. Deploy
 
 ## Publish a Landing Page
 1. Add `content/lp/{campaign}.mdx`
@@ -19,5 +16,6 @@
 5. Merge and deploy
 
 ## Validation Notes
-- `slug`/`campaign` must match filename
-- Invalid frontmatter fails build/time checks
+- Landing page `campaign` must match filename
+- Column content is loaded from `microCMS`
+- Invalid landing page frontmatter fails build/time checks

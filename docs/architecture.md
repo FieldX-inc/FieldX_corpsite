@@ -1,23 +1,22 @@
 # Architecture
 
 ## Goal
-Deliver a flexible corporate site that supports rapid publishing of blogs and landing pages without introducing a CMS.
+Deliver a flexible corporate site that supports rapid publishing of Column content and landing pages.
 
 ## System Overview
 - Next.js App Router for routing and rendering
-- MDX files in Git as the content source of truth
-- Frontmatter validation with schema checks
-- Publication controlled by `status: draft|published`
+- `microCMS` as the source of truth for Column content
+- MDX files in Git for landing pages
+- Schema validation for fetched CMS content and landing page frontmatter
 
 ## Runtime Flow
 1. Route receives slug/campaign.
-2. Repository loader reads MDX file from `content/*`.
-3. Frontmatter is validated.
-4. Non-published content is excluded.
-5. MDX is rendered server-side.
+2. Repository loader fetches Column content from `microCMS` or reads LP content from `content/lp`.
+3. Content shape is validated.
+4. Published entries are rendered server-side.
 
 ## Extensibility
-- Add new content types by introducing a new folder under `content/` and a corresponding schema.
+- Add new content types by introducing a new folder under `content/` or a new external content source with a corresponding schema.
 - Add shared UI by extending `src/components`.
 
 ## Application Structure

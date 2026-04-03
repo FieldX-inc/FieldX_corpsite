@@ -29,7 +29,7 @@ export function ColumnOrganism({
         {posts.length === 0 ? (
           <BodyText>{emptyLabel}</BodyText>
         ) : (
-          <ul className="fx-news-grid" aria-label={listAriaLabel}>
+          <ul className="fx-news-grid fx-news-grid--latest" aria-label={listAriaLabel}>
             {posts.map((post) => (
               <li key={post.slug}>
                 <NewsCard post={post} />

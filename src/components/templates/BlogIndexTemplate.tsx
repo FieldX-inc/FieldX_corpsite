@@ -10,7 +10,7 @@ type BlogIndexTemplateProps = {
 
 export function BlogIndexTemplate({ content, posts }: BlogIndexTemplateProps) {
   return (
-    <Surface as="section" tone="light" labelledBy="column-page-title" className="fx-section-organism">
+    <Surface as="section" tone="light" labelledBy="column-page-title" className="fx-section-organism fx-column-index-page">
       <div className="fx-shell">
         <SectionHeader title={content.nav.column} titleId="column-page-title" level="h1" />
         <BodyText className="fx-column-page-description">{content.blog.description}</BodyText>

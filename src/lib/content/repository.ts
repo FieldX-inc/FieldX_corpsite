@@ -1,25 +1,17 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 import matter from "gray-matter";
 import { z } from "zod";
 
 import { siteContent } from "@/components/site/content";
-import type { BlogFrontmatter, BlogPost, LandingPage, LandingPageFrontmatter } from "@/types/content";
+import { getMicrocmsClient, getMicrocmsColumnEndpoint } from "@/lib/content/microcms";
+import type { BlogPost, LandingPage, LandingPageFrontmatter } from "@/types/content";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const isoDateSchema = z
   .string()
   .refine((value) => !Number.isNaN(Date.parse(value)), "publishedAt must be a valid ISO date string");
-
-const blogSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-  slug: z.string().min(1),
-  status: z.enum(["draft", "published"]),
-  publishedAt: isoDateSchema.optional(),
-  tags: z.array(z.string()).optional(),
-  ogImage: z.string().optional()
-});
 
 const lpSchema = z.object({
   title: z.string().min(1),
@@ -61,31 +53,114 @@ function ensureSlugMatches(filePath: string, expected: string, actual: string, l
   }
 }
 
-async function loadBlogPosts(): Promise<BlogPost[]> {
-  const dirPath = path.join(CONTENT_ROOT, "blog");
-  const fileNames = await readMdxFiles(dirPath);
-
-  const posts = await Promise.all(
-    fileNames.map(async (fileName) => {
-      const filePath = path.join(dirPath, fileName);
-      const raw = await fs.readFile(filePath, "utf-8");
-      const parsed = matter(raw);
-      const frontmatter = blogSchema.parse(parsed.data) as BlogFrontmatter;
-
-      ensureSlugMatches(filePath, fileName.replace(/\.mdx$/, ""), frontmatter.slug, "slug");
-
-      return {
-        ...frontmatter,
-        body: parsed.content,
-        filePath
-      };
+const microcmsBlogSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  content: z.string().min(1),
+  publishedAt: isoDateSchema.optional(),
+  eyecatch: z
+    .object({
+      url: z.string().min(1)
     })
-  );
+    .optional(),
+  category: z
+    .union([
+      z.object({
+        id: z.string().min(1).optional(),
+        name: z.string().min(1).optional(),
+        title: z.string().min(1).optional()
+      }),
+      z.array(
+        z.object({
+          id: z.string().min(1).optional(),
+          name: z.string().min(1).optional(),
+          title: z.string().min(1).optional()
+        })
+      )
+    ])
+    .optional()
+});
 
-  return posts;
+type MicrocmsBlogResponse = z.infer<typeof microcmsBlogSchema>;
+
+function stripHtml(html: string): string {
+  return html
+    .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-async function loadLandingPages(): Promise<LandingPage[]> {
+function buildDescriptionFromContent(content: string): string {
+  const plainText = stripHtml(content);
+  return plainText.slice(0, 120);
+}
+
+function normalizeCategoryTags(category: MicrocmsBlogResponse["category"]): string[] | undefined {
+  if (!category) {
+    return undefined;
+  }
+
+  const values = Array.isArray(category) ? category : [category];
+  const tags = values
+    .map((item) => item.name ?? item.title)
+    .filter((value): value is string => Boolean(value));
+
+  return tags.length > 0 ? tags : undefined;
+}
+
+const loadBlogPosts = cache(async (): Promise<BlogPost[]> => {
+  const client = getMicrocmsClient();
+  const endpoint = getMicrocmsColumnEndpoint();
+  const posts: MicrocmsBlogResponse[] = [];
+  let offset = 0;
+  const limit = 100;
+
+  try {
+    while (true) {
+      const response = await client.getList<MicrocmsBlogResponse>({
+        endpoint,
+        queries: {
+          fields: "id,title,content,publishedAt,eyecatch,category",
+          orders: "-publishedAt",
+          limit,
+          offset
+        }
+      });
+
+      posts.push(...response.contents.map((item) => microcmsBlogSchema.parse(item)));
+
+      offset += response.contents.length;
+
+      if (offset >= response.totalCount || response.contents.length === 0) {
+        break;
+      }
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(
+      `[microCMS] Failed to fetch Column data from endpoint "${endpoint}". Check MICROCMS_SERVICE_DOMAIN, MICROCMS_API_KEY, MICROCMS_COLUMN_ENDPOINT, and network access. Original error: ${message}`
+    );
+  }
+
+  return posts.map((post) => ({
+    id: post.id,
+    title: post.title,
+    description: buildDescriptionFromContent(post.content),
+    slug: post.id,
+    publishedAt: post.publishedAt,
+    tags: normalizeCategoryTags(post.category),
+    ogImage: post.eyecatch?.url,
+    body: post.content
+  }));
+});
+
+const loadLandingPages = cache(async (): Promise<LandingPage[]> => {
   const dirPath = path.join(CONTENT_ROOT, "lp");
   const fileNames = await readMdxFiles(dirPath);
 
@@ -107,23 +182,17 @@ async function loadLandingPages(): Promise<LandingPage[]> {
   );
 
   return pages;
-}
+});
 
-export async function getBlogPosts(includeDraft = false): Promise<BlogPost[]> {
+export async function getBlogPosts(): Promise<BlogPost[]> {
   const allPosts = await loadBlogPosts();
-  const filtered = includeDraft ? allPosts : allPosts.filter((post) => post.status === "published");
-  return sortByPublishedDate(filtered);
+  return sortByPublishedDate(allPosts);
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   const allPosts = await loadBlogPosts();
   const post = allPosts.find((entry) => entry.slug === slug);
-
-  if (!post || post.status !== "published") {
-    return null;
-  }
-
-  return post;
+  return post ?? null;
 }
 
 export async function getLandingPages(includeDraft = false): Promise<LandingPage[]> {

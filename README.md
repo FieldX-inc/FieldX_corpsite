@@ -3,7 +3,8 @@
 Next.js App Router based corporate website starter for AI-driven iteration.
 
 ## Features
-- Git-managed MDX content (`blog`, `lp`)
+- `microCMS` managed Column content
+- Git-managed MDX landing pages (`lp`)
 - `draft/published` publication control
 - Japanese-only flat routes (no locale prefix)
 - Sitemap and robots generation
@@ -20,6 +21,27 @@ pnpm dev
 ```
 
 Open: `http://localhost:3000`
+
+## microCMS
+`/column` is backed by `microCMS`.
+
+Set the following in `.env.local` or Vercel environment variables:
+
+```bash
+MICROCMS_SERVICE_DOMAIN=your-service-domain
+MICROCMS_API_KEY=your-api-key
+MICROCMS_COLUMN_ENDPOINT=column
+```
+
+Expected content model fields for the Column API:
+- `title` (text)
+- `content` (rich editor HTML)
+- `eyecatch` (media, optional)
+- `category` (relation, optional)
+
+Notes:
+- URL slug is currently derived from the `microCMS` content ID.
+- Description text is generated from the `content` body.
 
 ## Release Phase
 Use `SITE_RELEASE_PHASE` to switch publication mode.
@@ -89,18 +111,8 @@ docs/
 ```
 
 ## Content Authoring
-### Blog (`content/blog/{slug}.mdx`)
-```mdx
----
-title: "..."
-description: "..."
-slug: "..."
-status: "draft"
-publishedAt: "2026-02-10"
----
-
-本文
-```
+### Column
+Manage Column posts in `microCMS`.
 
 ### Landing Page (`content/lp/{campaign}.mdx`)
 ```mdx

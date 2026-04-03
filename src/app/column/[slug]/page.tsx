@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { compileMDX } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 
 import { siteContent } from "@/components/site/content";
 import { BlogPostTemplate } from "@/components/templates";
-import { getBlogPostBySlug } from "@/lib/content/repository";
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/content/repository";
 
 export async function generateMetadata({
   params
@@ -29,6 +28,14 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug
+  }));
+}
+
 export default async function ColumnDetailPage({
   params
 }: {
@@ -41,7 +48,5 @@ export default async function ColumnDetailPage({
     notFound();
   }
 
-  const { content } = await compileMDX({ source: post.body });
-
-  return <BlogPostTemplate content={siteContent} post={post} body={content} />;
+  return <BlogPostTemplate content={siteContent} post={post} />;
 }

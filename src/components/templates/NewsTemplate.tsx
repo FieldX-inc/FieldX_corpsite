@@ -1,4 +1,5 @@
-import { NewsOrganism } from "@/components/organisms";
+import { BodyText, Surface } from "@/components/atoms";
+import { NewsCard, SectionHeader } from "@/components/molecules";
 import type { SiteLocaleContent } from "@/components/site/content";
 import type { BlogPost } from "@/types/content";
 
@@ -9,13 +10,23 @@ type NewsTemplateProps = {
 
 export function NewsTemplate({ content, posts }: NewsTemplateProps) {
   return (
-    <NewsOrganism
-      sectionId="news"
-      heading={content.nav.news}
-      emptyLabel={content.news.empty}
-      posts={posts}
-      titleId="news-page-title"
-      headingLevel="h1"
-    />
+    <Surface as="section" tone="light" labelledBy="news-page-title" className="fx-section-organism">
+      <div className="fx-shell">
+        <SectionHeader title={content.nav.news} titleId="news-page-title" level="h1" />
+        <BodyText className="fx-column-page-description">{content.blog.description}</BodyText>
+
+        {posts.length === 0 ? (
+          <BodyText className="fx-column-page-empty">{content.news.empty}</BodyText>
+        ) : (
+          <ul className="fx-news-grid" aria-label={content.nav.news}>
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <NewsCard post={post} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </Surface>
   );
 }
