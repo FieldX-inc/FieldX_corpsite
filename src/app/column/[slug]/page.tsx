@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ColumnPostTemplate } from "@/components/templates";
-import { getColumnPostBySlug, getColumnPosts } from "@/lib/content/repository";
+import { getColumnPostBySlug } from "@/lib/content/repository";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 300;
 
 export async function generateMetadata({
@@ -27,14 +28,6 @@ export async function generateMetadata({
       images: post.ogImage ? [post.ogImage] : undefined
     }
   };
-}
-
-export async function generateStaticParams() {
-  const posts = await getColumnPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug
-  }));
 }
 
 export default async function ColumnDetailPage({

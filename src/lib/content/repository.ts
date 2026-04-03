@@ -77,6 +77,10 @@ const microcmsBlogSchema = z.object({
 
 type MicrocmsBlogResponse = z.infer<typeof microcmsBlogSchema>;
 
+function hasMicrocmsConfig(): boolean {
+  return Boolean(process.env.MICROCMS_SERVICE_DOMAIN && process.env.MICROCMS_API_KEY);
+}
+
 function stripHtml(html: string): string {
   return html
     .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, " ")
@@ -109,6 +113,10 @@ function normalizeCategoryTags(category: MicrocmsBlogResponse["category"]): stri
 }
 
 const loadColumnPosts = cache(async (): Promise<ColumnPost[]> => {
+  if (!hasMicrocmsConfig()) {
+    return [];
+  }
+
   const client = getMicrocmsClient();
   const endpoint = getMicrocmsColumnEndpoint();
   const posts: MicrocmsBlogResponse[] = [];

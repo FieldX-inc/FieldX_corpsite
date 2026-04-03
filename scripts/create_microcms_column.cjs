@@ -43,12 +43,18 @@ function parseArticle(filePath) {
 
   return {
     title,
+    slug: pick("slug").replace(/^`|`$/g, ""),
     description,
     content: contentMatch[1].trim(),
   };
 }
 
 async function main() {
+  const articlePathArg = process.argv[2];
+  const articlePath = articlePathArg
+    ? path.resolve(process.cwd(), articlePathArg)
+    : path.join(process.cwd(), "briefs/2026-04-03-chintai-kanri-ai-microcms.md");
+
   const env = parseEnv(path.join(process.cwd(), ".env.local"));
   const serviceDomain = (env.MICROCMS_SERVICE_DOMAIN || "")
     .trim()
@@ -60,9 +66,7 @@ async function main() {
     .trim()
     .replace(/^\/+|\/+$/g, "");
 
-  const article = parseArticle(
-    path.join(process.cwd(), "briefs/2026-04-03-chintai-kanri-ai-microcms.md")
-  );
+  const article = parseArticle(articlePath);
 
   const contentClient = createClient({ serviceDomain, apiKey });
   const managementClient = createManagementClient({ serviceDomain, apiKey });
@@ -91,6 +95,7 @@ async function main() {
 
   const created = await contentClient.create({
     endpoint,
+    contentId: article.slug || undefined,
     content: payload,
     isDraft: true,
   });
@@ -101,6 +106,7 @@ async function main() {
         ok: true,
         endpoint,
         id: created.id,
+        articlePath,
         eyecatchUrl,
       },
       null,
