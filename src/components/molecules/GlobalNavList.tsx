@@ -61,7 +61,16 @@ export function GlobalNavList({
         <NavItemLink href="/news" label={nav.news} onClick={onNavigate} />
       </li>
       <li className="fx-global-nav-item-contact">
-        <NavItemLink href="/contact" label={nav.contact} className="fx-nav-item-link-contact" onClick={onNavigate} />
+        <NavItemLink
+          href="/contact"
+          label={nav.contact}
+          className="fx-nav-item-link-contact"
+          onClick={onNavigate}
+          tracking={{
+            ctaId: "global_nav_contact",
+            ctaLocation: "global_nav"
+          }}
+        />
       </li>
     </ul>
   );

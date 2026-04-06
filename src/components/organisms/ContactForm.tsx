@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
+
+import { getAttributionContext, getCurrentPagePath, trackCtaClick, trackEvent } from "@/lib/analytics";
 
 const inquiryTypeOptions = [
   { value: "project", label: "導入・ご相談" },
@@ -44,8 +46,22 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Partial<Record<ContactFieldName, string>>>({});
   const [statusMessage, setStatusMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasTrackedFormStartRef = useRef(false);
+
+  function trackFormStart() {
+    if (hasTrackedFormStartRef.current) {
+      return;
+    }
+
+    hasTrackedFormStartRef.current = true;
+    trackEvent("contact_form_started", {
+      form_id: "contact_form",
+      page_path: getCurrentPagePath()
+    });
+  }
 
   function handleChange(field: ContactFieldName, value: string) {
+    trackFormStart();
     setValues((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
     setStatusMessage("");
@@ -68,6 +84,12 @@ export function ContactForm() {
 
       setErrors(nextErrors);
       setStatusMessage("入力内容を確認してください。");
+      trackEvent("contact_form_submit_failed", {
+        form_id: "contact_form",
+        failure_stage: "validation",
+        error_count: result.error.issues.length,
+        page_path: getCurrentPagePath()
+      });
       return;
     }
 
@@ -81,20 +103,40 @@ export function ContactForm() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(result.data)
+        body: JSON.stringify({
+          ...result.data,
+          ...getAttributionContext()
+        })
       });
 
       const payload = (await response.json()) as { message?: string };
 
       if (!response.ok) {
         setStatusMessage(payload.message ?? "送信に失敗しました。");
+        trackEvent("contact_form_submit_failed", {
+          form_id: "contact_form",
+          failure_stage: "api_error",
+          response_status: response.status,
+          page_path: getCurrentPagePath()
+        });
         return;
       }
 
       setValues(initialValues);
       setStatusMessage("送信が完了しました。受付確認メールを送付しています。");
+      trackEvent("generate_lead", {
+        form_id: "contact_form",
+        inquiry_type: result.data.inquiryType,
+        has_company: result.data.company?.trim().length ? true : false,
+        page_path: getCurrentPagePath()
+      });
     } catch {
       setStatusMessage("送信に失敗しました。通信環境を確認して再度お試しください。");
+      trackEvent("contact_form_submit_failed", {
+        form_id: "contact_form",
+        failure_stage: "network_error",
+        page_path: getCurrentPagePath()
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -102,7 +144,7 @@ export function ContactForm() {
 
   return (
     <div className="fx-contact-form-block">
-      <form className="fx-contact-form" onSubmit={handleSubmit} noValidate>
+      <form className="fx-contact-form" onSubmit={handleSubmit} noValidate onFocusCapture={trackFormStart}>
         <div className="fx-contact-form-grid">
           <div className="fx-contact-field">
             <label className="fx-contact-label" htmlFor="contact-company">
@@ -229,7 +271,19 @@ export function ContactForm() {
           <p className="fx-contact-direct-link">
             メールソフトを使わず直接連絡する場合:
             {" "}
-            <a href="mailto:hello@fieldx.site">hello@fieldx.site</a>
+            <a
+              href="mailto:hello@fieldx.site"
+              onClick={() =>
+                trackCtaClick({
+                  ctaId: "contact_direct_email",
+                  ctaLabel: "hello@fieldx.site",
+                  ctaLocation: "contact_form",
+                  destinationUrl: "mailto:hello@fieldx.site"
+                })
+              }
+            >
+              hello@fieldx.site
+            </a>
           </p>
         </div>
 

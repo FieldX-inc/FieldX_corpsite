@@ -18,7 +18,17 @@ export function LandingPageTemplate({ content, page, body }: LandingPageTemplate
           <BodyText>{page.description}</BodyText>
           {page.heroCta ? (
             <MetaText className="fx-lp-cta-text">
-              {content.lp.ctaLabel}: <TextAnchor href="/contact">{page.heroCta}</TextAnchor>
+              {content.lp.ctaLabel}:{" "}
+              <TextAnchor
+                href="/contact"
+                tracking={{
+                  ctaId: `lp_hero_${page.campaign}`,
+                  ctaLabel: page.heroCta,
+                  ctaLocation: `lp_hero_${page.campaign}`
+                }}
+              >
+                {page.heroCta}
+              </TextAnchor>
             </MetaText>
           ) : null}
         </div>

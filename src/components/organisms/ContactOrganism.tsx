@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-import { BodyText, Surface } from "@/components/atoms";
+import { BodyText, Surface, TextAnchor } from "@/components/atoms";
 import { SectionHeader } from "@/components/molecules";
 
 import type { HomeSection } from "@/types/site";
@@ -36,9 +34,17 @@ export function ContactOrganism({
         <SectionHeader title={heading} titleId={titleId} level={titleLevel} />
         <BodyText>{body}</BodyText>
         <div className="fx-contact-links" aria-label={heading}>
-          <Link href={ctaHref} className="fx-about-cta">
+          <TextAnchor
+            href={ctaHref}
+            className="fx-about-cta"
+            tracking={{
+              ctaId: "home_contact_section",
+              ctaLabel,
+              ctaLocation: "home_contact_section"
+            }}
+          >
             {ctaLabel}
-          </Link>
+          </TextAnchor>
         </div>
       </div>
     </Surface>

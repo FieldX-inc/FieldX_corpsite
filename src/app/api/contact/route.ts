@@ -7,7 +7,15 @@ const contactRequestSchema = z.object({
   name: z.string().trim().min(1).max(80),
   email: z.string().trim().email(),
   inquiryType: z.enum(["project", "partnership", "media", "other"]),
-  message: z.string().trim().min(10).max(2000)
+  message: z.string().trim().min(10).max(2000),
+  pagePath: z.string().trim().max(300).optional().default(""),
+  pageTitle: z.string().trim().max(200).optional().default(""),
+  referrer: z.string().trim().max(500).optional().default(""),
+  utmSource: z.string().trim().max(120).optional().default(""),
+  utmMedium: z.string().trim().max(120).optional().default(""),
+  utmCampaign: z.string().trim().max(120).optional().default(""),
+  utmContent: z.string().trim().max(120).optional().default(""),
+  utmTerm: z.string().trim().max(120).optional().default("")
 });
 
 const inquiryTypeLabels = {
@@ -49,7 +57,17 @@ function getAdminMailText(input: z.infer<typeof contactRequestSchema>) {
     `お問い合わせ種別: ${inquiryTypeLabels[input.inquiryType]}`,
     "",
     "お問い合わせ内容",
-    input.message
+    input.message,
+    "",
+    "流入情報",
+    `ページ: ${input.pagePath || "未取得"}`,
+    `ページタイトル: ${input.pageTitle || "未取得"}`,
+    `参照元: ${input.referrer || "直接流入または未取得"}`,
+    `utm_source: ${input.utmSource || "未設定"}`,
+    `utm_medium: ${input.utmMedium || "未設定"}`,
+    `utm_campaign: ${input.utmCampaign || "未設定"}`,
+    `utm_content: ${input.utmContent || "未設定"}`,
+    `utm_term: ${input.utmTerm || "未設定"}`
   ].join("\n");
 }
 
