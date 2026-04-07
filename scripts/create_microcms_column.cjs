@@ -72,15 +72,22 @@ async function main() {
   const managementClient = createManagementClient({ serviceDomain, apiKey });
 
   let eyecatchUrl;
-  try {
-    const filePath = path.join(process.cwd(), "Frame 51.png");
-    const data = new Blob([fs.readFileSync(filePath)], { type: "image/png" });
-    const uploaded = await managementClient.uploadMedia({
-      data,
-      name: "chintai-kanri-ai-eyecatch.png",
-    });
-    eyecatchUrl = uploaded.url;
-  } catch (error) {
+  const eyecatchPath = (env.MICROCMS_EYECATCH_PATH || "").trim();
+  if (eyecatchPath) {
+    try {
+      const resolvedPath = path.resolve(process.cwd(), eyecatchPath);
+      const data = new Blob([fs.readFileSync(resolvedPath)], {
+        type: "image/png",
+      });
+      const uploaded = await managementClient.uploadMedia({
+        data,
+        name: path.basename(resolvedPath),
+      });
+      eyecatchUrl = uploaded.url;
+    } catch (error) {
+      eyecatchUrl = null;
+    }
+  } else {
     eyecatchUrl = null;
   }
 
@@ -93,19 +100,42 @@ async function main() {
     payload.eyecatch = { url: eyecatchUrl };
   }
 
-  const created = await contentClient.create({
-    endpoint,
-    contentId: article.slug || undefined,
-    content: payload,
-    isDraft: true,
-  });
+  let result;
+  if (article.slug) {
+    try {
+      result = await contentClient.update({
+        endpoint,
+        contentId: article.slug,
+        content: payload,
+        isDraft: true,
+      });
+    } catch (error) {
+      const status = error && typeof error === "object" ? error.status : null;
+      if (status === 404) {
+        result = await contentClient.create({
+          endpoint,
+          contentId: article.slug,
+          content: payload,
+          isDraft: true,
+        });
+      } else {
+        throw error;
+      }
+    }
+  } else {
+    result = await contentClient.create({
+      endpoint,
+      content: payload,
+      isDraft: true,
+    });
+  }
 
   console.log(
     JSON.stringify(
       {
         ok: true,
         endpoint,
-        id: created.id,
+        id: result.id || article.slug,
         articlePath,
         eyecatchUrl,
       },

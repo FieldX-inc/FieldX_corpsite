@@ -66,6 +66,7 @@ SUPABASE_ANON_KEY=your-anon-key
 
 Database schema and reporting views are documented in [docs/lead-db.sql](./docs/lead-db.sql).
 API contract for CRM integration is documented in [docs/contact-api.md](./docs/contact-api.md).
+Codex side data access prerequisites are documented in [docs/codex-data-access.md](./docs/codex-data-access.md).
 
 ## Scripts
 ```bash
