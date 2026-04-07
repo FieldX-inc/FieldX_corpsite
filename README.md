@@ -43,15 +43,29 @@ Notes:
 - URL slug is currently derived from the `microCMS` content ID.
 - Description text is generated from the `content` body.
 
-## GA4
-Set the GA4 Measurement ID in `.env.local` or Vercel environment variables.
+## GTM / GA4
+Set the GTM container ID and canonical site URL in `.env.local` or Vercel environment variables.
 
 ```bash
-NEXT_PUBLIC_GA_ID=G-2EJ0V2P6MZ
+NEXT_PUBLIC_SITE_URL=https://www.fieldx.site
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_CLARITY_ID=
 ```
 
-The root app injects the Google tag only when `NEXT_PUBLIC_GA_ID` is present.
+The root app injects GTM only when `NEXT_PUBLIC_GTM_ID` is present.
 Custom lead-gen events are documented in [docs/lead-acquisition-analytics.md](./docs/lead-acquisition-analytics.md).
+
+## Lead Storage
+To store contact leads in Supabase, set the following environment variables:
+
+```bash
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+SUPABASE_ANON_KEY=your-anon-key
+```
+
+Database schema and reporting views are documented in [docs/lead-db.sql](./docs/lead-db.sql).
+API contract for CRM integration is documented in [docs/contact-api.md](./docs/contact-api.md).
 
 ## Scripts
 ```bash

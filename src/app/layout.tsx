@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { SiteFooter, SiteHeader } from "@/components/organisms";
 import { siteContent } from "@/components/site/content";
-import { GoogleAnalytics } from "@/components/site/GoogleAnalytics";
+import { GoogleTagManager } from "@/components/site/GoogleTagManager";
 
 import "./globals.css";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   return (
     <html lang="ja">
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <main className="fx-main-area">{children}</main>
         <SiteFooter company={siteContent.company} />
-        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
+        {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       </body>
     </html>
   );

@@ -1,22 +1,8 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { z } from "zod";
 
-const contactRequestSchema = z.object({
-  company: z.string().trim().max(120).optional().default(""),
-  name: z.string().trim().min(1).max(80),
-  email: z.string().trim().email(),
-  inquiryType: z.enum(["project", "partnership", "media", "other"]),
-  message: z.string().trim().min(10).max(2000),
-  pagePath: z.string().trim().max(300).optional().default(""),
-  pageTitle: z.string().trim().max(200).optional().default(""),
-  referrer: z.string().trim().max(500).optional().default(""),
-  utmSource: z.string().trim().max(120).optional().default(""),
-  utmMedium: z.string().trim().max(120).optional().default(""),
-  utmCampaign: z.string().trim().max(120).optional().default(""),
-  utmContent: z.string().trim().max(120).optional().default(""),
-  utmTerm: z.string().trim().max(120).optional().default("")
-});
+import { saveLead } from "@/lib/leads";
+import { leadCreateInputSchema } from "@/types/lead";
 
 const inquiryTypeLabels = {
   project: "導入・ご相談",
@@ -47,7 +33,7 @@ function getSmtpConfig() {
   };
 }
 
-function getAdminMailText(input: z.infer<typeof contactRequestSchema>) {
+function getAdminMailText(input: ReturnType<typeof leadCreateInputSchema.parse>) {
   return [
     "Field X のお問い合わせフォームから新規送信がありました。",
     "",
@@ -67,11 +53,12 @@ function getAdminMailText(input: z.infer<typeof contactRequestSchema>) {
     `utm_medium: ${input.utmMedium || "未設定"}`,
     `utm_campaign: ${input.utmCampaign || "未設定"}`,
     `utm_content: ${input.utmContent || "未設定"}`,
-    `utm_term: ${input.utmTerm || "未設定"}`
+    `utm_term: ${input.utmTerm || "未設定"}`,
+    `ga_client_id: ${input.gaClientId || "未設定"}`
   ].join("\n");
 }
 
-function getAutoReplyText(input: z.infer<typeof contactRequestSchema>) {
+function getAutoReplyText(input: ReturnType<typeof leadCreateInputSchema.parse>) {
   return [
     `${input.name} 様`,
     "",
@@ -90,7 +77,7 @@ function getAutoReplyText(input: z.infer<typeof contactRequestSchema>) {
 }
 
 export async function POST(request: Request) {
-  const parsed = contactRequestSchema.safeParse(await request.json());
+  const parsed = leadCreateInputSchema.safeParse(await request.json());
 
   if (!parsed.success) {
     return NextResponse.json({ message: "入力内容を確認してください。" }, { status: 400 });
@@ -117,24 +104,42 @@ export async function POST(request: Request) {
   const from = `"${smtpConfig.fromName}" <${smtpConfig.fromEmail}>`;
 
   try {
-    await transporter.sendMail({
-      from,
-      to: "hello@fieldx.site",
-      replyTo: parsed.data.email,
-      subject: adminSubject,
-      text: getAdminMailText(parsed.data)
-    });
+    const [adminMailResult, replyMailResult, leadResult] = await Promise.allSettled([
+      transporter.sendMail({
+        from,
+        to: "hello@fieldx.site",
+        replyTo: parsed.data.email,
+        subject: adminSubject,
+        text: getAdminMailText(parsed.data)
+      }),
+      transporter.sendMail({
+        from,
+        to: parsed.data.email,
+        subject: replySubject,
+        text: getAutoReplyText(parsed.data)
+      }),
+      saveLead(parsed.data)
+    ]);
 
-    await transporter.sendMail({
-      from,
-      to: parsed.data.email,
-      subject: replySubject,
-      text: getAutoReplyText(parsed.data)
-    });
+    if (adminMailResult.status === "rejected" || replyMailResult.status === "rejected") {
+      console.error("contact form mail send failed", {
+        adminMailError: adminMailResult.status === "rejected" ? adminMailResult.reason : null,
+        replyMailError: replyMailResult.status === "rejected" ? replyMailResult.reason : null
+      });
+
+      return NextResponse.json(
+        { message: "送信に失敗しました。時間をおいて再度お試しください。" },
+        { status: 500 }
+      );
+    }
+
+    if (leadResult.status === "rejected") {
+      console.error("lead storage failed", leadResult.reason);
+    }
 
     return NextResponse.json({ message: "お問い合わせを送信しました。" });
   } catch (error) {
-    console.error("contact form mail send failed", error);
+    console.error("contact form request failed", error);
     return NextResponse.json(
       { message: "送信に失敗しました。時間をおいて再度お試しください。" },
       { status: 500 }

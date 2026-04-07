@@ -154,6 +154,7 @@ export function ContactForm() {
               id="contact-company"
               name="company"
               className="fx-contact-input"
+              data-clarity-mask="true"
               type="text"
               autoComplete="organization"
               value={values.company}
@@ -176,6 +177,7 @@ export function ContactForm() {
               id="contact-name"
               name="name"
               className="fx-contact-input"
+              data-clarity-mask="true"
               type="text"
               autoComplete="name"
               value={values.name}
@@ -198,6 +200,7 @@ export function ContactForm() {
               id="contact-email"
               name="email"
               className="fx-contact-input"
+              data-clarity-mask="true"
               type="email"
               autoComplete="email"
               inputMode="email"
@@ -221,6 +224,7 @@ export function ContactForm() {
               id="contact-type"
               name="inquiryType"
               className="fx-contact-input fx-contact-select"
+              data-clarity-mask="true"
               value={values.inquiryType}
               onChange={(event) => handleChange("inquiryType", event.target.value)}
               aria-describedby={errors.inquiryType ? "contact-type-error" : undefined}
@@ -248,6 +252,7 @@ export function ContactForm() {
             id="contact-message"
             name="message"
             className="fx-contact-input fx-contact-textarea"
+            data-clarity-mask="true"
             rows={8}
             value={values.message}
             onChange={(event) => handleChange("message", event.target.value)}

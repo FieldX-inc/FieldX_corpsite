@@ -1,14 +1,8 @@
 type EventParams = Record<string, string | number | boolean | null | undefined>;
 
-type Gtag = (
-  command: "event" | "config" | "js",
-  eventNameOrId: string | Date,
-  params?: EventParams
-) => void;
-
 declare global {
   interface Window {
-    gtag?: Gtag;
+    dataLayer?: Array<Record<string, unknown>>;
   }
 }
 
@@ -28,10 +22,11 @@ export type AttributionContext = {
   utmCampaign: string;
   utmContent: string;
   utmTerm: string;
+  gaClientId: string;
 };
 
-function hasGtag() {
-  return typeof window !== "undefined" && typeof window.gtag === "function";
+function hasDataLayer() {
+  return typeof window !== "undefined" && Array.isArray(window.dataLayer);
 }
 
 export function getCurrentPagePath() {
@@ -40,6 +35,29 @@ export function getCurrentPagePath() {
   }
 
   return `${window.location.pathname}${window.location.search}`;
+}
+
+function getCookieValue(name: string) {
+  if (typeof document === "undefined") {
+    return "";
+  }
+
+  const cookie = document.cookie
+    .split("; ")
+    .find((item) => item.startsWith(`${name}=`));
+
+  return cookie ? decodeURIComponent(cookie.split("=")[1] ?? "") : "";
+}
+
+function getGaClientId() {
+  const gaCookie = getCookieValue("_ga");
+  const parts = gaCookie.split(".");
+
+  if (parts.length < 4) {
+    return "";
+  }
+
+  return `${parts[2]}.${parts[3]}`;
 }
 
 export function getAttributionContext(): AttributionContext {
@@ -52,7 +70,8 @@ export function getAttributionContext(): AttributionContext {
       utmMedium: "",
       utmCampaign: "",
       utmContent: "",
-      utmTerm: ""
+      utmTerm: "",
+      gaClientId: ""
     };
   }
 
@@ -66,16 +85,20 @@ export function getAttributionContext(): AttributionContext {
     utmMedium: searchParams.get("utm_medium") ?? "",
     utmCampaign: searchParams.get("utm_campaign") ?? "",
     utmContent: searchParams.get("utm_content") ?? "",
-    utmTerm: searchParams.get("utm_term") ?? ""
+    utmTerm: searchParams.get("utm_term") ?? "",
+    gaClientId: getGaClientId()
   };
 }
 
 export function trackEvent(eventName: string, params: EventParams = {}) {
-  if (!hasGtag()) {
+  if (!hasDataLayer()) {
     return;
   }
 
-  window.gtag?.("event", eventName, params);
+  window.dataLayer?.push({
+    event: eventName,
+    ...params
+  });
 }
 
 function getDestinationType(destinationUrl: string) {
@@ -102,5 +125,12 @@ export function trackCtaClick({ ctaId, ctaLabel, ctaLocation, destinationUrl }: 
     destination_url: destinationUrl,
     destination_type: getDestinationType(destinationUrl),
     page_path: getCurrentPagePath()
+  });
+}
+
+export function trackPageView(pagePath: string, pageTitle: string) {
+  trackEvent("page_view", {
+    page_path: pagePath,
+    page_title: pageTitle
   });
 }
