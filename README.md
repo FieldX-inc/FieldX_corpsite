@@ -62,11 +62,21 @@ To store contact leads in Supabase, set the following environment variables:
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 SUPABASE_ANON_KEY=your-anon-key
+CRM_API_TOKEN=your-crm-api-token
 ```
 
 Database schema and reporting views are documented in [docs/lead-db.sql](./docs/lead-db.sql).
 API contract for CRM integration is documented in [docs/contact-api.md](./docs/contact-api.md).
 Codex side data access prerequisites are documented in [docs/codex-data-access.md](./docs/codex-data-access.md).
+
+CRM integrations can read lead data through the authenticated endpoints:
+- `GET /api/leads`
+- `GET /api/leads/{id}`
+- `GET /api/leads/daily`
+- `GET /api/leads/pages`
+- `GET /api/leads/campaigns`
+
+Pass `Authorization: Bearer ${CRM_API_TOKEN}` from your server-side CRM environment.
 
 ## Scripts
 ```bash

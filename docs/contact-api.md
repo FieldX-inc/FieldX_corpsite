@@ -2,11 +2,23 @@
 
 ## 目的
 - `/api/contact` の request / response 契約を固定する
+- CRM から lead データを安全に参照する read-only API を定義する
 - 自作 CRM や運用バッチが参照すべき lead データ項目を明確にする
 - メール送信と Lead DB 保存の責務分離を明文化する
 
 ## Endpoint
 - `POST /api/contact`
+- `GET /api/leads`
+- `GET /api/leads/:id`
+- `GET /api/leads/daily`
+- `GET /api/leads/pages`
+- `GET /api/leads/campaigns`
+
+## CRM Read API 認証
+- CRM 向け read API は固定トークン認証を使う
+- リクエストヘッダーに `Authorization: Bearer <CRM_API_TOKEN>` を付与する
+- トークン不一致または欠落時は `401`
+- 想定利用者はサーバーサイドの CRM SaaS のみ
 
 ## 概要
 - 問い合わせフォームの送信を受け付ける
@@ -91,6 +103,178 @@
 }
 ```
 
+## CRM Read API
+### `GET /api/leads`
+- 最新の lead 一覧を返す
+- 既定ソート: `createdAt desc`
+
+#### Query
+- `status`: `new | contacted | qualified | lost`
+- `inquiryType`: `project | partnership | media | other`
+- `utmCampaign`: string
+- `pagePath`: string
+- `limit`: `1..100`
+
+#### Response
+- Status: `200`
+
+```json
+{
+  "leads": [
+    {
+      "id": "uuid",
+      "createdAt": "2026-04-07T12:34:56.000Z",
+      "company": "株式会社Example",
+      "name": "山田 太郎",
+      "email": "taro@example.com",
+      "inquiryType": "project",
+      "message": "AI導入について相談したいです。",
+      "pagePath": "/contact",
+      "pageTitle": "お問い合わせ | Field X",
+      "referrer": "https://www.google.com/",
+      "utmSource": "google",
+      "utmMedium": "cpc",
+      "utmCampaign": "spring_lp",
+      "utmContent": "cta_a",
+      "utmTerm": "ai 導入",
+      "gaClientId": "1234567890.1234567890",
+      "status": "new",
+      "notes": null
+    }
+  ]
+}
+```
+
+### `GET /api/leads/:id`
+- 単一 lead の詳細を返す
+- 存在しない `id` は `404`
+
+#### Response
+- Status: `200`
+
+```json
+{
+  "lead": {
+    "id": "uuid",
+    "createdAt": "2026-04-07T12:34:56.000Z",
+    "company": "株式会社Example",
+    "name": "山田 太郎",
+    "email": "taro@example.com",
+    "inquiryType": "project",
+    "message": "AI導入について相談したいです。",
+    "pagePath": "/contact",
+    "pageTitle": "お問い合わせ | Field X",
+    "referrer": "https://www.google.com/",
+    "utmSource": "google",
+    "utmMedium": "cpc",
+    "utmCampaign": "spring_lp",
+    "utmContent": "cta_a",
+    "utmTerm": "ai 導入",
+    "gaClientId": "1234567890.1234567890",
+    "status": "new",
+    "notes": null
+  }
+}
+```
+
+### `GET /api/leads/daily`
+- 日別集計を返す
+
+#### Query
+- `from`: `YYYY-MM-DD`
+- `to`: `YYYY-MM-DD`
+- `limit`: `1..365`
+
+#### Response
+```json
+{
+  "summary": [
+    {
+      "day": "2026-04-07T00:00:00+00:00",
+      "leadCount": 12,
+      "qualifiedCount": 3
+    }
+  ]
+}
+```
+
+### `GET /api/leads/pages`
+- ページ別集計を返す
+
+#### Query
+- `limit`: `1..100`
+
+#### Response
+```json
+{
+  "summary": [
+    {
+      "pagePath": "/contact",
+      "inquiryType": "project",
+      "leadCount": 8,
+      "firstLeadAt": "2026-04-01T01:23:45.000Z",
+      "lastLeadAt": "2026-04-07T12:34:56.000Z"
+    }
+  ]
+}
+```
+
+### `GET /api/leads/campaigns`
+- `utm_campaign` 別集計を返す
+
+#### Query
+- `limit`: `1..100`
+
+#### Response
+```json
+{
+  "summary": [
+    {
+      "utmCampaign": "spring_lp",
+      "leadCount": 5,
+      "qualifiedCount": 2
+    }
+  ]
+}
+```
+
+### CRM Read API Errors
+#### Unauthorized
+- Status: `401`
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+#### Invalid Query Parameters
+- Status: `400`
+
+```json
+{
+  "message": "Invalid query parameters."
+}
+```
+
+#### Not Found
+- Status: `404`
+
+```json
+{
+  "message": "Lead not found."
+}
+```
+
+#### Internal Server Error
+- Status: `500`
+
+```json
+{
+  "message": "Internal server error."
+}
+```
+
 ## 保存先
 lead は Supabase の `public.leads` に保存する。
 
@@ -132,7 +316,7 @@ SQL は [lead-db.sql](/home/yshk0402/Corporates-site/docs/lead-db.sql) を参照
 
 ## CRM 連携方針
 - 本リポジトリ側では管理画面を持たない
-- CRM 側は `public.leads` を参照して表示・更新する
+- CRM 側は read API または `public.leads` を参照して表示する
 - 更新対象として想定している主カラム
   - `status`
   - `notes`
