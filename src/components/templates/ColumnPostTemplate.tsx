@@ -1,5 +1,5 @@
 import { BodyText, Surface, TextAnchor } from "@/components/atoms";
-import { SectionHeader } from "@/components/molecules";
+import { EditorialHeading } from "@/components/molecules";
 import type { ColumnPost } from "@/types/content";
 
 type ColumnPostTemplateProps = {
@@ -7,6 +7,8 @@ type ColumnPostTemplateProps = {
 };
 
 export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
+  const lead = post.lead ?? post.description;
+
   return (
     <Surface
       as="article"
@@ -28,8 +30,8 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
 
           <header className="fx-article-hero">
             <div className="fx-article-hero-copy">
-              <SectionHeader title={post.title} titleId="column-post-title" kicker="Column" level="h1" />
-              <BodyText className="fx-article-lead">{post.description}</BodyText>
+              <EditorialHeading title={post.title} titleId="column-post-title" kicker="Column" level="h1" />
+              <BodyText className="fx-article-lead">{lead}</BodyText>
             </div>
           </header>
 
@@ -37,6 +39,21 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
             <figure className="fx-article-cover">
               <img src={post.ogImage} alt={post.title} className="fx-article-cover-image" />
             </figure>
+          ) : null}
+
+          {post.toc.length > 0 ? (
+            <nav aria-label="記事目次" className="fx-article-toc">
+              <p className="fx-article-toc-label">目次</p>
+              <ol className="fx-article-toc-list">
+                {post.toc.map((item) => (
+                  <li key={item.id} className={`fx-article-toc-item fx-article-toc-item-level-${item.level}`}>
+                    <TextAnchor href={`#${item.id}`} className="fx-article-toc-link">
+                      {item.text}
+                    </TextAnchor>
+                  </li>
+                ))}
+              </ol>
+            </nav>
           ) : null}
 
           <div className="fx-article-content">

@@ -111,7 +111,11 @@ async function main() {
       });
     } catch (error) {
       const status = error && typeof error === "object" ? error.status : null;
-      if (status === 404) {
+      const message = error instanceof Error ? error.message : String(error);
+      const contentMissing =
+        status === 404 || /Content is not exists\./i.test(message);
+
+      if (contentMissing) {
         result = await contentClient.create({
           endpoint,
           contentId: article.slug,

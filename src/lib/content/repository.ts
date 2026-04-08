@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { siteContent } from "@/components/site/content";
 import { getMicrocmsClient, getMicrocmsColumnEndpoint } from "@/lib/content/microcms";
-import type { ColumnPost, LandingPage, LandingPageFrontmatter } from "@/types/content";
+import type { ColumnPost, ColumnPostTocItem, LandingPage, LandingPageFrontmatter } from "@/types/content";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const isoDateSchema = z
@@ -99,6 +99,90 @@ function buildDescriptionFromContent(content: string): string {
   return plainText.slice(0, 120);
 }
 
+function buildLeadFromContent(content: string): string | undefined {
+  const firstParagraphMatch = content.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+
+  if (!firstParagraphMatch) {
+    return undefined;
+  }
+
+  const lead = stripTags(firstParagraphMatch[1]);
+  return lead || undefined;
+}
+
+function decodeHtmlEntities(value: string): string {
+  return value
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'");
+}
+
+function stripTags(value: string): string {
+  return decodeHtmlEntities(value.replace(/<[^>]+>/g, " "))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function slugifyHeading(value: string): string {
+  const normalized = value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\p{Letter}\p{Number}\s-]/gu, " ")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+
+  return normalized || "section";
+}
+
+function appendClassName(rawAttrs: string, nextClassName: string): string {
+  const classMatch = rawAttrs.match(/\sclass=(['"])(.*?)\1/i);
+
+  if (!classMatch) {
+    return `${rawAttrs} class="${nextClassName}"`;
+  }
+
+  const existingClasses = classMatch[2].trim();
+  const mergedClassName = existingClasses ? `${existingClasses} ${nextClassName}` : nextClassName;
+
+  return rawAttrs.replace(/\sclass=(['"])(.*?)\1/i, ` class="${mergedClassName}"`);
+}
+
+function buildColumnBodyWithToc(content: string): Pick<ColumnPost, "body" | "toc"> {
+  const slugCounts = new Map<string, number>();
+  const toc: ColumnPostTocItem[] = [];
+  const body = content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (fullMatch, levelText, rawAttrs, rawHeading) => {
+    const text = stripTags(rawHeading);
+
+    if (!text) {
+      return fullMatch;
+    }
+
+    const baseSlug = slugifyHeading(text);
+    const duplicateCount = slugCounts.get(baseSlug) ?? 0;
+    const id = duplicateCount === 0 ? baseSlug : `${baseSlug}-${duplicateCount + 1}`;
+    slugCounts.set(baseSlug, duplicateCount + 1);
+
+    toc.push({
+      id,
+      text,
+      level: Number(levelText) as 2 | 3
+    });
+
+    const attrsWithoutId = rawAttrs.replace(/\s+id=(['"]).*?\1/gi, "");
+    const attrsWithClasses = appendClassName(
+      attrsWithoutId,
+      `fx-editorial-heading fx-editorial-heading-level-${levelText}`
+    );
+    return `<h${levelText}${attrsWithClasses} id="${id}">${rawHeading}</h${levelText}>`;
+  });
+
+  return { body, toc };
+}
+
 function normalizeCategoryTags(category: MicrocmsBlogResponse["category"]): string[] | undefined {
   if (!category) {
     return undefined;
@@ -150,16 +234,22 @@ const loadColumnPosts = cache(async (): Promise<ColumnPost[]> => {
     );
   }
 
-  return posts.map((post) => ({
-    id: post.id,
-    title: post.title,
-    description: buildDescriptionFromContent(post.content),
-    slug: post.id,
-    publishedAt: post.publishedAt,
-    tags: normalizeCategoryTags(post.category),
-    ogImage: post.eyecatch?.url,
-    body: post.content
-  }));
+  return posts.map((post) => {
+    const article = buildColumnBodyWithToc(post.content);
+
+    return {
+      id: post.id,
+      title: post.title,
+      description: buildDescriptionFromContent(post.content),
+      lead: buildLeadFromContent(post.content),
+      slug: post.id,
+      publishedAt: post.publishedAt,
+      tags: normalizeCategoryTags(post.category),
+      ogImage: post.eyecatch?.url,
+      body: article.body,
+      toc: article.toc
+    };
+  });
 });
 
 const loadLandingPages = cache(async (): Promise<LandingPage[]> => {
