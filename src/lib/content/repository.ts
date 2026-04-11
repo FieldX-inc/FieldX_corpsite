@@ -196,6 +196,10 @@ function normalizeCategoryTags(category: MicrocmsBlogResponse["category"]): stri
   return tags.length > 0 ? tags : undefined;
 }
 
+function isPublishedColumnPost(post: ColumnPost): boolean {
+  return Boolean(post.publishedAt);
+}
+
 const loadColumnPosts = cache(async (): Promise<ColumnPost[]> => {
   if (!hasMicrocmsConfig()) {
     return [];
@@ -278,12 +282,12 @@ const loadLandingPages = cache(async (): Promise<LandingPage[]> => {
 
 export async function getColumnPosts(): Promise<ColumnPost[]> {
   const allPosts = await loadColumnPosts();
-  return sortByPublishedDate(allPosts);
+  return sortByPublishedDate(allPosts.filter(isPublishedColumnPost));
 }
 
 export async function getColumnPostBySlug(slug: string): Promise<ColumnPost | null> {
   const allPosts = await loadColumnPosts();
-  const post = allPosts.find((entry) => entry.slug === slug);
+  const post = allPosts.find((entry) => entry.slug === slug && isPublishedColumnPost(entry));
   return post ?? null;
 }
 

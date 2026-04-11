@@ -42,6 +42,7 @@ Expected content model fields for the Column API:
 Notes:
 - URL slug is currently derived from the `microCMS` content ID.
 - Description text is generated from the `content` body.
+- Production `MICROCMS_API_KEY` should be a read-only Content API key without draft retrieval permissions. If the key can read drafts, `/column` may expose unpublished entries unless they are filtered server-side.
 
 ## GTM / GA4
 Set the GTM container ID and canonical site URL in `.env.local` or Vercel environment variables.

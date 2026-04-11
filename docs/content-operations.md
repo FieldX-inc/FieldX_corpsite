@@ -18,4 +18,5 @@
 ## Validation Notes
 - Landing page `campaign` must match filename
 - Column content is loaded from `microCMS`
+- The production `MICROCMS_API_KEY` must not allow draft retrieval. Use a public read-only key for the site runtime and keep broader keys for authoring scripts only.
 - Invalid landing page frontmatter fails build/time checks
