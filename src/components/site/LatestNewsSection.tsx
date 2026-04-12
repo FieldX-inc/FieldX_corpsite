@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { formatDate } from "@/lib/format-date";
 import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
 
@@ -29,7 +30,7 @@ export function LatestNewsSection({ sectionId, heading, emptyLabel, publishedLab
                 <p>{post.description}</p>
                 {post.publishedAt ? (
                   <p className="fx-date">
-                    {publishedLabel}: <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+                    {publishedLabel}: <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
                   </p>
                 ) : null}
               </article>

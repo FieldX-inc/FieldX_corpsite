@@ -1,4 +1,5 @@
 import { BodyText, MetaText, SectionTitle, TextAnchor } from "@/components/atoms";
+import { formatDate } from "@/lib/format-date";
 import type { ColumnPost } from "@/types/content";
 
 type NewsCardProps = {
@@ -23,7 +24,7 @@ export function NewsCard({ post }: NewsCardProps) {
           <p className="fx-news-tag">{tagLabel}</p>
           {post.publishedAt ? (
             <MetaText className="fx-news-card-date">
-              <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
             </MetaText>
           ) : null}
         </div>
