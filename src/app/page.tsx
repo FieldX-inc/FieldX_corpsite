@@ -5,7 +5,9 @@ import { getColumnPosts } from "@/lib/content/repository";
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const columnPosts = (await getColumnPosts()).slice(0, 3);
+  const allColumnPosts = await getColumnPosts();
+  const columnPosts = allColumnPosts.slice(0, 3);
+  const newsPosts = allColumnPosts.slice(0, 5);
 
-  return <HomeTemplate content={siteContent} columnPosts={columnPosts} newsPosts={[]} />;
+  return <HomeTemplate content={siteContent} columnPosts={columnPosts} newsPosts={newsPosts} />;
 }

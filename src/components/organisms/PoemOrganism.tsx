@@ -1,49 +1,42 @@
-import Image from "next/image";
-
 import { Surface } from "@/components/atoms";
-import { SectionHeader } from "@/components/molecules";
 
 import type { HomeSection } from "@/types/site";
 
 type PoemOrganismProps = {
   sectionId: HomeSection;
-  heading: string;
+  eyebrowEn: string;
+  eyebrowJa: string;
+  title: string;
   body: string;
   aboutCtaLabel: string;
   aboutHref: string;
 };
 
-export function PoemOrganism({ sectionId, heading, body, aboutCtaLabel, aboutHref }: PoemOrganismProps) {
-  const hasHeading = heading.trim().length > 0;
+export function PoemOrganism({ sectionId, eyebrowEn, eyebrowJa, title, body, aboutCtaLabel, aboutHref }: PoemOrganismProps) {
+  const titleLines = title.split("\n");
 
   return (
-    <Surface
-      as="section"
-      id={sectionId}
-      tone="light"
-      labelledBy={hasHeading ? "home-poem-title" : undefined}
-      className="fx-poem-organism"
-    >
+    <Surface as="section" id={sectionId} tone="light" labelledBy="home-poem-title" className="fx-poem-organism">
       <div className="fx-shell fx-poem-shell">
         <div className="fx-poem-copy">
-          {hasHeading ? <SectionHeader title={heading} titleId="home-poem-title" /> : null}
-          <p id="home-poem-text" className="fx-body-text fx-poem-body">
+          <header className="fx-poem-header">
+            <p className="fx-poem-eyebrow-en">{eyebrowEn}</p>
+            <p className="fx-poem-eyebrow-ja">{eyebrowJa}</p>
+          </header>
+          <h2 id="home-poem-title" className="fx-poem-title">
+            {titleLines.map((line, index) => (
+              <span key={`poem-title-${index}`} className="fx-poem-title-line">
+                <span className="fx-poem-title-line-text">{line}</span>
+              </span>
+            ))}
+          </h2>
+          <p id="home-poem-text" className="fx-poem-body">
             {body}
           </p>
-          <a className="fx-about-cta" href={aboutHref}>
+          <a className="fx-poem-cta" href={aboutHref}>
             {aboutCtaLabel}
           </a>
         </div>
-        <figure className="fx-poem-figure" aria-hidden="true">
-          <Image
-            src="/images/home/frame-2.png"
-            alt=""
-            width={4204}
-            height={1852}
-            className="fx-poem-image"
-            sizes="(max-width: 980px) 100vw, 42vw"
-          />
-        </figure>
       </div>
     </Surface>
   );

@@ -1,4 +1,4 @@
-import { ColumnOrganism, ContactOrganism, HeroOrganism, NewsOrganism, PoemOrganism, WhatWeDoOrganism } from "@/components/organisms";
+import { HeroOrganism, HomeColumnOrganism, HomeContactCtaOrganism, HomeNewsOrganism, PoemOrganism, ServiceViewOrganism } from "@/components/organisms";
 import type { SiteLocaleContent } from "@/components/site/content";
 import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
@@ -29,37 +29,48 @@ export function HomeTemplate({ content, columnPosts, newsPosts }: HomeTemplatePr
 
       <PoemOrganism
         sectionId={SECTION_IDS.poem}
-        heading={content.poem.heading}
+        eyebrowEn={content.poem.eyebrowEn}
+        eyebrowJa={content.poem.eyebrowJa}
+        title={content.poem.title}
         body={content.poem.body}
         aboutCtaLabel={content.poem.aboutCtaLabel}
         aboutHref="/about"
       />
 
-      <WhatWeDoOrganism
+      <ServiceViewOrganism
         sectionId={SECTION_IDS["what-we-do"]}
-        heading={content.whatWeDo.heading}
-        services={content.whatWeDo.services}
-        featuredRows={content.whatWeDo.featuredRows}
-        accentBackground={false}
-        layout="featured"
+        eyebrowEn={content.serviceView.eyebrowEn}
+        eyebrowJa={content.serviceView.eyebrowJa}
+        title={content.serviceView.title}
+        body={content.serviceView.body}
+        primaryCtaLabel={content.serviceView.primaryCtaLabel}
+        primaryCtaHref={content.serviceView.primaryCtaHref}
+        sections={content.serviceView.sections}
+        tiles={content.serviceView.tiles}
       />
 
-      <ColumnOrganism
+      <HomeColumnOrganism
         sectionId={SECTION_IDS.column}
         heading={content.column.heading}
+        eyebrowJa={content.column.eyebrowJa}
+        ctaLabel={content.column.ctaLabel}
+        ctaHref={content.column.ctaHref}
         emptyLabel={content.column.empty}
         listAriaLabel={content.column.listAriaLabel}
         posts={columnPosts}
       />
 
-      <NewsOrganism sectionId={SECTION_IDS.news} heading={content.news.heading} emptyLabel={content.news.empty} posts={newsPosts} />
+      <HomeNewsOrganism
+        sectionId={SECTION_IDS.news}
+        heading={content.news.heading}
+        eyebrowJa={content.news.eyebrowJa}
+        emptyLabel={content.news.empty}
+        posts={newsPosts}
+      />
 
-      <ContactOrganism
+      <HomeContactCtaOrganism
         sectionId={SECTION_IDS.contact}
-        heading={content.contact.heading}
-        body={content.contact.body}
-        ctaLabel={content.contact.ctaLabel}
-        ctaHref={content.contact.ctaHref}
+        cards={content.contact.cards}
       />
     </>
   );

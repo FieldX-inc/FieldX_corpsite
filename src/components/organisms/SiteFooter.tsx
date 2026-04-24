@@ -1,68 +1,81 @@
+import Image from "next/image";
 import Link from "next/link";
+
+import footerBrandImage from "../../../Group 235.png";
 
 type SiteFooterProps = {
   company: string;
 };
 
-type FooterLink = {
-  href: string;
-  label: string;
-};
-
-type FooterGroup = {
-  heading: FooterLink;
-  children?: FooterLink[];
-};
-
-type FooterContent = {
-  groups: FooterGroup[];
-  secondary: FooterLink[];
-};
-
-function getFooterContent(): FooterContent {
-  return {
-    groups: [
-      {
-        heading: { href: "/about", label: "about" },
-        children: [
-          { href: "/about#mvv", label: "MVV" },
-          { href: "/about#team", label: "Team" },
-          { href: "/about#company-profile", label: "会社概要" }
-        ]
-      },
-      {
-        heading: { href: "/what-we-do", label: "what we do" }
-      }
-    ],
-    secondary: [
-      { href: "/news", label: "News" },
-      { href: "/contact", label: "Contact" }
+const footerColumns = [
+  {
+    heading: "ABOUT",
+    links: [
+      { href: "/about#mvv", label: "会社概要" },
+      { href: "/about#team", label: "役員紹介" },
+      { href: "/about", label: "私たちについて" },
+      { href: "/about#history", label: "採用情報" }
     ]
-  };
-}
+  },
+  {
+    heading: "SERVICE",
+    links: [
+      { href: "/what-we-do", label: "AX Solution事業" },
+      { href: "/what-we-do", label: "AI Agent事業" }
+    ]
+  },
+  {
+    heading: "COLUMN",
+    links: [
+      { href: "/column", label: "お役立ち情報" },
+      { href: "/column", label: "資料一覧" }
+    ]
+  },
+  {
+    heading: "NEWS",
+    links: []
+  }
+] as const;
 
 export function SiteFooter({ company }: SiteFooterProps) {
   const year = new Date().getFullYear();
-  const footerContent = getFooterContent();
 
   return (
     <footer className="fx-site-footer">
-      <div className="fx-shell">
-        <div className="fx-footer-main">
-          <p className="fx-footer-wordmark">{company}</p>
-          <nav aria-label="Footer" className="fx-footer-nav">
-            <ul className="fx-footer-groups">
-              {footerContent.groups.map((group) => (
-                <li key={`${group.heading.label}-${group.heading.href}`} className="fx-footer-group">
-                  <Link href={group.heading.href} className="fx-footer-link">
-                    {group.heading.label}
+      <div className="fx-shell fx-site-footer-shell">
+        <div className="fx-site-footer-brand">
+          <div className="fx-site-footer-brand-image-wrap" aria-hidden="true">
+            <Image src={footerBrandImage} alt="" width={1072} height={313} className="fx-site-footer-brand-image" />
+          </div>
+          <p className="fx-site-footer-copyright">@{year} {company} inc. All Rights Reserved</p>
+        </div>
+
+        <div className="fx-site-footer-side">
+          <nav aria-label="Footer" className="fx-site-footer-nav">
+            <ul className="fx-site-footer-columns">
+              {footerColumns.map((column) => (
+                <li key={column.heading} className="fx-site-footer-column">
+                  <Link
+                    href={
+                      column.heading === "ABOUT"
+                        ? "/about"
+                        : column.heading === "SERVICE"
+                          ? "/what-we-do"
+                          : column.heading === "COLUMN"
+                            ? "/column"
+                            : "/news"
+                    }
+                    className="fx-site-footer-heading"
+                  >
+                    {column.heading}
                   </Link>
-                  {group.children?.length ? (
-                    <ul className="fx-footer-sub-links">
-                      {group.children.map((child) => (
-                        <li key={`${child.label}-${child.href}`}>
-                          <Link href={child.href} className="fx-footer-sub-link">
-                            {child.label}
+
+                  {column.links.length ? (
+                    <ul className="fx-site-footer-links">
+                      {column.links.map((link) => (
+                        <li key={`${column.heading}-${link.href}-${link.label}`}>
+                          <Link href={link.href} className="fx-site-footer-link">
+                            {link.label}
                           </Link>
                         </li>
                       ))}
@@ -70,24 +83,17 @@ export function SiteFooter({ company }: SiteFooterProps) {
                   ) : null}
                 </li>
               ))}
-              <li className="fx-footer-group fx-footer-group-secondary">
-                <ul className="fx-footer-secondary-links">
-                  {footerContent.secondary.map((link) => (
-                    <li key={`${link.label}-${link.href}`}>
-                      <Link href={link.href} className="fx-footer-link">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
             </ul>
           </nav>
-        </div>
-        <div className="fx-footer-meta">
-          <p>
-            © {year} {company}
-          </p>
+
+          <div className="fx-site-footer-cta-group">
+            <Link href="/contact" className="fx-site-footer-cta fx-site-footer-cta-primary">
+              まずは相談する
+            </Link>
+            <Link href="/contact?intent=materials" className="fx-site-footer-cta fx-site-footer-cta-secondary">
+              資料を請求する
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

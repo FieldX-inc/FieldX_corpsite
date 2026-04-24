@@ -14,7 +14,9 @@ export type SiteLocaleContent = {
     body: string;
   };
   poem: {
-    heading: string;
+    eyebrowEn: string;
+    eyebrowJa: string;
+    title: string;
     body: string;
     aboutCtaLabel: string;
   };
@@ -41,6 +43,21 @@ export type SiteLocaleContent = {
     featuredRows: WhatWeDoFeatureRow[];
     services: ServiceCard[];
   };
+  serviceView: {
+    eyebrowEn: string;
+    eyebrowJa: string;
+    title: string;
+    body: string;
+    primaryCtaLabel: string;
+    primaryCtaHref: string;
+    sections: {
+      title: string;
+      body: string;
+      ctaLabel: string;
+      ctaHref: string;
+    }[];
+    tiles: string[];
+  };
   team: {
     heading: string;
     body: string;
@@ -61,11 +78,15 @@ export type SiteLocaleContent = {
   };
   news: {
     heading: string;
+    eyebrowJa: string;
     empty: string;
     publishedLabel: string;
   };
   column: {
     heading: string;
+    eyebrowJa: string;
+    ctaLabel: string;
+    ctaHref: string;
     empty: string;
     listAriaLabel: string;
   };
@@ -74,6 +95,14 @@ export type SiteLocaleContent = {
     body: string;
     ctaLabel: string;
     ctaHref: string;
+    cards: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      points: string[];
+      ctaLabel: string;
+      ctaHref: string;
+    }[];
   };
   columnPage: {
     heading: string;
@@ -99,23 +128,16 @@ export const siteContent: SiteLocaleContent = {
     },
     hero: {
       title: "様々なFieldのXを解き、\n社会を次代につなげる。",
-      body: ""
+      body:
+        "現場に残る反復業務を、AIエージェントと業務設計で実装可能な形に落とし込みます。電話対応、書類処理、レポート作成などの定常業務を見直し、導入から運用定着まで伴走します。"
     },
     poem: {
-      heading: "",
-      body: `多くの企業では、
-電話対応、書類処理、データ入力など、
-人が時間を使い続けている業務が数多く残っています。
-
-AIの進化により、
-これらの業務は自動化・半自動化できる時代になりました。
-
-コール対応、書類業務、マーケティングオペレーションなど、
-さまざまな領域でAIを実装し、
-
-Field Xは、すべての事業領域・業界でAIが意思決定を支え、
-ヒトがヒトにしかできない業務に集中できる世界の実現を目指しています。`,
-      aboutCtaLabel: "About→"
+      eyebrowEn: "ABOUT",
+      eyebrowJa: "私たちについて",
+      title: "すべての事業領域・業界で\nAIが意思決定を支え、\nヒトがヒトにしかできない\n業務に集中できる世界の実現",
+      body:
+        "Field Xは、AIを単なるツールではなく新しいインフラとして捉えています。現場の業務を観察し、構造的なボトルネックを特定し、実務で継続運用できるワークフローまで落とし込むことを重視しています。PoCや勉強会で止まらず、電話対応、書類処理、マーケティング運用などの実業務にAIを組み込み、意思決定と生産性を同時に前進させます。",
+      aboutCtaLabel: "会社概要をみる"
     },
     about: {
       heading: "",
@@ -206,6 +228,32 @@ Field Xは、すべての事業領域・業界でAIが意思決定を支え、
         }
       ]
     },
+    serviceView: {
+      eyebrowEn: "SERVICE",
+      eyebrowJa: "事業内容",
+      title: "本当に価値のある成果を",
+      body:
+        "ああああああああああああああああああああああ\nああああああああああああああああああああああ\nああああああああああああああああああああああ\nああああああああああああああああああああああ\nあああああああああああああああああああ",
+      primaryCtaLabel: "事業内容をみる",
+      primaryCtaHref: "/what-we-do",
+      sections: [
+        {
+          title: "AX Solution事業",
+          body:
+            "経営視点を捉えつつ、現場へのヒアリングを通した課題抽出から、要件定義、AI開発・導入・定着までを企業様のパートナーとして行い、AX推進を支援します。",
+          ctaLabel: "詳細をみる",
+          ctaHref: "/what-we-do"
+        },
+        {
+          title: "AI Agent事業",
+          body:
+            "Field X の最先端のナレッジを AI SaaS という形で提供し、様々な業界の生産性向上を支援します。",
+          ctaLabel: "詳細をみる",
+          ctaHref: "/what-we-do"
+        }
+      ],
+      tiles: ["Call Agent", "PM Agent", "CRM", "経費処理", "ちょこっと\nインハウス"]
+    },
     team: {
       heading: "Team",
       body: "異なる専門性を持つ少数精鋭で、最後まで実装する。",
@@ -246,12 +294,16 @@ Field Xは、すべての事業領域・業界でAIが意思決定を支え、
       ]
     },
     news: {
-      heading: "Latest News",
+      heading: "NEWS",
+      eyebrowJa: "お知らせ",
       empty: "公開中のニュースはまだありません。",
       publishedLabel: "Published"
     },
     column: {
       heading: "Column",
+      eyebrowJa: "お役立ち情報",
+      ctaLabel: "お役立ち情報をみる",
+      ctaHref: "/column",
       empty: "公開中のコラムはまだありません。",
       listAriaLabel: "コラム一覧"
     },
@@ -259,7 +311,35 @@ Field Xは、すべての事業領域・業界でAIが意思決定を支え、
       heading: "Contact",
       body: "ご相談・協業に関するお問い合わせはこちら。",
       ctaLabel: "お問い合わせはこちら",
-      ctaHref: "/contact"
+      ctaHref: "/contact",
+      cards: [
+        {
+          eyebrow: "最新ナレッジをギュッと凝縮！！",
+          title: "AI活用最新事例集を無料ダウンロード",
+          body:
+            "Field Xが不動産賃貸管理会社様にこれまでに提供してきたAI活用の最新事例や、ご支援までのフローをわかりやすくまとめました。",
+          points: [
+            "業界／業種特化の最新AI活用の成功事例",
+            "サービスの概要や費用感",
+            "AI活用のメリットやよくある落とし穴"
+          ],
+          ctaLabel: "無料でダウンロードする",
+          ctaHref: "/contact?intent=materials"
+        },
+        {
+          eyebrow: "AI活用に関することなら何でも！！",
+          title: "30分からの無料オンライン相談実施中",
+          body:
+            "30分へのお打ち合わせで、貴社の課題や状況についてヒアリング。今すぐ活用できるアドバイスや、サービスの具体イメージもお伝えします。",
+          points: [
+            "AI活用のイメージがなくてもOK",
+            "とりあえず話を聞くだけでもOK",
+            "ご支援実績からプランを共有します"
+          ],
+          ctaLabel: "無料で相談する",
+          ctaHref: "/contact"
+        }
+      ]
     },
     columnPage: {
       heading: "Column",
