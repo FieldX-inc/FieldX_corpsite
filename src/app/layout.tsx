@@ -3,12 +3,28 @@ import type { Metadata } from "next";
 import { SiteFooter, SiteHeader } from "@/components/organisms";
 import { siteContent } from "@/components/site/content";
 import { GoogleTagManager } from "@/components/site/GoogleTagManager";
+import { getSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: `${siteContent.company} | Corporate Site`,
-  description: siteContent.hero.body || "Field X corporate site"
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: `${siteContent.company} | コーポレートサイト`,
+    template: `%s | ${siteContent.company}`
+  },
+  description: siteContent.hero.body,
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    title: `${siteContent.company} | コーポレートサイト`,
+    description: siteContent.hero.body,
+    url: "/",
+    siteName: siteContent.company,
+    locale: "ja_JP",
+    type: "website"
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

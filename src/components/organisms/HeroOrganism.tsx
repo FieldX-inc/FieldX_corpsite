@@ -17,7 +17,8 @@ type HeroOrganismProps = {
 export function HeroOrganism({ sectionId, title, body }: HeroOrganismProps) {
   const [isReady, setIsReady] = useState(false);
   const titleLines = title.split("\n");
-  const getHeroLineStyle = (index: number) => ({ ["--fx-hero-line-index"]: index }) as CSSProperties;
+  const getHeroLineStyle = (index: number) =>
+    ({ ["--fx-hero-line-index"]: index }) as CSSProperties;
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -49,7 +50,11 @@ export function HeroOrganism({ sectionId, title, body }: HeroOrganismProps) {
         <div className="fx-hero-copy">
           <h1 id="home-hero-title" className="fx-hero-title fx-hero-title-home">
             {titleLines.map((line, index) => (
-              <span key={`hero-line-${index}`} className="fx-hero-title-line" style={getHeroLineStyle(index)}>
+              <span
+                key={`hero-line-${index}`}
+                className="fx-hero-title-line"
+                style={getHeroLineStyle(index)}
+              >
                 <span className="fx-hero-title-line-text">{line}</span>
               </span>
             ))}
@@ -61,10 +66,13 @@ export function HeroOrganism({ sectionId, title, body }: HeroOrganismProps) {
             <Link href="/contact" className="fx-hero-cta fx-hero-cta-primary">
               まずは相談する
             </Link>
-            <TextAnchor href="/contact?intent=materials" className="fx-hero-cta fx-hero-cta-secondary">
+            <TextAnchor
+              href="/contact?intent=materials"
+              className="fx-hero-cta fx-hero-cta-secondary"
+            >
               資料を請求する
             </TextAnchor>
-            <TextAnchor href="/what-we-do" className="fx-hero-cta fx-hero-cta-tertiary">
+            <TextAnchor href="/service" className="fx-hero-cta fx-hero-cta-tertiary">
               過去事例をみる
             </TextAnchor>
           </div>

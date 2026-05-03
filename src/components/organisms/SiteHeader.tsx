@@ -27,19 +27,39 @@ export function SiteHeader({ company, nav, aboutSectionNav }: SiteHeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuId = useId();
   const desktopLinks = [
-    { href: "/about", label: "ABOUT", withCaret: true },
-    { href: "/what-we-do", label: "SERVICE", withCaret: false },
-    { href: "/column", label: "COLUMN", withCaret: true },
+    {
+      href: "/about",
+      label: "ABOUT",
+      withCaret: true,
+      children: [
+        { href: "/about#company-profile", label: aboutSectionNav.companyProfile || "会社概要" },
+        { href: "/about#team", label: "役員紹介" },
+        { href: "/about#mvv", label: "私たちについて" },
+        { href: "/about#history", label: "採用情報" }
+      ]
+    },
+    { href: "/service", label: "SERVICE", withCaret: false },
+    {
+      href: "/column/magazine",
+      label: "COLUMN",
+      withCaret: true,
+      children: [
+        { href: "/column/magazine", label: "マガジン" },
+        { href: "/column/materials", label: "資料一覧" }
+      ]
+    },
     { href: "/news", label: "NEWS", withCaret: false }
-  ] as const;
+  ];
 
   const mobileLinks = [
     { href: "/about", label: "ABOUT" },
     { href: "/about#mvv", label: aboutSectionNav.mvv || "MVV" },
     { href: "/about#team", label: "TEAM" },
     { href: "/about#company-profile", label: "COMPANY" },
-    { href: "/what-we-do", label: "SERVICE" },
-    { href: "/column", label: "COLUMN" },
+    { href: "/service", label: "SERVICE" },
+    { href: "/column/magazine", label: "COLUMN" },
+    { href: "/column/magazine", label: "MAGAZINE" },
+    { href: "/column/materials", label: "MATERIALS" },
     { href: "/news", label: "NEWS" }
   ] as const;
 
@@ -77,10 +97,31 @@ export function SiteHeader({ company, nav, aboutSectionNav }: SiteHeaderProps) {
           <nav aria-label="グローバルナビゲーション" className="fx-site-header-nav">
             <ul className="fx-site-header-nav-list">
               {desktopLinks.map((item) => (
-                <li key={item.href}>
-                  <TextAnchor href={item.href} className={`fx-site-header-nav-link${item.withCaret ? " is-caret" : ""}`}>
+                <li key={item.href} className="fx-site-header-nav-item">
+                  <TextAnchor
+                    href={item.href}
+                    className={`fx-site-header-nav-link${item.withCaret ? " is-caret" : ""}`}
+                  >
                     {item.label}
                   </TextAnchor>
+                  {item.children?.length ? (
+                    <ul
+                      className="fx-site-header-dropdown"
+                      aria-label={`${item.label}ページ内ナビゲーション`}
+                    >
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <TextAnchor
+                            href={child.href}
+                            className="fx-site-header-dropdown-link"
+                            tracking={undefined}
+                          >
+                            {child.label}
+                          </TextAnchor>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </li>
               ))}
             </ul>
@@ -137,11 +178,18 @@ export function SiteHeader({ company, nav, aboutSectionNav }: SiteHeaderProps) {
             onClick={() => setIsMobileMenuOpen(false)}
           />
           <div id={mobileMenuId} className="fx-site-header-mobile-panel">
-            <nav aria-label="モバイルグローバルナビゲーション" className="fx-site-header-mobile-nav">
+            <nav
+              aria-label="モバイルグローバルナビゲーション"
+              className="fx-site-header-mobile-nav"
+            >
               <ul className="fx-site-header-mobile-list">
                 {mobileLinks.map((item) => (
                   <li key={item.href}>
-                    <TextAnchor href={item.href} className="fx-site-header-mobile-link" tracking={undefined}>
+                    <TextAnchor
+                      href={item.href}
+                      className="fx-site-header-mobile-link"
+                      tracking={undefined}
+                    >
                       {item.label}
                     </TextAnchor>
                   </li>

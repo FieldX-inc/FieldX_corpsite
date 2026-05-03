@@ -27,7 +27,11 @@ export function GlobalNavList({
 }: GlobalNavListProps) {
   return (
     <ul className={className ?? "fx-global-nav-list"}>
-      <li className={enableAboutDropdown && aboutSectionNav ? "fx-global-nav-item-dropdown" : undefined}>
+      <li
+        className={
+          enableAboutDropdown && aboutSectionNav ? "fx-global-nav-item-dropdown" : undefined
+        }
+      >
         <NavItemLink href="/about" label={nav.about} onClick={onNavigate} />
         {enableAboutDropdown && aboutSectionNav ? (
           <div className="fx-about-subnav" role="menu" aria-label={`${nav.about} sections`}>
@@ -52,10 +56,26 @@ export function GlobalNavList({
         ) : null}
       </li>
       <li>
-        <NavItemLink href="/what-we-do" label={nav.whatWeDo} onClick={onNavigate} />
+        <NavItemLink href="/service" label={nav.whatWeDo} onClick={onNavigate} />
       </li>
-      <li>
-        <NavItemLink href="/column" label={nav.column} onClick={onNavigate} />
+      <li className={enableAboutDropdown ? "fx-global-nav-item-dropdown" : undefined}>
+        <NavItemLink href="/column/magazine" label={nav.column} onClick={onNavigate} />
+        {enableAboutDropdown ? (
+          <div className="fx-about-subnav" role="menu" aria-label={`${nav.column} sections`}>
+            <ul className="fx-about-subnav-list">
+              <li>
+                <TextAnchor href="/column/magazine" className="fx-about-subnav-link">
+                  マガジン
+                </TextAnchor>
+              </li>
+              <li>
+                <TextAnchor href="/column/materials" className="fx-about-subnav-link">
+                  資料一覧
+                </TextAnchor>
+              </li>
+            </ul>
+          </div>
+        ) : null}
       </li>
       <li>
         <NavItemLink href="/news" label={nav.news} onClick={onNavigate} />

@@ -21,6 +21,12 @@
   --fx-shell-max: 1440px;
   --fx-content-max: 1200px;
   --fx-shell-padding-x: clamp(14px, 3vw, 44px);
+  --fx-page-shell-max: 1148px;
+  --fx-page-narrow-shell-max: 820px;
+  --fx-page-section-padding-y: clamp(4.1rem, 6.5vw, 6rem);
+  --fx-page-section-gap-y: clamp(5.8rem, 8.5vw, 7.8rem);
+  --fx-page-content-gap-y: clamp(4rem, 6.2vw, 5.6rem);
+  --fx-page-block-gap-y: clamp(2.4rem, 4.4vw, 4.2rem);
   --fx-radius-sm: 10px;
   --fx-radius-md: 18px;
   --fx-radius-lg: 28px;
@@ -52,6 +58,10 @@
 @media (max-width: 640px) {
   :root {
     --fx-shell-padding-x: clamp(14px, 5vw, 20px);
+    --fx-page-section-padding-y: 4rem;
+    --fx-page-section-gap-y: 4rem;
+    --fx-page-content-gap-y: 3rem;
+    --fx-page-block-gap-y: 2.6rem;
     --fx-fs-body: clamp(0.97rem, 0.7vw + 0.86rem, 1.02rem);
     --fx-fs-section-title: clamp(1.7rem, 5.8vw, 2.35rem);
     --fx-fs-page-title: clamp(1.95rem, 7vw, 3rem);

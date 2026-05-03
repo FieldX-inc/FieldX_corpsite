@@ -46,7 +46,13 @@ export function HomeNewsOrganism({
   const featuredPosts = posts.slice(0, 5);
 
   return (
-    <Surface as="section" id={sectionId} tone="light" labelledBy={titleId} className="fx-home-news-organism">
+    <Surface
+      as="section"
+      id={sectionId}
+      tone="light"
+      labelledBy={titleId}
+      className="fx-home-news-organism"
+    >
       <div className="fx-home-news-panel">
         <div className="fx-shell fx-home-news-shell">
           <header className="fx-home-news-header">
@@ -86,7 +92,7 @@ export function HomeNewsOrganism({
           />
         </Link>
 
-        <Link href="/what-we-do" className="fx-home-news-link-card fx-home-news-link-card-service">
+        <Link href="/service" className="fx-home-news-link-card fx-home-news-link-card-service">
           <Image
             src={serviceGradientImage}
             alt=""

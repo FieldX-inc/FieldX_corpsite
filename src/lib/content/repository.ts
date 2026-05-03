@@ -6,12 +6,20 @@ import { z } from "zod";
 
 import { siteContent } from "@/components/site/content";
 import { getMicrocmsClient, getMicrocmsColumnEndpoint } from "@/lib/content/microcms";
-import type { ColumnPost, ColumnPostTocItem, LandingPage, LandingPageFrontmatter } from "@/types/content";
+import type {
+  ColumnPost,
+  ColumnPostTocItem,
+  LandingPage,
+  LandingPageFrontmatter
+} from "@/types/content";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const isoDateSchema = z
   .string()
-  .refine((value) => !Number.isNaN(Date.parse(value)), "publishedAt must be a valid ISO date string");
+  .refine(
+    (value) => !Number.isNaN(Date.parse(value)),
+    "publishedAt must be a valid ISO date string"
+  );
 
 const lpSchema = z.object({
   title: z.string().min(1),
@@ -45,7 +53,12 @@ async function readMdxFiles(dirPath: string): Promise<string[]> {
   }
 }
 
-function ensureSlugMatches(filePath: string, expected: string, actual: string, label: string): void {
+function ensureSlugMatches(
+  filePath: string,
+  expected: string,
+  actual: string,
+  label: string
+): void {
   if (expected !== actual) {
     throw new Error(
       `[content] ${label} mismatch in ${filePath}. Expected "${expected}" based on filename.`
@@ -154,31 +167,34 @@ function appendClassName(rawAttrs: string, nextClassName: string): string {
 function buildColumnBodyWithToc(content: string): Pick<ColumnPost, "body" | "toc"> {
   const slugCounts = new Map<string, number>();
   const toc: ColumnPostTocItem[] = [];
-  const body = content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (fullMatch, levelText, rawAttrs, rawHeading) => {
-    const text = stripTags(rawHeading);
+  const body = content.replace(
+    /<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi,
+    (fullMatch, levelText, rawAttrs, rawHeading) => {
+      const text = stripTags(rawHeading);
 
-    if (!text) {
-      return fullMatch;
+      if (!text) {
+        return fullMatch;
+      }
+
+      const baseSlug = slugifyHeading(text);
+      const duplicateCount = slugCounts.get(baseSlug) ?? 0;
+      const id = duplicateCount === 0 ? baseSlug : `${baseSlug}-${duplicateCount + 1}`;
+      slugCounts.set(baseSlug, duplicateCount + 1);
+
+      toc.push({
+        id,
+        text,
+        level: Number(levelText) as 2 | 3
+      });
+
+      const attrsWithoutId = rawAttrs.replace(/\s+id=(['"]).*?\1/gi, "");
+      const attrsWithClasses = appendClassName(
+        attrsWithoutId,
+        `fx-editorial-heading fx-editorial-heading-level-${levelText}`
+      );
+      return `<h${levelText}${attrsWithClasses} id="${id}">${rawHeading}</h${levelText}>`;
     }
-
-    const baseSlug = slugifyHeading(text);
-    const duplicateCount = slugCounts.get(baseSlug) ?? 0;
-    const id = duplicateCount === 0 ? baseSlug : `${baseSlug}-${duplicateCount + 1}`;
-    slugCounts.set(baseSlug, duplicateCount + 1);
-
-    toc.push({
-      id,
-      text,
-      level: Number(levelText) as 2 | 3
-    });
-
-    const attrsWithoutId = rawAttrs.replace(/\s+id=(['"]).*?\1/gi, "");
-    const attrsWithClasses = appendClassName(
-      attrsWithoutId,
-      `fx-editorial-heading fx-editorial-heading-level-${levelText}`
-    );
-    return `<h${levelText}${attrsWithClasses} id="${id}">${rawHeading}</h${levelText}>`;
-  });
+  );
 
   return { body, toc };
 }
@@ -277,6 +293,20 @@ const loadLandingPages = cache(async (): Promise<LandingPage[]> => {
     })
   );
 
+  const campaignFilePaths = new Map<string, string>();
+
+  for (const page of pages) {
+    const existingFilePath = campaignFilePaths.get(page.campaign);
+
+    if (existingFilePath) {
+      throw new Error(
+        `[content] Duplicate landing page campaign "${page.campaign}" in ${existingFilePath} and ${page.filePath}.`
+      );
+    }
+
+    campaignFilePaths.set(page.campaign, page.filePath);
+  }
+
   return pages;
 });
 
@@ -309,13 +339,21 @@ export async function getLandingPageByCampaign(campaign: string): Promise<Landin
 }
 
 export async function getAllPublishedRoutes(): Promise<string[]> {
-  const routes: string[] = ["/", "/about", "/column", "/contact", "/what-we-do", "/news"];
+  const routes: string[] = [
+    "/",
+    "/about",
+    "/column/magazine",
+    "/column/materials",
+    "/contact",
+    "/service",
+    "/news"
+  ];
 
   routes.push(
     ...siteContent.whatWeDo.services
       .map((service) => service.slug)
       .filter((slug): slug is string => Boolean(slug))
-      .map((slug) => `/what-we-do/${slug}`)
+      .map((slug) => `/service/${slug}`)
   );
 
   const [posts, pages] = await Promise.all([getColumnPosts(), getLandingPages()]);

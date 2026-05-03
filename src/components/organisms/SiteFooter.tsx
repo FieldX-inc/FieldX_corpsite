@@ -11,24 +11,24 @@ const footerColumns = [
   {
     heading: "ABOUT",
     links: [
-      { href: "/about#mvv", label: "会社概要" },
+      { href: "/about#company-profile", label: "会社概要" },
       { href: "/about#team", label: "役員紹介" },
-      { href: "/about", label: "私たちについて" },
+      { href: "/about#mvv", label: "私たちについて" },
       { href: "/about#history", label: "採用情報" }
     ]
   },
   {
     heading: "SERVICE",
     links: [
-      { href: "/what-we-do", label: "AX Solution事業" },
-      { href: "/what-we-do", label: "AI Agent事業" }
+      { href: "/service", label: "AX Solution事業" },
+      { href: "/service", label: "AI Agent事業" }
     ]
   },
   {
     heading: "COLUMN",
     links: [
-      { href: "/column", label: "お役立ち情報" },
-      { href: "/column", label: "資料一覧" }
+      { href: "/column/magazine", label: "マガジン" },
+      { href: "/column/materials", label: "資料一覧" }
     ]
   },
   {
@@ -45,9 +45,17 @@ export function SiteFooter({ company }: SiteFooterProps) {
       <div className="fx-shell fx-site-footer-shell">
         <div className="fx-site-footer-brand">
           <div className="fx-site-footer-brand-image-wrap" aria-hidden="true">
-            <Image src={footerBrandImage} alt="" width={1072} height={313} className="fx-site-footer-brand-image" />
+            <Image
+              src={footerBrandImage}
+              alt=""
+              width={1072}
+              height={313}
+              className="fx-site-footer-brand-image"
+            />
           </div>
-          <p className="fx-site-footer-copyright">@{year} {company} inc. All Rights Reserved</p>
+          <p className="fx-site-footer-copyright">
+            @{year} {company} inc. All Rights Reserved
+          </p>
         </div>
 
         <div className="fx-site-footer-side">
@@ -60,7 +68,7 @@ export function SiteFooter({ company }: SiteFooterProps) {
                       column.heading === "ABOUT"
                         ? "/about"
                         : column.heading === "SERVICE"
-                          ? "/what-we-do"
+                          ? "/service"
                           : column.heading === "COLUMN"
                             ? "/column"
                             : "/news"
@@ -90,7 +98,10 @@ export function SiteFooter({ company }: SiteFooterProps) {
             <Link href="/contact" className="fx-site-footer-cta fx-site-footer-cta-primary">
               まずは相談する
             </Link>
-            <Link href="/contact?intent=materials" className="fx-site-footer-cta fx-site-footer-cta-secondary">
+            <Link
+              href="/contact?intent=materials"
+              className="fx-site-footer-cta fx-site-footer-cta-secondary"
+            >
               資料を請求する
             </Link>
           </div>

@@ -37,6 +37,7 @@ a {
   top: 0;
   z-index: 50;
   margin-bottom: 0;
+  background: #fff;
 }
 
 .fx-site-header-inner {
@@ -203,7 +204,7 @@ a {
 
 .fx-page-section,
 .fx-section-organism {
-  padding-block: clamp(4.5rem, 8vw, 7.7rem);
+  padding-block: var(--fx-page-section-padding-y);
 }
 
 .fx-not-found {
@@ -277,7 +278,7 @@ a {
 
   .fx-page-section,
   .fx-section-organism {
-    padding-block: clamp(4rem, 8vw, 5rem);
+    padding-block: var(--fx-page-section-padding-y);
   }
 
   .fx-site-footer-shell {
@@ -335,7 +336,7 @@ a {
 
   .fx-page-section,
   .fx-section-organism {
-    padding-block: clamp(4.6rem, 10vw, 6.2rem);
+    padding-block: var(--fx-page-section-padding-y);
   }
 
   .fx-site-footer-brand {
