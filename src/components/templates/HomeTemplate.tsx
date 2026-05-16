@@ -1,4 +1,11 @@
-import { HeroOrganism, HomeColumnOrganism, HomeContactCtaOrganism, HomeNewsOrganism, PoemOrganism, ServiceViewOrganism } from "@/components/organisms";
+import {
+  HeroOrganism,
+  HomeColumnOrganism,
+  HomeContactCtaOrganism,
+  HomeNewsOrganism,
+  PoemOrganism,
+  ServiceViewOrganism
+} from "@/components/organisms";
 import type { SiteLocaleContent } from "@/components/site/content";
 import type { ColumnPost } from "@/types/content";
 import type { HomeSection } from "@/types/site";
@@ -25,7 +32,11 @@ type HomeTemplateProps = {
 export function HomeTemplate({ content, columnPosts, newsPosts }: HomeTemplateProps) {
   return (
     <>
-      <HeroOrganism sectionId={SECTION_IDS.hero} title={content.hero.title} body={content.hero.body} />
+      <HeroOrganism
+        sectionId={SECTION_IDS.hero}
+        title={content.hero.title}
+        body={content.hero.body}
+      />
 
       <PoemOrganism
         sectionId={SECTION_IDS.poem}
@@ -45,8 +56,7 @@ export function HomeTemplate({ content, columnPosts, newsPosts }: HomeTemplatePr
         body={content.serviceView.body}
         primaryCtaLabel={content.serviceView.primaryCtaLabel}
         primaryCtaHref={content.serviceView.primaryCtaHref}
-        sections={content.serviceView.sections}
-        tiles={content.serviceView.tiles}
+        agents={content.serviceView.agents}
       />
 
       <HomeColumnOrganism
@@ -68,10 +78,7 @@ export function HomeTemplate({ content, columnPosts, newsPosts }: HomeTemplatePr
         posts={newsPosts}
       />
 
-      <HomeContactCtaOrganism
-        sectionId={SECTION_IDS.contact}
-        cards={content.contact.cards}
-      />
+      <HomeContactCtaOrganism sectionId={SECTION_IDS.contact} cards={content.contact.cards} />
     </>
   );
 }

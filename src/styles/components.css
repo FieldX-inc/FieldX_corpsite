@@ -739,21 +739,21 @@
 
 .fx-service-view-organism {
   display: flex;
-  align-items: flex-start;
-  min-height: 150svh;
+  align-items: center;
+  min-height: 100svh;
   background: #fff;
-  padding-block: clamp(2rem, 3vw, 2.8rem) clamp(0.75rem, 1.2vw, 1.15rem);
+  padding-block: clamp(2rem, 3.8vw, 3.4rem);
 }
 
 .fx-service-view-shell {
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: clamp(1.7rem, 2.3vw, 2.2rem);
-  min-height: 100%;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
 }
 
 .fx-service-view-copy {
-  max-width: 31rem;
+  max-width: 34rem;
 }
 
 .fx-service-view-header {
@@ -783,19 +783,23 @@
   margin: clamp(1.1rem, 2vw, 1.45rem) 0 0;
   color: #101010;
   font-family: var(--fx-font-body);
-  font-size: clamp(2.05rem, 2.4vw, 2.35rem);
+  font-size: clamp(2.25rem, 3.4vw, 4rem);
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.04em;
-  white-space: nowrap;
+}
+
+.fx-service-view-title-line {
+  display: block;
 }
 
 .fx-service-view-body {
-  margin: 0.65rem 0 0;
+  margin: clamp(1rem, 1.7vw, 1.35rem) 0 0;
   color: #181818;
-  font-size: 0.82rem;
-  line-height: 1.2;
-  max-width: 24rem;
+  font-size: clamp(0.92rem, 1vw, 1.02rem);
+  font-weight: 700;
+  line-height: 1.55;
+  max-width: 33rem;
 }
 
 .fx-service-view-body-line {
@@ -826,7 +830,7 @@
 
 .fx-service-view-cta-primary,
 .fx-service-view-cta-secondary {
-  margin-top: 0.95rem;
+  margin-top: clamp(1.25rem, 2.2vw, 1.9rem);
   background: #ff433d;
   color: #fff;
 }
@@ -845,106 +849,58 @@
 .fx-service-view-content {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: clamp(1.25rem, 1.8vw, 1.7rem);
+  gap: clamp(0.95rem, 1.5vw, 1.25rem);
   align-items: start;
 }
 
-.fx-service-view-row {
+.fx-service-view-agent-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  align-items: start;
+  gap: clamp(0.65rem, 1vw, 0.95rem);
 }
 
-.fx-service-view-section {
+.fx-service-view-agent-card {
+  position: relative;
   display: grid;
   align-content: start;
-  justify-items: start;
+  min-height: clamp(8.2rem, 12vw, 10.2rem);
+  padding: clamp(0.95rem, 1.45vw, 1.25rem);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 0.5rem;
+  background: #f7f7f8;
 }
 
-.fx-service-view-section-primary {
-  max-width: 34rem;
+.fx-service-view-agent-mark {
+  width: 1.45rem;
+  aspect-ratio: 1;
+  border: 2px solid #ff433d;
+  border-radius: 50%;
 }
 
-.fx-service-view-section-secondary {
-  max-width: none;
-  width: 100%;
-  padding-top: clamp(0.65rem, 0.9vw, 0.95rem);
-}
-
-.fx-service-view-section-title {
+.fx-service-view-agent-title {
   margin: 0;
-  color: #ff433d;
+  padding-top: clamp(0.85rem, 1.2vw, 1rem);
+  color: #111;
   font-family: var(--fx-font-body);
-  font-size: clamp(1.85rem, 2.1vw, 2.3rem);
+  font-size: clamp(1rem, 1.25vw, 1.22rem);
   font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
-.fx-service-view-section-body {
-  margin: 0.62rem 0 0;
-  color: #1a1a1a;
-  font-size: 0.93rem;
-  line-height: 1.42;
-  max-width: 34rem;
+.fx-service-view-agent-body {
+  margin: 0.45rem 0 0;
+  color: #3b3b3f;
+  font-size: clamp(0.78rem, 0.88vw, 0.88rem);
+  font-weight: 700;
+  line-height: 1.45;
 }
 
-.fx-service-view-section-secondary .fx-service-view-section-body {
-  max-width: none;
-}
-
-.fx-service-view-section .fx-service-view-cta-secondary {
-  min-height: 3.3rem;
-  min-width: 5.5rem;
-  padding-inline: 1.3rem;
-  font-size: 1rem;
-  justify-self: start;
-}
-
-.fx-service-view-tiles-top,
-.fx-service-view-tiles-bottom {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.fx-service-view-tiles-top {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-self: start;
-  grid-column: span 2;
-  margin-top: clamp(0.95rem, 1.2vw, 1.15rem);
-}
-
-.fx-service-view-tiles-bottom {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 0.1rem;
-}
-
-.fx-service-view-tile {
-  aspect-ratio: 16 / 9;
-  background: #cfcfcf;
-  color: #fff;
-  display: grid;
-  align-items: end;
-  text-align: center;
-  padding: 0.75rem;
-  border-radius: 0.4rem;
-  font-family: var(--fx-font-body);
-  font-size: clamp(1.3rem, 1.8vw, 1.8rem);
-  font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -0.03em;
-}
-
-.fx-service-view-tile-content {
-  display: grid;
-  place-items: center;
-  min-height: 100%;
-  width: 100%;
-}
-
-.fx-service-view-tile-line {
-  display: block;
+.fx-service-view-note {
+  margin: 0;
+  color: #5c5555;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.45;
 }
 
 .fx-home-column-organism {
@@ -5973,7 +5929,7 @@
   }
 
   .fx-service-view-organism {
-    min-height: 150svh;
+    min-height: auto;
   }
 
   .fx-home-column-link {
@@ -5994,8 +5950,13 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .fx-service-view-row {
+  .fx-service-view-shell {
     grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .fx-service-view-agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .fx-services-organism-accent::before {
@@ -6289,19 +6250,12 @@
     font-size: 0.92rem;
   }
 
-  .fx-service-view-section-title {
-    font-size: 1.7rem;
-  }
-
-  .fx-service-view-row,
-  .fx-service-view-tiles-top,
-  .fx-service-view-tiles-bottom {
+  .fx-service-view-agent-grid {
     grid-template-columns: 1fr;
   }
 
-  .fx-service-view-tile {
-    aspect-ratio: 16 / 9;
-    font-size: clamp(1.5rem, 8vw, 2.2rem);
+  .fx-service-view-agent-card {
+    min-height: auto;
   }
 
   .fx-whatwedo-item {

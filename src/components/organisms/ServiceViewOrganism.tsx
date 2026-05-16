@@ -10,13 +10,10 @@ type ServiceViewOrganismProps = {
   body: string;
   primaryCtaLabel: string;
   primaryCtaHref: string;
-  sections: {
+  agents: {
     title: string;
     body: string;
-    ctaLabel: string;
-    ctaHref: string;
   }[];
-  tiles: string[];
 };
 
 export function ServiceViewOrganism({
@@ -27,15 +24,16 @@ export function ServiceViewOrganism({
   body,
   primaryCtaLabel,
   primaryCtaHref,
-  sections,
-  tiles
+  agents
 }: ServiceViewOrganismProps) {
-  const [firstSection, secondSection] = sections;
-  const topTiles = tiles.slice(0, 2);
-  const bottomTiles = tiles.slice(2);
-
   return (
-    <Surface as="section" id={sectionId} tone="light" labelledBy="home-service-title" className="fx-service-view-organism">
+    <Surface
+      as="section"
+      id={sectionId}
+      tone="light"
+      labelledBy="home-service-title"
+      className="fx-service-view-organism"
+    >
       <div className="fx-shell fx-service-view-shell">
         <div className="fx-service-view-copy">
           <header className="fx-service-view-header">
@@ -44,7 +42,11 @@ export function ServiceViewOrganism({
           </header>
 
           <h2 id="home-service-title" className="fx-service-view-title">
-            {title}
+            {title.split("\n").map((line) => (
+              <span key={line} className="fx-service-view-title-line">
+                {line}
+              </span>
+            ))}
           </h2>
 
           <p className="fx-service-view-body">
@@ -61,55 +63,22 @@ export function ServiceViewOrganism({
         </div>
 
         <div className="fx-service-view-content">
-          {firstSection ? (
-            <article className="fx-service-view-section fx-service-view-section-primary">
-              <h3 className="fx-service-view-section-title">{firstSection.title}</h3>
-              <p className="fx-service-view-section-body">{firstSection.body}</p>
-              <Link href={firstSection.ctaHref} className="fx-service-view-cta fx-service-view-cta-secondary">
-                {firstSection.ctaLabel}
-              </Link>
-            </article>
-          ) : null}
-
-          <div className="fx-service-view-row">
-            {secondSection ? (
-              <article className="fx-service-view-section fx-service-view-section-secondary">
-                <h3 className="fx-service-view-section-title">{secondSection.title}</h3>
-                <p className="fx-service-view-section-body">{secondSection.body}</p>
-                <Link href={secondSection.ctaHref} className="fx-service-view-cta fx-service-view-cta-secondary">
-                  {secondSection.ctaLabel}
-                </Link>
-              </article>
-            ) : null}
-
-            <div className="fx-service-view-tiles-top" aria-label="上段サービスカード">
-              {topTiles.map((tile) => (
-                <article key={tile} className="fx-service-view-tile fx-service-view-tile-top" aria-label={tile.replace("\n", " ")}>
-                  <div className="fx-service-view-tile-content">
-                    {tile.split("\n").map((line, index) => (
-                      <span key={`${tile}-${index}`} className="fx-service-view-tile-line">
-                        {line}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div className="fx-service-view-tiles-bottom" aria-label="下段サービスカード">
-            {bottomTiles.map((tile) => (
-              <article key={tile} className="fx-service-view-tile fx-service-view-tile-bottom" aria-label={tile.replace("\n", " ")}>
-                <div className="fx-service-view-tile-content">
-                  {tile.split("\n").map((line, index) => (
-                    <span key={`${tile}-${index}`} className="fx-service-view-tile-line">
-                      {line}
-                    </span>
-                  ))}
-                </div>
+          <div
+            className="fx-service-view-agent-grid"
+            aria-label="賃貸管理業務を支えるAIエージェント一覧"
+          >
+            {agents.map((agent) => (
+              <article key={agent.title} className="fx-service-view-agent-card">
+                <span className="fx-service-view-agent-mark" aria-hidden="true" />
+                <h3 className="fx-service-view-agent-title">{agent.title}</h3>
+                <p className="fx-service-view-agent-body">{agent.body}</p>
               </article>
             ))}
           </div>
+
+          <p className="fx-service-view-note">
+            個別エージェントと基盤の詳細はサービスページで紹介しています。
+          </p>
         </div>
       </div>
     </Surface>

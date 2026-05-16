@@ -50,13 +50,10 @@ export type SiteLocaleContent = {
     body: string;
     primaryCtaLabel: string;
     primaryCtaHref: string;
-    sections: {
+    agents: {
       title: string;
       body: string;
-      ctaLabel: string;
-      ctaHref: string;
     }[];
-    tiles: string[];
   };
   team: {
     heading: string;
@@ -233,25 +230,40 @@ export const siteContent: SiteLocaleContent = {
   serviceView: {
     eyebrowEn: "SERVICE",
     eyebrowJa: "事業内容",
-    title: "本当に価値のある成果を",
-    body: "Field Xは、現場の業務フローを起点にAIエージェントを設計し、導入後の運用定着まで伴走します。\n電話対応、書類処理、営業支援、ナレッジ活用など、反復業務を人の判断が活きるワークフローへ組み替えます。",
-    primaryCtaLabel: "事業内容をみる",
+    title: "賃貸管理業務を支える\nAIエージェント群",
+    body: "電話対応、書類作成、更新案内、退去手続き、オーナー対応まで。\nField Xは、現場に残る反復業務をAIが準備し、人が判断できる状態に整えます。",
+    primaryCtaLabel: "サービスを見る",
     primaryCtaHref: "/service",
-    sections: [
+    agents: [
       {
-        title: "AX Solution事業",
-        body: "経営視点を捉えつつ、現場へのヒアリングを通した課題抽出から、要件定義、AI開発・導入・定着までを企業様のパートナーとして行い、AX推進を支援します。",
-        ctaLabel: "詳細をみる",
-        ctaHref: "/service"
+        title: "AIコール",
+        body: "電話応対"
       },
       {
-        title: "AI Agent事業",
-        body: "Field X の最先端のナレッジを AI SaaS という形で提供し、様々な業界の生産性向上を支援します。",
-        ctaLabel: "詳細をみる",
-        ctaHref: "/service"
+        title: "AIチャット",
+        body: "メール・チャット返信"
+      },
+      {
+        title: "オーナー支援",
+        body: "訪問前の情報整理"
+      },
+      {
+        title: "AI Docs",
+        body: "契約・書類作成"
+      },
+      {
+        title: "退去手続き",
+        body: "退去完了までの支援"
+      },
+      {
+        title: "更新案内",
+        body: "連絡・リマインド"
+      },
+      {
+        title: "修繕提案",
+        body: "修繕・リノベ提案"
       }
-    ],
-    tiles: ["Call Agent", "PM Agent", "CRM", "経費処理", "ちょこっと\nインハウス"]
+    ]
   },
   team: {
     heading: "Team",
