@@ -8,21 +8,21 @@
   aria-labelledby="title desc"
 >
   <title id="title">大規模修繕エージェント</title>
-  <desc id="desc">修繕提案を表す建物と工具のアイコン</desc>
-  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
+  <desc id="desc">修繕提案を表す控えめな線画アイコン</desc>
+  <rect width="160" height="160" rx="6" fill="#F4F4F6" />
+  <path d="M36 58h55v73H36V58Z" stroke="#1E1E21" stroke-width="7" stroke-linejoin="round" />
   <path
-    d="M34 56h56v76H34V56Z"
-    fill="#fff"
-    stroke="#111"
-    stroke-width="8"
-    stroke-linejoin="round"
-  />
-  <path
-    d="M48 74h10M70 74h10M48 94h10M70 94h10M48 114h10M70 114h10"
-    stroke="#111"
-    stroke-width="6"
+    d="M50 77h10M72 77h9M50 96h10M72 96h9M50 115h10M72 115h9"
+    stroke="#1E1E21"
+    stroke-width="5"
     stroke-linecap="round"
   />
-  <path d="M96 33a26 26 0 0 0 25 32l-49 49a13 13 0 0 1-18-18l50-50-8-13Z" fill="#FF3D38" />
-  <path d="m59 103 8 8" stroke="#fff" stroke-width="6" stroke-linecap="round" />
+  <path
+    d="M99 35a25 25 0 0 0 24 30l-48 48a12 12 0 0 1-17-17l49-49-8-12Z"
+    fill="#F4F4F6"
+    stroke="#1E1E21"
+    stroke-width="7"
+    stroke-linejoin="round"
+  />
+  <path d="m63 101 8 8" stroke="#1E1E21" stroke-width="5" stroke-linecap="round" />
 </svg>

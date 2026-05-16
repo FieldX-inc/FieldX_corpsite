@@ -8,25 +8,31 @@
   aria-labelledby="title desc"
 >
   <title id="title">AIチャットエージェント</title>
-  <desc id="desc">メールとチャット返信を表す吹き出しのアイコン</desc>
-  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
-  <path
-    d="M36 48h88c7 0 12 5 12 12v52c0 7-5 12-12 12H36c-7 0-12-5-12-12V60c0-7 5-12 12-12Z"
-    fill="#FF3D38"
+  <desc id="desc">メールとチャット返信を表す控えめな線画アイコン</desc>
+  <rect width="160" height="160" rx="6" fill="#F4F4F6" />
+  <rect
+    x="35"
+    y="53"
+    width="90"
+    height="58"
+    rx="8"
+    stroke="#1E1E21"
+    stroke-width="7"
+    stroke-linejoin="round"
   />
   <path
-    d="m31 58 49 34 49-34"
-    stroke="#fff"
-    stroke-width="8"
+    d="m39 60 41 30 41-30"
+    stroke="#1E1E21"
+    stroke-width="7"
     stroke-linecap="round"
     stroke-linejoin="round"
   />
   <path
-    d="M56 32h42c6 0 11 5 11 11v28c0 6-5 11-11 11H78L57 100V82h-1c-6 0-11-5-11-11V43c0-6 5-11 11-11Z"
-    fill="#fff"
-    stroke="#111"
-    stroke-width="7"
+    d="M62 40h45c6 0 10 4 10 10v27c0 6-4 10-10 10H89l-20 17V87h-7c-6 0-10-4-10-10V50c0-6 4-10 10-10Z"
+    fill="#F4F4F6"
+    stroke="#1E1E21"
+    stroke-width="6"
     stroke-linejoin="round"
   />
-  <path d="M64 54h27M64 66h17" stroke="#111" stroke-width="6" stroke-linecap="round" />
+  <path d="M69 58h27M69 69h18" stroke="#1E1E21" stroke-width="5" stroke-linecap="round" />
 </svg>

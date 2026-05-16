@@ -8,16 +8,25 @@
   aria-labelledby="title desc"
 >
   <title id="title">退去手続きエージェント</title>
-  <desc id="desc">退去手続きを表すドアとチェックリストのアイコン</desc>
-  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
-  <path d="M36 30h56v100H36V30Z" fill="#FF3D38" />
-  <path d="M92 43h24v87H92" stroke="#111" stroke-width="8" stroke-linejoin="round" />
-  <circle cx="78" cy="80" r="5" fill="#fff" />
-  <rect x="82" y="62" width="52" height="64" rx="8" fill="#fff" stroke="#111" stroke-width="7" />
-  <path
-    d="m94 82 7 7 14-16M94 105l7 7 14-16"
-    stroke="#FF3D38"
+  <desc id="desc">退去手続きを表す控えめな線画アイコン</desc>
+  <rect width="160" height="160" rx="6" fill="#F4F4F6" />
+  <path d="M39 32h52v96H39V32Z" stroke="#1E1E21" stroke-width="7" stroke-linejoin="round" />
+  <path d="M91 43h25v85H91" stroke="#1E1E21" stroke-width="7" stroke-linejoin="round" />
+  <circle cx="76" cy="80" r="4" fill="#1E1E21" />
+  <rect
+    x="83"
+    y="64"
+    width="47"
+    height="61"
+    rx="7"
+    fill="#F4F4F6"
+    stroke="#1E1E21"
     stroke-width="6"
+  />
+  <path
+    d="m96 85 7 7 14-17M96 107l7 7 14-17"
+    stroke="#1E1E21"
+    stroke-width="5"
     stroke-linecap="round"
     stroke-linejoin="round"
   />
