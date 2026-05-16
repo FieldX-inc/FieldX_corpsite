@@ -10,27 +10,39 @@
   <title id="title">更新案内エージェント</title>
   <desc id="desc">契約更新を表す控えめな線画アイコン</desc>
   <rect width="160" height="160" rx="6" fill="#F4F4F6" />
-  <rect x="33" y="40" width="94" height="88" rx="9" stroke="#1E1E21" stroke-width="7" />
-  <path d="M33 65h94M58 31v20M102 31v20" stroke="#1E1E21" stroke-width="7" stroke-linecap="round" />
-  <path d="M63 93a22 22 0 0 1 37-14l6 6" stroke="#1E1E21" stroke-width="6" stroke-linecap="round" />
-  <path
-    d="M107 72v15H92"
-    stroke="#1E1E21"
-    stroke-width="6"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-  <path
-    d="M98 101a22 22 0 0 1-37 14l-6-6"
-    stroke="#1E1E21"
-    stroke-width="6"
-    stroke-linecap="round"
-  />
-  <path
-    d="M54 123v-15h15"
-    stroke="#1E1E21"
-    stroke-width="6"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
+  <g class="fx-agent-icon-glyph" transform="translate(20 20) scale(0.75)">
+    <rect x="33" y="40" width="94" height="88" rx="9" stroke="#1E1E21" stroke-width="4.6" />
+    <path
+      d="M33 65h94M58 31v20M102 31v20"
+      stroke="#1E1E21"
+      stroke-width="4.6"
+      stroke-linecap="round"
+    />
+    <path
+      d="M63 93a22 22 0 0 1 37-14l6 6"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+      stroke-linecap="round"
+    />
+    <path
+      d="M107 72v15H92"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M98 101a22 22 0 0 1-37 14l-6-6"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+      stroke-linecap="round"
+    />
+    <path
+      d="M54 123v-15h15"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
 </svg>

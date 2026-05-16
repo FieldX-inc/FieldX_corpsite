@@ -10,19 +10,21 @@
   <title id="title">大規模修繕エージェント</title>
   <desc id="desc">修繕提案を表す控えめな線画アイコン</desc>
   <rect width="160" height="160" rx="6" fill="#F4F4F6" />
-  <path d="M36 58h55v73H36V58Z" stroke="#1E1E21" stroke-width="7" stroke-linejoin="round" />
-  <path
-    d="M50 77h10M72 77h9M50 96h10M72 96h9M50 115h10M72 115h9"
-    stroke="#1E1E21"
-    stroke-width="5"
-    stroke-linecap="round"
-  />
-  <path
-    d="M99 35a25 25 0 0 0 24 30l-48 48a12 12 0 0 1-17-17l49-49-8-12Z"
-    fill="#F4F4F6"
-    stroke="#1E1E21"
-    stroke-width="7"
-    stroke-linejoin="round"
-  />
-  <path d="m63 101 8 8" stroke="#1E1E21" stroke-width="5" stroke-linecap="round" />
+  <g class="fx-agent-icon-glyph" transform="translate(20 20) scale(0.75)">
+    <path d="M36 58h55v73H36V58Z" stroke="#1E1E21" stroke-width="4.6" stroke-linejoin="round" />
+    <path
+      d="M50 77h10M72 77h9M50 96h10M72 96h9M50 115h10M72 115h9"
+      stroke="#1E1E21"
+      stroke-width="3.5"
+      stroke-linecap="round"
+    />
+    <path
+      d="M99 35a25 25 0 0 0 24 30l-48 48a12 12 0 0 1-17-17l49-49-8-12Z"
+      fill="#F4F4F6"
+      stroke="#1E1E21"
+      stroke-width="4.6"
+      stroke-linejoin="round"
+    />
+    <path d="m63 101 8 8" stroke="#1E1E21" stroke-width="3.5" stroke-linecap="round" />
+  </g>
 </svg>
