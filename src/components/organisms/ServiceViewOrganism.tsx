@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Surface } from "@/components/atoms";
@@ -13,6 +14,7 @@ type ServiceViewOrganismProps = {
   agents: {
     title: string;
     body: string;
+    icon: string;
   }[];
 };
 
@@ -69,7 +71,13 @@ export function ServiceViewOrganism({
           >
             {agents.map((agent) => (
               <article key={agent.title} className="fx-service-view-agent-card">
-                <span className="fx-service-view-agent-mark" aria-hidden="true" />
+                <Image
+                  src={agent.icon}
+                  alt=""
+                  width={160}
+                  height={160}
+                  className="fx-service-view-agent-icon"
+                />
                 <h3 className="fx-service-view-agent-title">{agent.title}</h3>
                 <p className="fx-service-view-agent-body">{agent.body}</p>
               </article>

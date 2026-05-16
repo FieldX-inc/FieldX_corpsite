@@ -870,16 +870,16 @@
   background: #f7f7f8;
 }
 
-.fx-service-view-agent-mark {
-  width: 1.45rem;
-  aspect-ratio: 1;
-  border: 2px solid #ff433d;
-  border-radius: 50%;
+.fx-service-view-agent-icon {
+  display: block;
+  width: clamp(3rem, 4.3vw, 3.8rem);
+  height: auto;
+  border-radius: 0.28rem;
 }
 
 .fx-service-view-agent-title {
   margin: 0;
-  padding-top: clamp(0.85rem, 1.2vw, 1rem);
+  padding-top: clamp(0.75rem, 1vw, 0.9rem);
   color: #111;
   font-family: var(--fx-font-body);
   font-size: clamp(1rem, 1.25vw, 1.22rem);

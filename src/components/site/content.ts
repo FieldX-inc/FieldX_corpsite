@@ -53,6 +53,7 @@ export type SiteLocaleContent = {
     agents: {
       title: string;
       body: string;
+      icon: string;
     }[];
   };
   team: {
@@ -237,31 +238,38 @@ export const siteContent: SiteLocaleContent = {
     agents: [
       {
         title: "AIコール",
-        body: "電話応対"
+        body: "電話応対",
+        icon: "/images/services/agents/call-agent.svg"
       },
       {
         title: "AIチャット",
-        body: "メール・チャット返信"
+        body: "メール・チャット返信",
+        icon: "/images/services/agents/chat-agent.svg"
       },
       {
         title: "オーナー支援",
-        body: "訪問前の情報整理"
+        body: "訪問前の情報整理",
+        icon: "/images/services/agents/owner-agent.svg"
       },
       {
         title: "AI Docs",
-        body: "契約・書類作成"
+        body: "契約・書類作成",
+        icon: "/images/services/agents/docs-agent.svg"
       },
       {
         title: "退去手続き",
-        body: "退去完了までの支援"
+        body: "退去完了までの支援",
+        icon: "/images/services/agents/move-out-agent.svg"
       },
       {
         title: "更新案内",
-        body: "連絡・リマインド"
+        body: "連絡・リマインド",
+        icon: "/images/services/agents/renewal-agent.svg"
       },
       {
         title: "修繕提案",
-        body: "修繕・リノベ提案"
+        body: "修繕・リノベ提案",
+        icon: "/images/services/agents/repair-agent.svg"
       }
     ]
   },
