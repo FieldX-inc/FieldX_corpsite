@@ -4343,9 +4343,11 @@
 }
 
 .fx-service-page-agent-thumb {
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 1;
-  background: #d9d9d9;
+  border-radius: 0.45rem;
 }
 
 .fx-service-page-agent-copy {

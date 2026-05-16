@@ -1,0 +1,28 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">大規模修繕エージェント</title>
+  <desc id="desc">修繕提案を表す建物と工具のアイコン</desc>
+  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
+  <path
+    d="M34 56h56v76H34V56Z"
+    fill="#fff"
+    stroke="#111"
+    stroke-width="8"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M48 74h10M70 74h10M48 94h10M70 94h10M48 114h10M70 114h10"
+    stroke="#111"
+    stroke-width="6"
+    stroke-linecap="round"
+  />
+  <path d="M96 33a26 26 0 0 0 25 32l-49 49a13 13 0 0 1-18-18l50-50-8-13Z" fill="#FF3D38" />
+  <path d="m59 103 8 8" stroke="#fff" stroke-width="6" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,36 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">更新案内エージェント</title>
+  <desc id="desc">契約更新のリマインドを表すカレンダーと循環矢印のアイコン</desc>
+  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
+  <rect x="30" y="38" width="100" height="92" rx="10" fill="#fff" stroke="#111" stroke-width="8" />
+  <path d="M30 64h100M56 30v20M104 30v20" stroke="#111" stroke-width="8" stroke-linecap="round" />
+  <path d="M63 92a23 23 0 0 1 38-14l6 6" stroke="#FF3D38" stroke-width="8" stroke-linecap="round" />
+  <path
+    d="M108 70v16H92"
+    stroke="#FF3D38"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M98 101a23 23 0 0 1-38 14l-6-6"
+    stroke="#FF3D38"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+  <path
+    d="M53 123v-16h16"
+    stroke="#FF3D38"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

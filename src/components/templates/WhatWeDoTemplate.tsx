@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { HomeContactCtaOrganism } from "@/components/organisms";
@@ -11,37 +12,44 @@ const agentProducts = [
   {
     title: "AIコールエージェント",
     body: "見込み客や入居者からの電話に応対する。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/call-agent.svg"
   },
   {
     title: "AIチャットエージェント",
     body: "見込み客や入居者からのメールやチャットの返信をAIが応対する。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/chat-agent.svg"
   },
   {
     title: "オーナーエージェント",
     body: "オーナー様訪問前に確認するべき社内情報をまとめる。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/owner-agent.svg"
   },
   {
     title: "AI Docs エージェント",
     body: "各種契約書などの煩雑な書類作成をAIが完了する。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/docs-agent.svg"
   },
   {
     title: "退去手続きエージェント",
     body: "退去連絡から退去完了までの一連の業務をAIが支援する。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/move-out-agent.svg"
   },
   {
     title: "更新案内エージェント",
     body: "契約更新対象者への連絡・リマインドを定期的に実行する。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/renewal-agent.svg"
   },
   {
     title: "大規模修繕エージェント",
     body: "水回りからリノベーションまで、修繕提案をAIが支援する。",
-    href: "/contact?intent=materials"
+    href: "/contact?intent=materials",
+    icon: "/images/services/agents/repair-agent.svg"
   }
 ] as const;
 
@@ -115,7 +123,13 @@ export function WhatWeDoTemplate({ content }: WhatWeDoTemplateProps) {
             <div className="fx-service-page-agent-grid">
               {agentProducts.map((product) => (
                 <article key={product.title} className="fx-service-page-agent-card">
-                  <div className="fx-service-page-agent-thumb" aria-hidden="true" />
+                  <Image
+                    src={product.icon}
+                    alt=""
+                    width={160}
+                    height={160}
+                    className="fx-service-page-agent-thumb"
+                  />
                   <div className="fx-service-page-agent-copy">
                     <h4 className="fx-service-page-agent-title">{product.title}</h4>
                     <p className="fx-service-page-agent-body">{product.body}</p>

@@ -1,0 +1,24 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">オーナーエージェント</title>
+  <desc id="desc">オーナー情報の確認を表す人物と書類のアイコン</desc>
+  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
+  <circle cx="56" cy="54" r="20" fill="#FF3D38" />
+  <path d="M24 120c5-25 18-38 32-38s27 13 32 38" fill="#FF3D38" />
+  <rect x="78" y="36" width="54" height="78" rx="8" fill="#fff" stroke="#111" stroke-width="8" />
+  <path d="M94 58h22M94 74h22M94 90h14" stroke="#111" stroke-width="7" stroke-linecap="round" />
+  <path
+    d="m106 116 9 9 22-24"
+    stroke="#FF3D38"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

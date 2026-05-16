@@ -1,0 +1,24 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">退去手続きエージェント</title>
+  <desc id="desc">退去手続きを表すドアとチェックリストのアイコン</desc>
+  <rect width="160" height="160" rx="18" fill="#FFF1EF" />
+  <path d="M36 30h56v100H36V30Z" fill="#FF3D38" />
+  <path d="M92 43h24v87H92" stroke="#111" stroke-width="8" stroke-linejoin="round" />
+  <circle cx="78" cy="80" r="5" fill="#fff" />
+  <rect x="82" y="62" width="52" height="64" rx="8" fill="#fff" stroke="#111" stroke-width="7" />
+  <path
+    d="m94 82 7 7 14-16M94 105l7 7 14-16"
+    stroke="#FF3D38"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
