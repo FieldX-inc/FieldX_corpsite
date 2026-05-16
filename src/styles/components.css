@@ -620,11 +620,13 @@
 }
 
 .fx-poem-organism {
+  --fx-poem-header-clearance: var(--fx-header-height);
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--fx-poem-header-clearance));
+  scroll-margin-top: var(--fx-poem-header-clearance);
   padding-block: clamp(3.2rem, 5vw, 4.8rem) clamp(1.1rem, 1.8vw, 1.8rem);
   background: linear-gradient(90deg, #f33d3b 0%, #ff9e3c 19%, #fff0f0 60%, #ffffff 100%);
 }
@@ -5920,7 +5922,7 @@
   }
 
   .fx-poem-organism {
-    min-height: 100svh;
+    --fx-poem-header-clearance: 84px;
     align-items: flex-start;
   }
 
@@ -6168,7 +6170,7 @@
   }
 
   .fx-poem-organism {
-    min-height: 100svh;
+    --fx-poem-header-clearance: 70px;
     align-items: flex-start;
     padding-block: clamp(2.4rem, 8vw, 3.6rem);
   }
