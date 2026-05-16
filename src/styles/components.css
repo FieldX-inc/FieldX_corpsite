@@ -4281,6 +4281,322 @@
   font-size: clamp(1.22rem, 1.75vw, 1.58rem);
 }
 
+.fx-service-page-products {
+  background: #fff;
+  padding: clamp(4.2rem, 6.8vw, 6.4rem) var(--fx-shell-padding-x) 0;
+}
+
+.fx-service-page-products .fx-service-page-shell {
+  display: grid;
+  gap: clamp(4.2rem, 6.4vw, 6.2rem);
+}
+
+.fx-service-page-agent-suite,
+.fx-service-page-platform {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.fx-service-page-agent-suite {
+  gap: clamp(1.9rem, 3.2vw, 2.7rem);
+}
+
+.fx-service-page-products .fx-service-page-red-heading {
+  display: grid;
+  justify-items: center;
+  color: #ff3d38;
+  text-align: center;
+  font-size: clamp(2rem, 3.2vw, 2.95rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.fx-service-page-products .fx-service-page-red-heading span {
+  display: block;
+}
+
+.fx-service-page-agent-lead,
+.fx-service-page-platform-lead,
+.fx-service-page-crm-body {
+  margin: 0;
+  color: #111;
+  font-size: clamp(0.95rem, 1.02vw, 1.02rem);
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.fx-service-page-agent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.9rem) clamp(1.1rem, 2.8vw, 2.6rem);
+  width: 100%;
+  margin-top: 0.3rem;
+}
+
+.fx-service-page-agent-card {
+  display: grid;
+  grid-template-columns: clamp(4.7rem, 7vw, 6.3rem) minmax(0, 1fr);
+  gap: clamp(1rem, 1.6vw, 1.35rem);
+  align-items: start;
+  text-align: left;
+}
+
+.fx-service-page-agent-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #d9d9d9;
+}
+
+.fx-service-page-agent-copy {
+  display: grid;
+  align-content: start;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.fx-service-page-agent-title {
+  margin: 0;
+  color: #111;
+  font-size: clamp(1.02rem, 1.15vw, 1.14rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.fx-service-page-agent-body {
+  margin: 0;
+  color: #111;
+  font-size: clamp(0.78rem, 0.88vw, 0.88rem);
+  font-weight: 700;
+  line-height: 1.32;
+}
+
+.fx-service-page-agent-link {
+  width: fit-content;
+  color: #ff3d38;
+  text-decoration: none;
+  font-size: clamp(0.8rem, 0.9vw, 0.88rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.fx-service-page-agent-link::after {
+  content: "›";
+  margin-left: 0.36rem;
+}
+
+.fx-service-page-platform {
+  gap: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.fx-service-page-platform-visual {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(220px, 0.56fr);
+  gap: clamp(2.4rem, 5.2vw, 5.6rem);
+  align-items: end;
+  width: min(100%, 44rem);
+  margin-top: 0.5rem;
+}
+
+.fx-service-page-platform-diagram {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 1.22;
+  justify-self: end;
+}
+
+.fx-service-page-platform-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: clamp(5rem, 8vw, 6.8rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: #ff3d38;
+  color: #fff;
+}
+
+.fx-service-page-platform-core svg {
+  width: 66%;
+  height: 66%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fx-service-page-platform-node {
+  position: absolute;
+  z-index: 3;
+  width: clamp(2.6rem, 4.2vw, 3.4rem);
+  aspect-ratio: 1;
+  border: 2px solid rgba(130, 96, 88, 0.38);
+  background: #fff;
+}
+
+.fx-service-page-platform-node.is-top-left {
+  left: 9%;
+  top: 18%;
+}
+
+.fx-service-page-platform-node.is-top {
+  left: 49%;
+  top: 2%;
+  transform: translateX(-50%);
+}
+
+.fx-service-page-platform-node.is-top-right {
+  right: 8%;
+  top: 22%;
+}
+
+.fx-service-page-platform-node.is-left {
+  left: 0;
+  top: 48%;
+}
+
+.fx-service-page-platform-node.is-right {
+  right: 0;
+  top: 50%;
+}
+
+.fx-service-page-platform-node.is-bottom {
+  right: 14%;
+  bottom: 3%;
+}
+
+.fx-service-page-platform-line {
+  position: absolute;
+  z-index: 1;
+  height: 2px;
+  background: rgba(130, 96, 88, 0.28);
+  transform-origin: left center;
+}
+
+.fx-service-page-platform-line.is-line-top-left {
+  left: 28%;
+  top: 34%;
+  width: 26%;
+  transform: rotate(36deg);
+}
+
+.fx-service-page-platform-line.is-line-top {
+  left: 52%;
+  top: 23%;
+  width: 19%;
+  transform: rotate(88deg);
+}
+
+.fx-service-page-platform-line.is-line-top-right {
+  left: 57%;
+  top: 36%;
+  width: 25%;
+  transform: rotate(-28deg);
+}
+
+.fx-service-page-platform-line.is-line-left {
+  left: 18%;
+  top: 58%;
+  width: 32%;
+  transform: rotate(-6deg);
+}
+
+.fx-service-page-platform-line.is-line-right {
+  left: 58%;
+  top: 58%;
+  width: 25%;
+  transform: rotate(1deg);
+}
+
+.fx-service-page-platform-line.is-line-bottom {
+  left: 58%;
+  top: 66%;
+  width: 27%;
+  transform: rotate(48deg);
+}
+
+.fx-service-page-platform-sketch {
+  display: grid;
+  place-items: center;
+  min-height: clamp(8rem, 15vw, 11.5rem);
+  padding: 1.4rem;
+  background: #d9d9d9;
+  color: #111;
+  font-size: clamp(1.6rem, 3vw, 2.45rem);
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.fx-service-page-crm {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  overflow: hidden;
+  margin-top: clamp(0.6rem, 1vw, 1rem);
+  padding: clamp(3.1rem, 4.7vw, 4.25rem) clamp(1.1rem, 3vw, 3.2rem) clamp(3.9rem, 6vw, 5.5rem);
+  border-radius: 1rem;
+  background:
+    radial-gradient(ellipse at 50% 105%, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0) 56%),
+    linear-gradient(150deg, #ff9f3f 0%, #ff433d 50%, #fff7f3 100%);
+  color: #fff;
+}
+
+.fx-service-page-crm-title {
+  display: grid;
+  justify-items: center;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2rem, 3.1vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.fx-service-page-crm-title span {
+  display: block;
+}
+
+.fx-service-page-crm-body {
+  margin-top: clamp(1.8rem, 2.6vw, 2.4rem);
+  color: #fff;
+}
+
+.fx-service-page-crm .fx-service-page-cta {
+  margin-top: clamp(1.7rem, 2.6vw, 2.35rem);
+  min-height: 3.2rem;
+  background: #ff3d38;
+}
+
+.fx-service-page-crm-media {
+  width: min(100%, 56rem);
+  aspect-ratio: 920 / 515;
+  margin-top: clamp(3.9rem, 6vw, 5.7rem);
+  border-radius: 0.35rem;
+  background: #d9d9d9;
+}
+
+.fx-service-page-products + .fx-home-contact-cta-organism {
+  min-height: 74svh;
+  padding-top: clamp(7rem, 12vw, 11rem);
+}
+
+.fx-service-page-products + .fx-home-contact-cta-organism .fx-home-contact-cta-grid {
+  width: min(100%, 1066px);
+  gap: clamp(3rem, 7.5vw, 7.05rem);
+}
+
+.fx-service-page-products + .fx-home-contact-cta-organism .fx-home-contact-cta-card-inner {
+  min-height: clamp(468px, 45vw, 508px);
+}
+
+.fx-service-page-products + .fx-home-contact-cta-organism .fx-home-contact-cta-card-title {
+  font-size: clamp(1.22rem, 1.75vw, 1.58rem);
+}
+
 .fx-column-page-hero,
 .fx-news-page-hero,
 .fx-contact-page-hero {
@@ -5121,6 +5437,25 @@
     max-width: 443px;
   }
 
+  .fx-service-page-agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fx-service-page-platform-visual {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    width: min(100%, 36rem);
+    gap: 2rem;
+  }
+
+  .fx-service-page-platform-diagram {
+    justify-self: center;
+  }
+
+  .fx-service-page-platform-sketch {
+    width: min(100%, 24rem);
+  }
+
   .fx-about-page-profile-row {
     grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
   }
@@ -5234,6 +5569,51 @@
 
   .fx-service-page-flow-card-body {
     margin-top: 0.42rem;
+  }
+
+  .fx-service-page-products {
+    padding-top: 4rem;
+  }
+
+  .fx-service-page-products .fx-service-page-shell {
+    gap: 4rem;
+  }
+
+  .fx-service-page-agent-lead br,
+  .fx-service-page-platform-lead br,
+  .fx-service-page-crm-body br {
+    display: none;
+  }
+
+  .fx-service-page-agent-grid {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100%, 28rem);
+  }
+
+  .fx-service-page-agent-card {
+    grid-template-columns: 4.8rem minmax(0, 1fr);
+  }
+
+  .fx-service-page-platform-visual {
+    margin-top: 0;
+  }
+
+  .fx-service-page-platform-sketch {
+    min-height: 7rem;
+    font-size: 1.45rem;
+  }
+
+  .fx-service-page-crm {
+    padding-inline: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .fx-service-page-crm-media {
+    margin-top: 2.6rem;
+  }
+
+  .fx-service-page-products + .fx-home-contact-cta-organism {
+    padding-top: 5rem;
   }
 
   .fx-column-page-hero,
