@@ -19,8 +19,8 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
       <div className="fx-shell fx-article-layout">
         <div className="fx-article-inner">
           <nav aria-label="パンくず" className="fx-article-breadcrumb">
-            <TextAnchor href="/column" className="fx-article-breadcrumb-link">
-              Column
+            <TextAnchor href="/column/magazine" className="fx-article-breadcrumb-link">
+              マガジン
             </TextAnchor>
             <span aria-hidden="true" className="fx-article-breadcrumb-separator">
               /
@@ -30,7 +30,12 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
 
           <header className="fx-article-hero">
             <div className="fx-article-hero-copy">
-              <EditorialHeading title={post.title} titleId="column-post-title" kicker="Column" level="h1" />
+              <EditorialHeading
+                title={post.title}
+                titleId="column-post-title"
+                kicker="Column"
+                level="h1"
+              />
               <BodyText className="fx-article-lead">{lead}</BodyText>
             </div>
           </header>
@@ -46,7 +51,10 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
               <p className="fx-article-toc-label">目次</p>
               <ol className="fx-article-toc-list">
                 {post.toc.map((item) => (
-                  <li key={item.id} className={`fx-article-toc-item fx-article-toc-item-level-${item.level}`}>
+                  <li
+                    key={item.id}
+                    className={`fx-article-toc-item fx-article-toc-item-level-${item.level}`}
+                  >
                     <TextAnchor href={`#${item.id}`} className="fx-article-toc-link">
                       {item.text}
                     </TextAnchor>

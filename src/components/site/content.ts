@@ -14,7 +14,9 @@ export type SiteLocaleContent = {
     body: string;
   };
   poem: {
-    heading: string;
+    eyebrowEn: string;
+    eyebrowJa: string;
+    title: string;
     body: string;
     aboutCtaLabel: string;
   };
@@ -41,6 +43,19 @@ export type SiteLocaleContent = {
     featuredRows: WhatWeDoFeatureRow[];
     services: ServiceCard[];
   };
+  serviceView: {
+    eyebrowEn: string;
+    eyebrowJa: string;
+    title: string;
+    body: string;
+    primaryCtaLabel: string;
+    primaryCtaHref: string;
+    agents: {
+      title: string;
+      body: string;
+      icon: string;
+    }[];
+  };
   team: {
     heading: string;
     body: string;
@@ -61,11 +76,15 @@ export type SiteLocaleContent = {
   };
   news: {
     heading: string;
+    eyebrowJa: string;
     empty: string;
     publishedLabel: string;
   };
   column: {
     heading: string;
+    eyebrowJa: string;
+    ctaLabel: string;
+    ctaHref: string;
     empty: string;
     listAriaLabel: string;
   };
@@ -74,6 +93,24 @@ export type SiteLocaleContent = {
     body: string;
     ctaLabel: string;
     ctaHref: string;
+    cards: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      image?: {
+        src: string;
+        alt: string;
+      };
+      cover?: {
+        kicker: string;
+        title: string;
+        subtitle: string;
+        ctaLabel: string;
+      };
+      points: string[];
+      ctaLabel: string;
+      ctaHref: string;
+    }[];
   };
   columnPage: {
     heading: string;
@@ -89,187 +126,267 @@ export type SiteLocaleContent = {
 };
 
 export const siteContent: SiteLocaleContent = {
-    company: "Field X",
-    nav: {
-      about: "About",
-      whatWeDo: "What We Do",
-      column: "Column",
-      news: "News",
-      contact: "Contact"
-    },
-    hero: {
-      title: "様々なFieldのXを解き、\n社会を次代につなげる。",
-      body: ""
-    },
-    poem: {
-      heading: "",
-      body: `多くの企業では、
-電話対応、書類処理、データ入力など、
-人が時間を使い続けている業務が数多く残っています。
-
-AIの進化により、
-これらの業務は自動化・半自動化できる時代になりました。
-
-コール対応、書類業務、マーケティングオペレーションなど、
-さまざまな領域でAIを実装し、
-
-Field Xは、すべての事業領域・業界でAIが意思決定を支え、
-ヒトがヒトにしかできない業務に集中できる世界の実現を目指しています。`,
-      aboutCtaLabel: "About→"
-    },
-    about: {
-      heading: "",
-      body: "Field Xは高専出身の二人によって立ち上げられたスタートアップです。合理化が進むこの時代に、様々な分野で事業創造を続け、集団で有り続けることの価値を証明します。"
-    },
-    mvv: {
-      heading: "MVV",
-      items: [
-        {
-          label: "Mission",
-          body: "様々なFieldのXを解き、社会を次代につなげる。"
-        },
-        {
-          label: "Vision",
-          body: "すべての事業領域・業界でAIが意思決定を支え、\nヒトがヒトにしかできない業務に集中できる世界の実現"
-        },
-        {
-          label: "Value",
-          entries: [
-            {
-              title: "Solve the X",
-              subtitle: "見えない課題を見つけ、構造から解く。",
-              body:
-                "私たちは表面的な問題ではなく、\n業務や産業の構造そのものにある「X」を見つけ出し、解決する。"
-            },
-            {
-              title: "Build Fast",
-              subtitle: "速く作り、速く学び、速く進む。",
-              body:
-                "AI時代において最大の競争力はスピードである。\nField X は、仮説・実装・改善を高速で回す。"
-            },
-            {
-              title: "AI First",
-              subtitle: "AIを前提に世界を設計する。",
-              body:
-                "AIはツールではなく、\n新しいインフラである。\n私たちはすべての業務をAI前提で再設計する。"
-            },
-            {
-              title: "Think from the Field",
-              subtitle: "現場から考える。",
-              body:
-                "机上の理論ではなく、\n現場の業務・顧客・産業構造から答えを導く。"
-            },
-            {
-              title: "Create the Next Standard",
-              subtitle: "次の当たり前をつくる。",
-              body:
-                "AIエージェントが企業の業務を支える世界。\nField X はその標準をつくる。"
-            }
-          ]
-        }
-      ]
-    },
-    whatWeDo: {
-      heading: "What We Do",
-      intro:
-        "Xとは、まだ名前のついていない挑戦や未解決の社会課題。様々な領域のXを解く、創造的な事業開発を実行します。",
-      featuredRows: [
-        {
-          title: "AI Agent Platform",
-          body:
-            "企業の業務を分解し、\nAIエージェントとして再構築します。\nコール対応、書類業務、マーケティング運用など、\n企業活動を支えるオペレーションをAI化し、\n企業の生産性を大きく引き上げます。"
-        },
-        {
-          title: "Vertical AI Products",
-          body:
-            "AIエージェントを基盤に、\n業界ごとの課題を解決するプロダクトを開発します。\n不動産、マーケティング、ECなど、\n各産業の業務構造に最適化されたAIプロダクトを展開し、\n産業全体の進化を支えていきます。"
-        }
-      ],
-      services: [
-        {
-          category: "AI DX 事業",
-          name: "Launch X",
-          description: "企画から公開までを最短で。あなたのアイデア実装をAIでエンパワーメントします。",
-          image: {
-            src: "/images/services/launch-x.svg",
-            alt: "Launch X service visual"
+  company: "Field X",
+  nav: {
+    about: "About",
+    whatWeDo: "Service",
+    column: "Column",
+    news: "News",
+    contact: "Contact"
+  },
+  hero: {
+    title: "様々なFieldのXを解き、\n社会を次代につなげる。",
+    body: "賃貸管理業務をはじめ、社会生活に根ざした産業へ。Field Xは、AIによる自動化とAIエージェント群による自律化を実装し、社会をより良い形で次の世代につなげます。"
+  },
+  poem: {
+    eyebrowEn: "ABOUT",
+    eyebrowJa: "私たちについて",
+    title:
+      "すべての事業領域・業界で\nAIが意思決定を支え、\nヒトがヒトにしかできない\n業務に集中できる世界の実現",
+    body: "必要な発明の多くが社会に実装されたいま、産業の中心には、それを維持し、運用し、次へつなぐ仕事があります。一方で、ヒトが本当に向き合うべき仕事は、社会に問いを立て、まだないものを創造することです。Field Xは、AIエージェント群による維持業務の自律化を通じて、ヒトがヒトにしかできない業務に集中できる世界を実現します。",
+    aboutCtaLabel: "会社概要をみる"
+  },
+  about: {
+    heading: "",
+    body: "Field Xは高専出身の二人によって立ち上げられたスタートアップです。合理化が進むこの時代に、様々な分野で事業創造を続け、集団で有り続けることの価値を証明します。"
+  },
+  mvv: {
+    heading: "MVV",
+    items: [
+      {
+        label: "Mission",
+        body: "様々なFieldのXを解き、社会を次代につなげる。"
+      },
+      {
+        label: "Vision",
+        body: "すべての事業領域・業界でAIが意思決定を支え、\nヒトがヒトにしかできない業務に集中できる世界の実現"
+      },
+      {
+        label: "Value",
+        entries: [
+          {
+            title: "Solve the X",
+            subtitle: "見えない課題を見つけ、構造から解く。",
+            body: "私たちは表面的な問題ではなく、\n業務や産業の構造そのものにある「X」を見つけ出し、解決する。"
+          },
+          {
+            title: "Build Fast",
+            subtitle: "速く作り、速く学び、速く進む。",
+            body: "AI時代において最大の競争力はスピードである。\nField X は、仮説・実装・改善を高速で回す。"
+          },
+          {
+            title: "AI First",
+            subtitle: "AIを前提に世界を設計する。",
+            body: "AIはツールではなく、\n新しいインフラである。\n私たちはすべての業務をAI前提で再設計する。"
+          },
+          {
+            title: "Think from the Field",
+            subtitle: "現場から考える。",
+            body: "机上の理論ではなく、\n現場の業務・顧客・産業構造から答えを導く。"
+          },
+          {
+            title: "Create the Next Standard",
+            subtitle: "次の当たり前をつくる。",
+            body: "AIエージェントが企業の業務を支える世界。\nField X はその標準をつくる。"
           }
+        ]
+      }
+    ]
+  },
+  whatWeDo: {
+    heading: "What We Do",
+    intro:
+      "Xとは、まだ名前のついていない挑戦や未解決の社会課題。様々な領域のXを解く、創造的な事業開発を実行します。",
+    featuredRows: [
+      {
+        title: "AI Agent Platform",
+        body: "企業の業務を分解し、\nAIエージェントとして再構築します。\nコール対応、書類業務、マーケティング運用など、\n企業活動を支えるオペレーションをAI化し、\n企業の生産性を大きく引き上げます。"
+      },
+      {
+        title: "Vertical AI Products",
+        body: "AIエージェントを基盤に、\n業界ごとの課題を解決するプロダクトを開発します。\n不動産、マーケティング、ECなど、\n各産業の業務構造に最適化されたAIプロダクトを展開し、\n産業全体の進化を支えていきます。"
+      }
+    ],
+    services: [
+      {
+        category: "AI DX 事業",
+        name: "Launch X",
+        description: "企画から公開までを最短で。あなたのアイデア実装をAIでエンパワーメントします。",
+        image: {
+          src: "/images/services/launch-x.svg",
+          alt: "Launch X のサービスイメージ"
+        }
+      },
+      {
+        category: "教育 事業",
+        name: "高専ジョブ",
+        description: "高専生のための、高専生によるキャリアサービス",
+        image: {
+          src: "/images/services/kosen-job.svg",
+          alt: "高専ジョブのサービスイメージ"
+        }
+      }
+    ]
+  },
+  serviceView: {
+    eyebrowEn: "SERVICE",
+    eyebrowJa: "事業内容",
+    title: "賃貸管理業務を支える\nAIエージェント群",
+    body: "AIエージェントを通じて、賃貸管理のあらゆる業務を自動化。\nヒトがヒトにしかできない対人業務に集中することで、コストを削減しつつ、確かな成果を創出します。",
+    primaryCtaLabel: "サービスを見る",
+    primaryCtaHref: "/service",
+    agents: [
+      {
+        title: "AIコール",
+        body: "電話応対",
+        icon: "/images/services/agents/call-agent.svg"
+      },
+      {
+        title: "AIチャット",
+        body: "メール・チャット返信",
+        icon: "/images/services/agents/chat-agent.svg"
+      },
+      {
+        title: "オーナー支援",
+        body: "訪問前の情報整理",
+        icon: "/images/services/agents/owner-agent.svg"
+      },
+      {
+        title: "AI Docs",
+        body: "契約・書類作成",
+        icon: "/images/services/agents/docs-agent.svg"
+      },
+      {
+        title: "退去手続き",
+        body: "退去完了までの支援",
+        icon: "/images/services/agents/move-out-agent.svg"
+      },
+      {
+        title: "更新案内",
+        body: "連絡・リマインド",
+        icon: "/images/services/agents/renewal-agent.svg"
+      },
+      {
+        title: "修繕提案",
+        body: "修繕・リノベ提案",
+        icon: "/images/services/agents/repair-agent.svg"
+      }
+    ]
+  },
+  team: {
+    heading: "Team",
+    body: "異なる専門性を持つ少数精鋭で、最後まで実装する。",
+    members: [
+      {
+        name: "佐藤善彦",
+        role: "代表取締役",
+        bio: "2002年広島県呉市生まれ。呉工業高等専門学校卒業後University of the Peopleへ編入し中退。在学中に広告代理店系ベンチャーで長期インターンシップを開始しその後新卒入社。ChatGPTなどの生成AI技術の指数関数的な発展をビジネスの現場で目の当たりにし、2026年不動産賃貸管理会社向けにAIエージェントを提供する株式会社Field Xを創業。",
+        imageSrc: "/images/team/sato-yoshihiko.jpg",
+        imageAlt: "佐藤善彦の顔写真"
+      },
+      {
+        name: "吉村佑介",
+        role: "共同創業者 専務取締役",
+        bio: "2002年広島県福山市生まれ。呉工業高等専門学校プロジェクトデザイン工学専攻卒業。新卒から、大手電力会社、大手不動産ディベロッパーで営業職として渡り歩く。2026年AIによる業務改革を基軸事業に展開する株式会社Field Xを共同創業。現在は事業最高責任者として不動産賃貸管理会社のコールセンターAIや書類管理をDXするAIサービスを展開している。",
+        imageSrc: "/images/team/yoshimura-yusuke.jpg",
+        imageAlt: "吉村佑介の顔写真"
+      }
+    ]
+  },
+  companyProfile: {
+    heading: "会社概要",
+    items: [
+      { label: "会社名", value: "Field X" },
+      { label: "代表者", value: "佐藤 善彦" },
+      { label: "所在地", value: "東京都渋谷区神泉町10-15" },
+      { label: "設立", value: "2026年" },
+      {
+        label: "主な事業領域",
+        value: [
+          "AIコールエージェントの開発・導入",
+          "書類業務のAI自動化",
+          "業務オペレーションのAIエージェント化",
+          "ナレッジベース / RAGシステムの構築",
+          "AI活用プロダクトの開発"
+        ]
+      }
+    ]
+  },
+  news: {
+    heading: "NEWS",
+    eyebrowJa: "お知らせ",
+    empty: "公開中のニュースはまだありません。",
+    publishedLabel: "Published"
+  },
+  column: {
+    heading: "Column",
+    eyebrowJa: "お役立ち情報",
+    ctaLabel: "お役立ち情報をみる",
+    ctaHref: "/column/magazine",
+    empty: "公開中のコラムはまだありません。",
+    listAriaLabel: "コラム一覧"
+  },
+  contact: {
+    heading: "Contact",
+    body: "ご相談・協業に関するお問い合わせはこちら。",
+    ctaLabel: "お問い合わせはこちら",
+    ctaHref: "/contact",
+    cards: [
+      {
+        eyebrow: "最新ナレッジをギュッと凝縮！！",
+        title: "AI活用最新事例集を無料ダウンロード",
+        body: "Field Xが不動産賃貸管理会社様にこれまでに提供してきたAI活用の最新事例や、ご支援までのフローをわかりやすくまとめました。",
+        image: {
+          src: "/images/contact/ai-case-study-minimal-bg.png",
+          alt: "AI活用最新事例集のスライド表紙イメージ"
         },
-        {
-          category: "教育 事業",
-          name: "高専ジョブ",
-          description: "高専生のための、高専生によるキャリアサービス",
-          image: {
-            src: "/images/services/kosen-job.svg",
-            alt: "高専ジョブ service visual"
-          }
-        }
-      ]
-    },
-    team: {
-      heading: "Team",
-      body: "異なる専門性を持つ少数精鋭で、最後まで実装する。",
-      members: [
-        {
-          name: "佐藤善彦",
-          role: "代表取締役",
-          bio: "2002年広島県呉市生まれ。呉工業高等専門学校卒業後University of the Peopleへ編入し中退。在学中に広告代理店系ベンチャーで長期インターンシップを開始しその後新卒入社。ChatGPTなどの生成AI技術の指数関数的な発展をビジネスの現場で目の当たりにし、2026年AIによる業務改革を基軸事業に展開する株式会社Field Xを創業。",
-          imageSrc: "/images/team/sato-yoshihiko.jpg",
-          imageAlt: "佐藤善彦の顔写真"
+        cover: {
+          kicker: "FIELD X WHITE PAPER",
+          title: "AI活用\n最新事例集",
+          subtitle: "不動産賃貸管理会社向け",
+          ctaLabel: "無料ダウンロード"
         },
-        {
-          name: "吉村佑介",
-          role: "共同創業者 専務取締役",
-          bio: "2002年広島県福山市生まれ。呉工業高等専門学校プロジェクトデザイン工学専攻卒業。新卒から、大手電力会社、大手不動産ディベロッパーで営業職として渡り歩く。2026年AIによる業務改革を基軸事業に展開する株式会社Field Xを共同創業。現在は事業最高責任者として不動産賃貸管理会社のコールセンターAIや書類管理をDXするAIサービスを展開している。",
-          imageSrc: "/images/team/yoshimura-yusuke.jpg",
-          imageAlt: "吉村佑介の顔写真"
-        }
-      ]
-    },
-    companyProfile: {
-      heading: "会社概要",
-      items: [
-        { label: "会社名", value: "Field X" },
-        { label: "代表者", value: "佐藤 善彦" },
-        { label: "所在地", value: "東京都渋谷区神泉町10-15" },
-        { label: "設立", value: "2026年" },
-        {
-          label: "主な事業領域",
-          value: [
-            "AIコールエージェントの開発・導入",
-            "書類業務のAI自動化",
-            "業務オペレーションのAIエージェント化",
-            "ナレッジベース / RAGシステムの構築",
-            "AI活用プロダクトの開発"
-          ]
-        }
-      ]
-    },
-    news: {
-      heading: "Latest News",
-      empty: "公開中のニュースはまだありません。",
-      publishedLabel: "Published"
-    },
-    column: {
-      heading: "Column",
-      empty: "公開中のコラムはまだありません。",
-      listAriaLabel: "コラム一覧"
-    },
-    contact: {
-      heading: "Contact",
-      body: "ご相談・協業に関するお問い合わせはこちら。",
-      ctaLabel: "お問い合わせはこちら",
-      ctaHref: "/contact"
-    },
-    columnPage: {
-      heading: "Column",
-      description: "公開中の記事のみ表示しています。",
-      empty: "公開中の記事はありません。",
-      listAriaLabel: "コラム記事一覧",
-      publishedLabel: "Published"
-    },
-    lp: {
-      eyebrow: "Landing Page",
-      ctaLabel: "CTA"
-    }
+        points: [
+          "業界／業種特化の最新AI活用の成功事例",
+          "サービスの概要や費用感",
+          "AI活用のメリットやよくある落とし穴"
+        ],
+        ctaLabel: "無料でダウンロードする",
+        ctaHref: "/contact?intent=materials"
+      },
+      {
+        eyebrow: "AI活用に関することなら何でも！！",
+        title: "30分からの無料オンライン相談実施中",
+        body: "30分〜のお打ち合わせで、貴社の課題や状況についてヒアリング。今すぐ活用できるアドバイスや、サービスの具体イメージもお伝えします。",
+        image: {
+          src: "/images/contact/ai-consultation-minimal-bg.png",
+          alt: "無料オンライン相談のスライド表紙イメージ"
+        },
+        cover: {
+          kicker: "ONLINE CONSULTATION",
+          title: "AI導入・業務設計\n30分相談",
+          subtitle: "実装の入口を30分で整理",
+          ctaLabel: "無料で相談"
+        },
+        points: [
+          "AI活用のイメージがなくてもOK",
+          "とりあえず話を聞くだけでもOK",
+          "ご支援実績からプランを共有します"
+        ],
+        ctaLabel: "無料で相談する",
+        ctaHref: "/contact"
+      }
+    ]
+  },
+  columnPage: {
+    heading: "Column",
+    description: "公開中の記事のみ表示しています。",
+    empty: "公開中の記事はありません。",
+    listAriaLabel: "コラム記事一覧",
+    publishedLabel: "Published"
+  },
+  lp: {
+    eyebrow: "ランディングページ",
+    ctaLabel: "資料をダウンロード"
+  }
 };

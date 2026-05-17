@@ -1,0 +1,40 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">AIチャットエージェント</title>
+  <desc id="desc">メールとチャット返信を表す控えめな線画アイコン</desc>
+  <rect width="160" height="160" rx="6" fill="#F4F4F6" />
+  <g class="fx-agent-icon-glyph" transform="translate(20 20) scale(0.75)">
+    <rect
+      x="35"
+      y="53"
+      width="90"
+      height="58"
+      rx="8"
+      stroke="#1E1E21"
+      stroke-width="4.6"
+      stroke-linejoin="round"
+    />
+    <path
+      d="m39 60 41 30 41-30"
+      stroke="#1E1E21"
+      stroke-width="4.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M62 40h45c6 0 10 4 10 10v27c0 6-4 10-10 10H89l-20 17V87h-7c-6 0-10-4-10-10V50c0-6 4-10 10-10Z"
+      fill="#F4F4F6"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+      stroke-linejoin="round"
+    />
+    <path d="M69 58h27M69 69h18" stroke="#1E1E21" stroke-width="3.5" stroke-linecap="round" />
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">退去手続きエージェント</title>
+  <desc id="desc">退去手続きを表す控えめな線画アイコン</desc>
+  <rect width="160" height="160" rx="6" fill="#F4F4F6" />
+  <g class="fx-agent-icon-glyph" transform="translate(20 20) scale(0.75)">
+    <path d="M39 32h52v96H39V32Z" stroke="#1E1E21" stroke-width="4.6" stroke-linejoin="round" />
+    <path d="M91 43h25v85H91" stroke="#1E1E21" stroke-width="4.6" stroke-linejoin="round" />
+    <circle cx="76" cy="80" r="4" fill="#1E1E21" />
+    <rect
+      x="83"
+      y="64"
+      width="47"
+      height="61"
+      rx="7"
+      fill="#F4F4F6"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+    />
+    <path
+      d="m96 85 7 7 14-17M96 107l7 7 14-17"
+      stroke="#1E1E21"
+      stroke-width="3.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>

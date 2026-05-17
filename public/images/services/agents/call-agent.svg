@@ -1,0 +1,28 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">AIコールエージェント</title>
+  <desc id="desc">電話応対を表す控えめな線画アイコン</desc>
+  <rect width="160" height="160" rx="6" fill="#F4F4F6" />
+  <g class="fx-agent-icon-glyph" transform="translate(20 20) scale(0.75)">
+    <path
+      d="M54 51c5-4 11-3 15 3l5 9c2 4 2 9-2 12l-6 5c7 13 17 23 30 30l5-6c3-4 8-4 12-2l9 5c6 4 7 10 3 15-5 7-14 10-23 8-31-8-56-33-64-64-2-9 1-18 8-23Z"
+      stroke="#1E1E21"
+      stroke-width="4.6"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M92 48h22c5 0 9 4 9 9v18c0 5-4 9-9 9h-9l-14 12V84h-7c-5 0-9-4-9-9V57c0-5 4-9 9-9h8Z"
+      stroke="#1E1E21"
+      stroke-width="4.1"
+      stroke-linejoin="round"
+    />
+    <path d="M91 64h17M91 74h11" stroke="#1E1E21" stroke-width="3.5" stroke-linecap="round" />
+  </g>
+</svg>

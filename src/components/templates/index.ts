@@ -1,5 +1,7 @@
 export { AboutTemplate } from "./AboutTemplate";
 export { ColumnIndexTemplate } from "./ColumnIndexTemplate";
+export { ColumnMagazineTemplate } from "./ColumnMagazineTemplate";
+export { ColumnMaterialsTemplate } from "./ColumnMaterialsTemplate";
 export { ColumnPostTemplate } from "./ColumnPostTemplate";
 export { ContactTemplate } from "./ContactTemplate";
 export { HomeTemplate } from "./HomeTemplate";

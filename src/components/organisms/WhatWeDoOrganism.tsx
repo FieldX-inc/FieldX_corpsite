@@ -4,10 +4,7 @@ import Link from "next/link";
 import { BodyText, Surface } from "@/components/atoms";
 import { SectionHeader } from "@/components/molecules";
 
-import type {
-  ServiceCard as ServiceCardType,
-  WhatWeDoFeatureRow
-} from "@/types/site";
+import type { ServiceCard as ServiceCardType, WhatWeDoFeatureRow } from "@/types/site";
 
 type WhatWeDoOrganismProps = {
   sectionId: string;
@@ -36,7 +33,7 @@ export function WhatWeDoOrganism({
   kicker = "Business",
   accentBackground = true,
   showMedia = false,
-  linkBasePath = "what-we-do",
+  linkBasePath = "service",
   layout = "catalog",
   featuredRows = [],
   showServiceDescriptions = true,
@@ -73,7 +70,10 @@ export function WhatWeDoOrganism({
       return "education";
     }
 
-    return compact.replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
+    return compact
+      .replace(/[^a-z0-9-]/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
   };
 
   return (
@@ -105,7 +105,9 @@ export function WhatWeDoOrganism({
                   className="fx-whatwedo-featured-header"
                 />
               ) : null}
-              {hasIntro ? <BodyText className="fx-whatwedo-featured-intro">{intro}</BodyText> : null}
+              {hasIntro ? (
+                <BodyText className="fx-whatwedo-featured-intro">{intro}</BodyText>
+              ) : null}
               <div className="fx-whatwedo-featured-list" aria-label={heading} role="list">
                 {featuredRows.map((row) => (
                   <article key={row.title} className="fx-whatwedo-featured-row" role="listitem">
@@ -125,7 +127,12 @@ export function WhatWeDoOrganism({
         ) : (
           <>
             {hasHeading ? (
-              <SectionHeader title={heading} titleId={titleId} level={headingLevel} kicker={kicker ?? undefined} />
+              <SectionHeader
+                title={heading}
+                titleId={titleId}
+                level={headingLevel}
+                kicker={kicker ?? undefined}
+              />
             ) : null}
             {hasIntro ? <BodyText className="fx-whatwedo-intro">{intro}</BodyText> : null}
             {featuredRows.length > 0 ? (
@@ -135,7 +142,10 @@ export function WhatWeDoOrganism({
                     <h3 className="fx-whatwedo-overview-title">{row.title}</h3>
                     <p className="fx-whatwedo-overview-body">
                       {row.body.split("\n").map((line, index) => (
-                        <span key={`${row.title}-overview-${index}`} className="fx-whatwedo-overview-line">
+                        <span
+                          key={`${row.title}-overview-${index}`}
+                          className="fx-whatwedo-overview-line"
+                        >
                           {line}
                         </span>
                       ))}
@@ -158,8 +168,17 @@ export function WhatWeDoOrganism({
                       {group.items.map((service) => (
                         <li key={service.slug ?? service.name}>
                           {service.slug ? (
-                            <Link href={`/${linkBasePath}/${service.slug}`} className="fx-whatwedo-item-link">
-                              <article className={showMedia ? "fx-whatwedo-item fx-whatwedo-item-media" : "fx-whatwedo-item"}>
+                            <Link
+                              href={`/${linkBasePath}/${service.slug}`}
+                              className="fx-whatwedo-item-link"
+                            >
+                              <article
+                                className={
+                                  showMedia
+                                    ? "fx-whatwedo-item fx-whatwedo-item-media"
+                                    : "fx-whatwedo-item"
+                                }
+                              >
                                 <div className="fx-whatwedo-item-content">
                                   <h4 className="fx-whatwedo-item-title">{service.name}</h4>
                                   {showServiceDescriptions ? (
@@ -168,7 +187,12 @@ export function WhatWeDoOrganism({
                                 </div>
                                 {showMedia && service.image ? (
                                   <figure className="fx-whatwedo-item-image">
-                                    <Image src={service.image.src} alt={service.image.alt} width={280} height={168} />
+                                    <Image
+                                      src={service.image.src}
+                                      alt={service.image.alt}
+                                      width={280}
+                                      height={168}
+                                    />
                                   </figure>
                                 ) : null}
                                 <span className="fx-whatwedo-arrow" aria-hidden="true">
@@ -177,7 +201,13 @@ export function WhatWeDoOrganism({
                               </article>
                             </Link>
                           ) : (
-                            <article className={showMedia ? "fx-whatwedo-item fx-whatwedo-item-media" : "fx-whatwedo-item"}>
+                            <article
+                              className={
+                                showMedia
+                                  ? "fx-whatwedo-item fx-whatwedo-item-media"
+                                  : "fx-whatwedo-item"
+                              }
+                            >
                               <div className="fx-whatwedo-item-content">
                                 <h4 className="fx-whatwedo-item-title">{service.name}</h4>
                                 {showServiceDescriptions ? (
@@ -186,7 +216,12 @@ export function WhatWeDoOrganism({
                               </div>
                               {showMedia && service.image ? (
                                 <figure className="fx-whatwedo-item-image">
-                                  <Image src={service.image.src} alt={service.image.alt} width={280} height={168} />
+                                  <Image
+                                    src={service.image.src}
+                                    alt={service.image.alt}
+                                    width={280}
+                                    height={168}
+                                  />
                                 </figure>
                               ) : null}
                               <span className="fx-whatwedo-arrow" aria-hidden="true">
