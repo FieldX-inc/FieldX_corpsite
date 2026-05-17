@@ -12,9 +12,17 @@ const inquiryTypeOptions = [
   { value: "other", label: "その他" }
 ] as const;
 
+const awarenessSourceOptions = [
+  { value: "x", label: "X" },
+  { value: "google", label: "Google" },
+  { value: "event", label: "展示会" },
+  { value: "ai", label: "AI（ChatGPT, Gemini etc...）" }
+] as const;
+
 const contactFormSchema = z.object({
   company: z.string().trim().max(120, "会社名は120文字以内で入力してください。").optional(),
-  name: z.string().trim().min(1, "お名前を入力してください。").max(80, "お名前は80文字以内で入力してください。"),
+  lastName: z.string().trim().min(1, "姓を入力してください。").max(40, "姓は40文字以内で入力してください。"),
+  firstName: z.string().trim().min(1, "名を入力してください。").max(40, "名は40文字以内で入力してください。"),
   email: z
     .string()
     .trim()
@@ -23,6 +31,11 @@ const contactFormSchema = z.object({
   inquiryType: z.enum(inquiryTypeOptions.map((option) => option.value) as [string, ...string[]], {
     errorMap: () => ({ message: "お問い合わせ種別を選択してください。" })
   }),
+  awarenessSources: z
+    .array(z.enum(awarenessSourceOptions.map((option) => option.value) as [string, ...string[]]))
+    .max(awarenessSourceOptions.length)
+    .optional()
+    .default([]),
   message: z
     .string()
     .trim()
@@ -35,9 +48,11 @@ type ContactFieldName = keyof ContactFormValues;
 
 const initialValues: ContactFormValues = {
   company: "",
-  name: "",
+  lastName: "",
+  firstName: "",
   email: "",
   inquiryType: inquiryTypeOptions[0].value,
+  awarenessSources: [],
   message: ""
 };
 
@@ -64,6 +79,19 @@ export function ContactForm() {
     trackFormStart();
     setValues((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
+    setStatusMessage("");
+  }
+
+  function handleAwarenessSourceChange(source: ContactFormValues["awarenessSources"][number], isChecked: boolean) {
+    trackFormStart();
+    setValues((current) => {
+      const nextSources = isChecked
+        ? Array.from(new Set([...current.awarenessSources, source]))
+        : current.awarenessSources.filter((item) => item !== source);
+
+      return { ...current, awarenessSources: nextSources };
+    });
+    setErrors((current) => ({ ...current, awarenessSources: undefined }));
     setStatusMessage("");
   }
 
@@ -104,7 +132,12 @@ export function ContactForm() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          ...result.data,
+          company: result.data.company,
+          name: `${result.data.lastName} ${result.data.firstName}`.trim(),
+          email: result.data.email,
+          inquiryType: result.data.inquiryType,
+          awarenessSources: result.data.awarenessSources,
+          message: result.data.message,
           ...getAttributionContext()
         })
       });
@@ -128,6 +161,7 @@ export function ContactForm() {
         form_id: "contact_form",
         inquiry_type: result.data.inquiryType,
         has_company: result.data.company?.trim().length ? true : false,
+        awareness_sources: result.data.awarenessSources.join(","),
         page_path: getCurrentPagePath()
       });
     } catch {
@@ -169,27 +203,52 @@ export function ContactForm() {
             ) : null}
           </div>
 
-          <div className="fx-contact-field">
-            <label className="fx-contact-label" htmlFor="contact-name">
-              お名前<span className="fx-contact-required">必須</span>
-            </label>
-            <input
-              id="contact-name"
-              name="name"
-              className="fx-contact-input"
-              data-clarity-mask="true"
-              type="text"
-              autoComplete="name"
-              value={values.name}
-              onChange={(event) => handleChange("name", event.target.value)}
-              aria-describedby={errors.name ? "contact-name-error" : undefined}
-              aria-invalid={errors.name ? "true" : undefined}
-            />
-            {errors.name ? (
-              <p id="contact-name-error" className="fx-contact-error" role="alert">
-                {errors.name}
-              </p>
-            ) : null}
+          <div className="fx-contact-name-grid">
+            <div className="fx-contact-field">
+              <label className="fx-contact-label" htmlFor="contact-last-name">
+                姓<span className="fx-contact-required">必須</span>
+              </label>
+              <input
+                id="contact-last-name"
+                name="lastName"
+                className="fx-contact-input"
+                data-clarity-mask="true"
+                type="text"
+                autoComplete="family-name"
+                value={values.lastName}
+                onChange={(event) => handleChange("lastName", event.target.value)}
+                aria-describedby={errors.lastName ? "contact-last-name-error" : undefined}
+                aria-invalid={errors.lastName ? "true" : undefined}
+              />
+              {errors.lastName ? (
+                <p id="contact-last-name-error" className="fx-contact-error" role="alert">
+                  {errors.lastName}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="fx-contact-field">
+              <label className="fx-contact-label" htmlFor="contact-first-name">
+                名<span className="fx-contact-required">必須</span>
+              </label>
+              <input
+                id="contact-first-name"
+                name="firstName"
+                className="fx-contact-input"
+                data-clarity-mask="true"
+                type="text"
+                autoComplete="given-name"
+                value={values.firstName}
+                onChange={(event) => handleChange("firstName", event.target.value)}
+                aria-describedby={errors.firstName ? "contact-first-name-error" : undefined}
+                aria-invalid={errors.firstName ? "true" : undefined}
+              />
+              {errors.firstName ? (
+                <p id="contact-first-name-error" className="fx-contact-error" role="alert">
+                  {errors.firstName}
+                </p>
+              ) : null}
+            </div>
           </div>
 
           <div className="fx-contact-field">
@@ -220,22 +279,24 @@ export function ContactForm() {
             <label className="fx-contact-label" htmlFor="contact-type">
               お問い合わせ種別<span className="fx-contact-required">必須</span>
             </label>
-            <select
-              id="contact-type"
-              name="inquiryType"
-              className="fx-contact-input fx-contact-select"
-              data-clarity-mask="true"
-              value={values.inquiryType}
-              onChange={(event) => handleChange("inquiryType", event.target.value)}
-              aria-describedby={errors.inquiryType ? "contact-type-error" : undefined}
-              aria-invalid={errors.inquiryType ? "true" : undefined}
-            >
-              {inquiryTypeOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            <span className="fx-contact-select-wrap">
+              <select
+                id="contact-type"
+                name="inquiryType"
+                className="fx-contact-input fx-contact-select"
+                data-clarity-mask="true"
+                value={values.inquiryType}
+                onChange={(event) => handleChange("inquiryType", event.target.value)}
+                aria-describedby={errors.inquiryType ? "contact-type-error" : undefined}
+                aria-invalid={errors.inquiryType ? "true" : undefined}
+              >
+                {inquiryTypeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </span>
             {errors.inquiryType ? (
               <p id="contact-type-error" className="fx-contact-error" role="alert">
                 {errors.inquiryType}
@@ -243,6 +304,24 @@ export function ContactForm() {
             ) : null}
           </div>
         </div>
+
+        <fieldset className="fx-contact-field fx-contact-checkbox-field">
+          <legend className="fx-contact-label">どこでField Xについて知りましたか？</legend>
+          <div className="fx-contact-checkbox-grid">
+            {awarenessSourceOptions.map((option) => (
+              <label key={option.value} className="fx-contact-checkbox-label">
+                <input
+                  type="checkbox"
+                  name="awarenessSources"
+                  value={option.value}
+                  checked={values.awarenessSources.includes(option.value)}
+                  onChange={(event) => handleAwarenessSourceChange(option.value, event.target.checked)}
+                />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
         <div className="fx-contact-field">
           <label className="fx-contact-label" htmlFor="contact-message">

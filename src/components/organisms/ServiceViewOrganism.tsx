@@ -84,9 +84,6 @@ export function ServiceViewOrganism({
             ))}
           </div>
 
-          <p className="fx-service-view-note">
-            個別エージェントと基盤の詳細はサービスページで紹介しています。
-          </p>
         </div>
       </div>
     </Surface>

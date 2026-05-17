@@ -287,13 +287,21 @@ a {
   }
 
   .fx-site-footer-brand {
-    grid-template-columns: 1fr;
-    align-items: start;
+    display: contents;
+  }
+
+  .fx-site-footer-brand-image-wrap {
+    order: 1;
   }
 
   .fx-site-footer-side {
+    order: 2;
     justify-items: start;
     padding-bottom: 0;
+  }
+
+  .fx-site-footer-copyright {
+    order: 3;
   }
 
   .fx-site-footer-columns {
@@ -340,9 +348,7 @@ a {
   }
 
   .fx-site-footer-brand {
-    grid-template-columns: 1fr;
-    row-gap: 0.55rem;
-    align-items: start;
+    display: contents;
   }
 
   .fx-site-footer-brand-image-wrap {

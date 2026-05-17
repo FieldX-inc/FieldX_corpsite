@@ -628,7 +628,7 @@
   min-height: calc(100svh - var(--fx-poem-header-clearance));
   scroll-margin-top: var(--fx-poem-header-clearance);
   padding-block: clamp(3.2rem, 5vw, 4.8rem) clamp(1.1rem, 1.8vw, 1.8rem);
-  background: linear-gradient(90deg, #f33d3b 0%, #ff9e3c 19%, #fff0f0 60%, #ffffff 100%);
+  background: linear-gradient(270deg, #f33d3b 0%, #ff9e3c 19%, #fff0f0 60%, #ffffff 100%);
 }
 
 .fx-poem-organism::before {
@@ -853,6 +853,7 @@
   grid-template-columns: minmax(0, 1fr);
   gap: clamp(0.95rem, 1.5vw, 1.25rem);
   align-items: start;
+  padding-top: clamp(1rem, 3vw, 2.2rem);
 }
 
 .fx-service-view-agent-grid {
@@ -893,14 +894,6 @@
   margin: 0.45rem 0 0;
   color: #3b3b3f;
   font-size: clamp(0.78rem, 0.88vw, 0.88rem);
-  font-weight: 700;
-  line-height: 1.45;
-}
-
-.fx-service-view-note {
-  margin: 0;
-  color: #5c5555;
-  font-size: 0.86rem;
   font-weight: 700;
   line-height: 1.45;
 }
@@ -4297,6 +4290,7 @@
   grid-template-columns: clamp(4.7rem, 7vw, 6.3rem) minmax(0, 1fr);
   gap: clamp(1rem, 1.6vw, 1.35rem);
   align-items: start;
+  min-height: clamp(5.8rem, 7vw, 6.6rem);
   text-align: left;
 }
 
@@ -4310,8 +4304,9 @@
 
 .fx-service-page-agent-copy {
   display: grid;
-  align-content: start;
-  gap: 0.22rem;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.2rem;
+  height: 100%;
   min-width: 0;
 }
 
@@ -4332,6 +4327,7 @@
 }
 
 .fx-service-page-agent-link {
+  align-self: end;
   width: fit-content;
   color: #ff3d38;
   text-decoration: none;
@@ -4350,146 +4346,15 @@
 }
 
 .fx-service-page-platform-visual {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.8fr) minmax(220px, 0.56fr);
-  gap: clamp(2.4rem, 5.2vw, 5.6rem);
-  align-items: end;
-  width: min(100%, 44rem);
-  margin-top: 0.5rem;
-}
-
-.fx-service-page-platform-diagram {
   position: relative;
-  width: min(100%, 22rem);
-  aspect-ratio: 1.22;
-  justify-self: end;
+  width: min(100%, 58rem);
+  margin-top: 0.1rem;
 }
 
-.fx-service-page-platform-core {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: clamp(5rem, 8vw, 6.8rem);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  background: #ff3d38;
-  color: #fff;
-}
-
-.fx-service-page-platform-core svg {
-  width: 66%;
-  height: 66%;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 3.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.fx-service-page-platform-node {
-  position: absolute;
-  z-index: 3;
-  width: clamp(2.6rem, 4.2vw, 3.4rem);
-  aspect-ratio: 1;
-  border: 2px solid rgba(130, 96, 88, 0.38);
-  background: #fff;
-}
-
-.fx-service-page-platform-node.is-top-left {
-  left: 9%;
-  top: 18%;
-}
-
-.fx-service-page-platform-node.is-top {
-  left: 49%;
-  top: 2%;
-  transform: translateX(-50%);
-}
-
-.fx-service-page-platform-node.is-top-right {
-  right: 8%;
-  top: 22%;
-}
-
-.fx-service-page-platform-node.is-left {
-  left: 0;
-  top: 48%;
-}
-
-.fx-service-page-platform-node.is-right {
-  right: 0;
-  top: 50%;
-}
-
-.fx-service-page-platform-node.is-bottom {
-  right: 14%;
-  bottom: 3%;
-}
-
-.fx-service-page-platform-line {
-  position: absolute;
-  z-index: 1;
-  height: 2px;
-  background: rgba(130, 96, 88, 0.28);
-  transform-origin: left center;
-}
-
-.fx-service-page-platform-line.is-line-top-left {
-  left: 28%;
-  top: 34%;
-  width: 26%;
-  transform: rotate(36deg);
-}
-
-.fx-service-page-platform-line.is-line-top {
-  left: 52%;
-  top: 23%;
-  width: 19%;
-  transform: rotate(88deg);
-}
-
-.fx-service-page-platform-line.is-line-top-right {
-  left: 57%;
-  top: 36%;
-  width: 25%;
-  transform: rotate(-28deg);
-}
-
-.fx-service-page-platform-line.is-line-left {
-  left: 18%;
-  top: 58%;
-  width: 32%;
-  transform: rotate(-6deg);
-}
-
-.fx-service-page-platform-line.is-line-right {
-  left: 58%;
-  top: 58%;
-  width: 25%;
-  transform: rotate(1deg);
-}
-
-.fx-service-page-platform-line.is-line-bottom {
-  left: 58%;
-  top: 66%;
-  width: 27%;
-  transform: rotate(48deg);
-}
-
-.fx-service-page-platform-sketch {
-  display: grid;
-  place-items: center;
-  min-height: clamp(8rem, 15vw, 11.5rem);
-  padding: 1.4rem;
-  background: #d9d9d9;
-  color: #111;
-  font-size: clamp(1.6rem, 3vw, 2.45rem);
-  font-weight: 800;
-  line-height: 1.1;
-  white-space: nowrap;
+.fx-service-page-platform-image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .fx-service-page-crm {
@@ -4843,37 +4708,41 @@
 
 .fx-contact-page-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 0.76fr) minmax(0, 1fr);
-  gap: clamp(2rem, 4vw, 4.7rem);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: start;
-  justify-items: stretch;
+  justify-items: center;
+  width: min(100%, 44rem);
+  margin-inline: auto;
 }
 
 .fx-contact-page-copy {
   display: grid;
   align-content: start;
-  justify-items: start;
-  text-align: left;
+  justify-items: center;
+  width: min(100%, 44rem);
+  text-align: center;
 }
 
 .fx-contact-page-copy .fx-contact-page-section-title {
-  text-align: left;
+  text-align: center;
 }
 
 .fx-contact-page-copy .fx-contact-page-section-title::after {
-  left: 0;
-  transform: none;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .fx-contact-page-copy .fx-contact-page-description {
-  width: auto;
-  margin-inline: 0;
-  text-align: left;
+  width: min(100%, 40rem);
+  margin-inline: auto;
+  text-align: center;
 }
 
 .fx-contact-page-notes {
   display: grid;
   gap: clamp(1rem, 1.8vw, 1.35rem);
+  width: min(100%, 42rem);
   margin: var(--fx-page-content-gap-y) 0 0;
 }
 
@@ -4903,7 +4772,7 @@
 }
 
 .fx-contact-form-block {
-  max-width: none;
+  max-width: 42rem;
   width: 100%;
   padding: clamp(1.25rem, 2vw, 1.8rem);
   border: 1px solid rgba(17, 17, 17, 0.12);
@@ -4918,6 +4787,12 @@
 }
 
 .fx-contact-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.fx-contact-name-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -4986,11 +4861,63 @@
 
 .fx-contact-select {
   appearance: none;
+  padding-right: 2.7rem;
+}
+
+.fx-contact-select-wrap {
+  position: relative;
+  display: block;
+}
+
+.fx-contact-select-wrap::after {
+  content: "›";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  color: rgba(17, 17, 17, 0.72);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(90deg);
 }
 
 .fx-contact-textarea {
   min-height: 9rem;
   resize: vertical;
+}
+
+.fx-contact-checkbox-field {
+  padding: 0;
+  border: 0;
+}
+
+.fx-contact-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1rem;
+  margin-top: 0.05rem;
+}
+
+.fx-contact-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.7rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(24, 19, 19, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--fx-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.fx-contact-checkbox-label input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--fx-red);
 }
 
 .fx-contact-note,
@@ -5402,18 +5329,7 @@
   }
 
   .fx-service-page-platform-visual {
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    width: min(100%, 36rem);
-    gap: 2rem;
-  }
-
-  .fx-service-page-platform-diagram {
-    justify-self: center;
-  }
-
-  .fx-service-page-platform-sketch {
-    width: min(100%, 24rem);
+    width: min(100%, 48rem);
   }
 
   .fx-about-page-profile-row {
@@ -5558,11 +5474,6 @@
     margin-top: 0;
   }
 
-  .fx-service-page-platform-sketch {
-    min-height: 7rem;
-    font-size: 1.45rem;
-  }
-
   .fx-service-page-crm {
     padding-inline: 1rem;
     border-radius: 0.75rem;
@@ -5634,6 +5545,11 @@
   }
 
   .fx-contact-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fx-contact-name-grid,
+  .fx-contact-checkbox-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -5766,6 +5682,11 @@
   }
 
   .fx-contact-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fx-contact-name-grid,
+  .fx-contact-checkbox-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

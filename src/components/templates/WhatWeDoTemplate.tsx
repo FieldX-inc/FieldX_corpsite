@@ -53,15 +53,6 @@ const agentProducts = [
   }
 ] as const;
 
-const platformNodes = [
-  { className: "is-top-left" },
-  { className: "is-top" },
-  { className: "is-top-right" },
-  { className: "is-left" },
-  { className: "is-right" },
-  { className: "is-bottom" }
-] as const;
-
 function CtaLink({
   href,
   children,
@@ -156,30 +147,13 @@ export function WhatWeDoTemplate({ content }: WhatWeDoTemplateProps) {
             </p>
 
             <div className="fx-service-page-platform-visual" aria-hidden="true">
-              <div className="fx-service-page-platform-diagram">
-                {platformNodes.map((node) => (
-                  <span
-                    key={node.className}
-                    className={`fx-service-page-platform-node ${node.className}`}
-                  />
-                ))}
-                <span className="fx-service-page-platform-line is-line-top-left" />
-                <span className="fx-service-page-platform-line is-line-top" />
-                <span className="fx-service-page-platform-line is-line-top-right" />
-                <span className="fx-service-page-platform-line is-line-left" />
-                <span className="fx-service-page-platform-line is-line-right" />
-                <span className="fx-service-page-platform-line is-line-bottom" />
-                <span className="fx-service-page-platform-core">
-                  <svg viewBox="0 0 64 64" role="img" aria-label="">
-                    <path d="M18 19c0-5 8-9 17-9s17 4 17 9-8 9-17 9-17-4-17-9Z" />
-                    <path d="M18 19v25c0 5 8 9 17 9s17-4 17-9V19" />
-                    <path d="M18 31c0 5 8 9 17 9s17-4 17-9" />
-                    <path d="M18 42c0 5 8 9 17 9s17-4 17-9" />
-                    <path d="m43 43 12 12M55 43 43 55" />
-                  </svg>
-                </span>
-              </div>
-              <div className="fx-service-page-platform-sketch">←下書きの絵</div>
+              <Image
+                src="/images/services/platform/agent-platform-overview-v11.png"
+                alt=""
+                width={1672}
+                height={941}
+                className="fx-service-page-platform-image"
+              />
             </div>
           </section>
 

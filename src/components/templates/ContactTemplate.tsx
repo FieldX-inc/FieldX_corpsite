@@ -39,16 +39,6 @@ export function ContactTemplate({ content }: ContactTemplateProps) {
                 お問い合わせ
               </h2>
               <p className="fx-contact-page-description">{content.contact.body}</p>
-              <dl className="fx-contact-page-notes" aria-label="お問い合わせ前の確認事項">
-                <div>
-                  <dt>相談できる内容</dt>
-                  <dd>AIエージェント導入、業務フロー整理、既存ツールを活かした自動化設計</dd>
-                </div>
-                <div>
-                  <dt>返信について</dt>
-                  <dd>内容を確認のうえ、担当者よりメールでご連絡します。</dd>
-                </div>
-              </dl>
             </div>
             <ContactForm />
           </div>

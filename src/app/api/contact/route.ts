@@ -11,6 +11,21 @@ const inquiryTypeLabels = {
   other: "その他"
 } as const;
 
+const awarenessSourceLabels = {
+  x: "X",
+  google: "Google",
+  event: "展示会",
+  ai: "AI（ChatGPT, Gemini etc...）"
+} as const;
+
+function formatAwarenessSources(input: ReturnType<typeof leadCreateInputSchema.parse>) {
+  if (!input.awarenessSources?.length) {
+    return "未選択";
+  }
+
+  return input.awarenessSources.map((source) => awarenessSourceLabels[source]).join(", ");
+}
+
 function getSmtpConfig() {
   const host = process.env.SMTP_HOST;
   const port = process.env.SMTP_PORT;
@@ -41,6 +56,7 @@ function getAdminMailText(input: ReturnType<typeof leadCreateInputSchema.parse>)
     `お名前: ${input.name}`,
     `メールアドレス: ${input.email}`,
     `お問い合わせ種別: ${inquiryTypeLabels[input.inquiryType]}`,
+    `Field Xを知ったきっかけ: ${formatAwarenessSources(input)}`,
     "",
     "お問い合わせ内容",
     input.message,
@@ -67,6 +83,7 @@ function getAutoReplyText(input: ReturnType<typeof leadCreateInputSchema.parse>)
     "",
     `会社名: ${input.company || "未入力"}`,
     `お問い合わせ種別: ${inquiryTypeLabels[input.inquiryType]}`,
+    `Field Xを知ったきっかけ: ${formatAwarenessSources(input)}`,
     "",
     "お問い合わせ内容",
     input.message,
