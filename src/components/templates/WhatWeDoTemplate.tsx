@@ -12,43 +12,43 @@ const agentProducts = [
   {
     title: "AIコールエージェント",
     body: "見込み客や入居者からの電話に応対する。",
-    href: "/contact?intent=materials",
+    href: "/service/ai-call-agent",
     icon: "/images/services/agents/call-agent.svg"
   },
   {
     title: "AIチャットエージェント",
     body: "見込み客や入居者からのメールやチャットの返信をAIが応対する。",
-    href: "/contact?intent=materials",
+    href: "/service/ai-chat-agent",
     icon: "/images/services/agents/chat-agent.svg"
   },
   {
     title: "オーナーエージェント",
     body: "オーナー様訪問前に確認するべき社内情報をまとめる。",
-    href: "/contact?intent=materials",
+    href: "/service/owner-agent",
     icon: "/images/services/agents/owner-agent.svg"
   },
   {
     title: "AI Docs エージェント",
     body: "各種契約書などの煩雑な書類作成をAIが完了する。",
-    href: "/contact?intent=materials",
+    href: "/service/ai-docs-agent",
     icon: "/images/services/agents/docs-agent.svg"
   },
   {
     title: "退去手続きエージェント",
     body: "退去連絡から退去完了までの一連の業務をAIが支援する。",
-    href: "/contact?intent=materials",
+    href: "/service/move-out-agent",
     icon: "/images/services/agents/move-out-agent.svg"
   },
   {
     title: "更新案内エージェント",
     body: "契約更新対象者への連絡・リマインドを定期的に実行する。",
-    href: "/contact?intent=materials",
+    href: "/service/renewal-agent",
     icon: "/images/services/agents/renewal-agent.svg"
   },
   {
     title: "大規模修繕エージェント",
     body: "水回りからリノベーションまで、修繕提案をAIが支援する。",
-    href: "/contact?intent=materials",
+    href: "/service/large-scale-repair-agent",
     icon: "/images/services/agents/repair-agent.svg"
   }
 ] as const;
@@ -78,9 +78,9 @@ export function WhatWeDoTemplate({ content }: WhatWeDoTemplateProps) {
             SERVICE
           </h1>
           <p className="fx-service-page-lead">
-            AIを業務の外側に置かず、現場で使い続けられる仕組みとして実装する。
+            Field Xは賃貸管理業務に特化したAIエージェントカンパニーです。
             <br />
-            課題整理から開発、導入、運用定着までを一気通貫で支援します。
+            Field XのAIエージェントがどのように、賃貸管理業務を支援し成果をもたらすのかご覧ください。
           </p>
           <div className="fx-service-page-hero-actions">
             <CtaLink href="/contact">まずは相談する</CtaLink>

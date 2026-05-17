@@ -19,16 +19,14 @@ export function NewsTemplate({ content, posts }: NewsTemplateProps) {
             NEWS
           </h1>
           <p className="fx-news-page-lead">
-            Field Xからのお知らせ、プロダクトや取り組みに関する更新情報を掲載します。
-            <br />
-            AIを業務に実装する現場から、継続的な進捗をお届けします。
+            Field Xのプレスリリースや最新情報をお届けします。
           </p>
           <div className="fx-news-page-hero-actions">
             <Link href="/contact" className="fx-news-page-primary-link">
               まずは相談する
             </Link>
-            <Link href="/column/magazine" className="fx-news-page-secondary-link">
-              コラムを読む
+            <Link href="/contact?intent=materials" className="fx-news-page-secondary-link">
+              資料請求する
             </Link>
           </div>
         </div>

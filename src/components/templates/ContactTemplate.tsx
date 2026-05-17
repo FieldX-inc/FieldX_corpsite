@@ -21,11 +21,11 @@ export function ContactTemplate({ content }: ContactTemplateProps) {
             現場の課題や検討状況が整理されていない段階でも、お気軽にお問い合わせください。
           </p>
           <div className="fx-contact-page-hero-actions">
-            <Link href="#contact-form" className="fx-contact-page-primary-link">
-              フォームへ進む
+            <Link href="/contact?intent=materials" className="fx-contact-page-primary-link">
+              資料請求
             </Link>
-            <Link href="mailto:hello@fieldx.site" className="fx-contact-page-secondary-link">
-              メールで相談する
+            <Link href="#contact-form" className="fx-contact-page-secondary-link">
+              お問い合わせ
             </Link>
           </div>
         </div>

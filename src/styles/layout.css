@@ -14,7 +14,7 @@ body {
   font-family: var(--fx-font-body);
   font-size: var(--fx-fs-body);
   line-height: var(--fx-lh-body);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 
 a {
@@ -209,17 +209,205 @@ a {
 
 .fx-not-found {
   min-height: calc(100vh - var(--fx-header-height) - (var(--fx-header-offset) * 2));
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: var(--fx-text);
+}
+
+.fx-not-found-inner {
   display: grid;
-  place-items: center;
+  justify-items: center;
+  gap: clamp(1rem, 1.8vw, 1.45rem);
+  padding-block: clamp(3.4rem, 6.5vw, 5.6rem);
+  text-align: center;
+}
+
+.fx-not-found-runner {
+  position: relative;
+  width: min(100%, 42rem);
+  aspect-ratio: 13 / 5;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  image-rendering: pixelated;
+  touch-action: none;
+}
+
+.fx-not-found-runner:focus-visible {
+  outline: 3px solid var(--fx-red);
+  outline-offset: 6px;
+}
+
+.fx-not-found-runner-score {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  font-family: var(--fx-font-display);
+  font-size: clamp(0.78rem, 1.5vw, 0.95rem);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.fx-not-found-runner-bricks,
+.fx-not-found-runner-brick,
+.fx-not-found-runner-ball,
+.fx-not-found-runner-paddle {
+  position: absolute;
+  display: block;
+}
+
+.fx-not-found-runner-bricks {
+  inset: 0;
+}
+
+.fx-not-found-runner-brick {
+  width: 9.2%;
+  height: 5.2%;
+  background: var(--fx-red);
+  box-shadow: inset 0 0 0 2px #fff;
+  transition:
+    opacity 120ms steps(2, end),
+    transform 120ms steps(2, end);
+}
+
+.fx-not-found-runner-brick:nth-child(2n) {
+  background: #111;
+}
+
+.fx-not-found-runner-brick.is-hidden {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.fx-not-found-runner-ball {
+  z-index: 2;
+  width: 2.1%;
+  aspect-ratio: 1;
+  background: var(--fx-red);
+  box-shadow: 3px 3px 0 #111;
+}
+
+.fx-not-found-runner-paddle {
+  left: 39%;
+  bottom: 8%;
+  z-index: 2;
+  width: 22%;
+  height: 3.3%;
+  background: #111;
+}
+
+.fx-not-found-runner-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 3;
+  transform: translateX(-50%);
+  color: var(--fx-red);
+  font-family: var(--fx-font-display);
+  font-size: clamp(0.7rem, 1.5vw, 0.84rem);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.fx-not-found-kicker {
+  margin: 0;
+  color: var(--fx-red);
+  font-family: var(--fx-font-display);
+  font-size: clamp(4.2rem, 11vw, 8.25rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.fx-not-found-title {
+  margin: 0;
+  font-family: var(--fx-font-display);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: 0;
 }
 
 .fx-not-found-message {
   margin: 0;
-  text-align: center;
-  font-family: var(--fx-font-display);
-  font-size: clamp(1.6rem, 5vw, 3rem);
-  line-height: 1.15;
-  letter-spacing: 0.05em;
+  max-width: 42rem;
+  font-weight: 700;
+  line-height: 1.9;
+}
+
+.fx-not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.fx-not-found-primary-link,
+.fx-not-found-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 11rem;
+  min-height: 3.5rem;
+  padding: 0.95rem 1.45rem;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.fx-not-found-primary-link {
+  background: #ff403a;
+}
+
+.fx-not-found-primary-link:hover,
+.fx-not-found-primary-link:focus-visible {
+  background: #ff4b46;
+}
+
+.fx-not-found-secondary-link {
+  background: #000;
+}
+
+@media (max-width: 640px) {
+  .fx-not-found-inner {
+    gap: 0.95rem;
+    padding-block: clamp(3rem, 8vw, 4.4rem);
+  }
+
+  .fx-not-found-runner {
+    width: min(100%, 22rem);
+    aspect-ratio: 16 / 8;
+    margin-block: 0.1rem 0.2rem;
+  }
+
+  .fx-not-found-runner-score {
+    top: 0.1rem;
+    right: 0.1rem;
+    font-size: 0.76rem;
+  }
+
+  .fx-not-found-runner-hint {
+    bottom: 0.05rem;
+    font-size: 0.68rem;
+  }
+
+  .fx-not-found-kicker {
+    font-size: clamp(4.7rem, 18vw, 6.4rem);
+  }
+
+  .fx-not-found-title {
+    font-size: clamp(1.45rem, 6.2vw, 1.75rem);
+    line-height: 1.18;
+  }
+
+  .fx-not-found-message {
+    line-height: 1.7;
+  }
 }
 
 .fx-article-shell {
@@ -319,8 +507,10 @@ a {
   }
 
   .fx-site-header-inner {
+    position: relative;
     min-height: 74px;
     padding-inline: var(--fx-shell-padding-x) 0;
+    justify-content: center;
   }
 
   .fx-site-header-desktop {

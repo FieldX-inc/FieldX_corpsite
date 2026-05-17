@@ -19,16 +19,14 @@ export function ColumnMagazineTemplate({ content, posts }: ColumnMagazineTemplat
             MAGAZINE
           </h1>
           <p className="fx-column-page-lead">
-            AI活用をPoCで止めず、現場の業務に組み込むための視点を発信します。
-            <br />
-            不動産賃貸管理を中心に、業務設計・運用定着・AIエージェントの実装知を整理します。
+            Field XのAIエージェントやAgent Platformに関するお役立ちコンテンツをお届けします。
           </p>
           <div className="fx-column-page-hero-actions">
             <Link href="/column/materials" className="fx-column-page-primary-link">
-              資料を見る
+              資料請求する
             </Link>
             <Link href="/contact" className="fx-column-page-secondary-link">
-              まずは相談する
+              お問い合わせ
             </Link>
           </div>
         </div>

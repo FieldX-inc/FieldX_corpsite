@@ -52,15 +52,11 @@ export function SiteHeader({ company, nav, aboutSectionNav }: SiteHeaderProps) {
   ];
 
   const mobileLinks = [
-    { href: "/about", label: "ABOUT" },
-    { href: "/about#mvv", label: aboutSectionNav.mvv || "MVV" },
-    { href: "/about#team", label: "TEAM" },
-    { href: "/about#company-profile", label: "COMPANY" },
-    { href: "/service", label: "SERVICE" },
-    { href: "/column/magazine", label: "COLUMN" },
-    { href: "/column/magazine", label: "MAGAZINE" },
-    { href: "/column/materials", label: "MATERIALS" },
-    { href: "/news", label: "NEWS" }
+    { href: "/about", label: "ABOUT", caption: "私たちについて" },
+    { href: "/service", label: "SERVICE", caption: "事業内容" },
+    { href: "/column/magazine", label: "MAGAZINE", caption: "お役立ちコンテンツ" },
+    { href: "/column/materials", label: "MATERIALS", caption: "資料一覧" },
+    { href: "/news", label: "NEWS", caption: "お知らせ" }
   ] as const;
 
   useEffect(() => {
@@ -190,7 +186,8 @@ export function SiteHeader({ company, nav, aboutSectionNav }: SiteHeaderProps) {
                       className="fx-site-header-mobile-link"
                       tracking={undefined}
                     >
-                      {item.label}
+                      <span className="fx-site-header-mobile-link-main">{item.label}</span>
+                      <span className="fx-site-header-mobile-link-sub">{item.caption}</span>
                     </TextAnchor>
                   </li>
                 ))}

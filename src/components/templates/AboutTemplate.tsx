@@ -49,7 +49,7 @@ export function AboutTemplate({ content }: AboutTemplateProps) {
           <p className="fx-about-page-lead">
             様々なFieldのXを解き、社会を次代につなげる。
             <br />
-            Field Xは、AIを前提に業務と産業の次の標準をつくる会社です。
+            Field Xは、既存産業にAIを実装しより良い形で社会を次代につなげる会社です。
           </p>
           <div className="fx-about-page-hero-actions">
             <Link href="/contact" className="fx-about-page-primary-link">
@@ -147,7 +147,7 @@ export function AboutTemplate({ content }: AboutTemplateProps) {
               に由来しています。
             </p>
             <p>
-              現在に至るまでに、社会を形作ってきた先人達に敬意を持ちながらも既存産業をAIネイティブに変革することで、本質的に
+              現在に至るまでに社会を形作ってきた先人達に敬意を持ちながらも、既存産業をAIネイティブに変革することで本質的に
               <strong>ヒトがヒトにしかできない業務に集中できる世界の実現</strong>
               を目指しています。
             </p>
@@ -168,8 +168,8 @@ export function AboutTemplate({ content }: AboutTemplateProps) {
               <li key={item} className="fx-about-page-recruit-item">
                 <span>{item}</span>
                 <Link
-                  href="/contact"
-                  aria-label={`${item}について問い合わせる`}
+                  href="https://recruit.fieldx.site"
+                  aria-label={`${item}の募集ページを見る`}
                   className="fx-about-page-recruit-link"
                 />
               </li>

@@ -34,9 +34,9 @@ export function ColumnMaterialsTemplate({ content }: ColumnMaterialsTemplateProp
             MATERIALS
           </h1>
           <p className="fx-column-page-lead">
-            AI導入や業務設計の検討に使える資料を集約していきます。
+            Field Xが提供するサービスの紹介資料です。
             <br />
-            現在は資料請求フォームから、個別に必要な資料をご案内しています。
+            資料請求フォームの送信完了後、確認メールから資料をダウンロードいただけます。
           </p>
           <div className="fx-column-page-hero-actions">
             <Link href="/contact?intent=materials" className="fx-column-page-primary-link">

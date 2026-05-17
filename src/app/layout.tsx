@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { M_PLUS_Rounded_1c, Noto_Sans_JP } from "next/font/google";
 
 import { SiteFooter, SiteHeader } from "@/components/organisms";
 import { siteContent } from "@/components/site/content";
@@ -6,6 +7,20 @@ import { GoogleTagManager } from "@/components/site/GoogleTagManager";
 import { getSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
+
+const notoSansJp = Noto_Sans_JP({
+  display: "swap",
+  preload: false,
+  variable: "--fx-font-noto-sans-jp",
+  weight: ["400", "500", "700", "800", "900"]
+});
+
+const mPlusRounded = M_PLUS_Rounded_1c({
+  display: "swap",
+  preload: false,
+  variable: "--fx-font-m-plus-rounded",
+  weight: ["700", "800", "900"]
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -31,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   return (
-    <html lang="ja">
+    <html lang="ja" className={`${notoSansJp.variable} ${mPlusRounded.variable}`}>
       <body>
         <SiteHeader
           company={siteContent.company}
