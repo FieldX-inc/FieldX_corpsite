@@ -1,0 +1,109 @@
+# Firebase App Hosting configuration for the Field X corporate site.
+# Secrets referenced here must be created in Google Cloud Secret Manager
+# before the first App Hosting rollout.
+
+runConfig:
+  minInstances: 0
+  maxInstances: 3
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 1024
+
+env:
+  - variable: SITE_RELEASE_PHASE
+    value: full
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://www.fieldx.site
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_GTM_ID
+    secret: fieldx-corporate-next-public-gtm-id
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_CLARITY_ID
+    secret: fieldx-corporate-next-public-clarity-id
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: MICROCMS_SERVICE_DOMAIN
+    secret: fieldx-corporate-microcms-service-domain
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: MICROCMS_API_KEY
+    secret: fieldx-corporate-microcms-api-key
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: MICROCMS_COLUMN_ENDPOINT
+    value: column
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: SMTP_HOST
+    secret: fieldx-corporate-smtp-host
+    availability:
+      - RUNTIME
+
+  - variable: SMTP_PORT
+    value: "587"
+    availability:
+      - RUNTIME
+
+  - variable: SMTP_SECURE
+    value: "false"
+    availability:
+      - RUNTIME
+
+  - variable: SMTP_USER
+    secret: fieldx-corporate-smtp-user
+    availability:
+      - RUNTIME
+
+  - variable: SMTP_PASS
+    secret: fieldx-corporate-smtp-pass
+    availability:
+      - RUNTIME
+
+  - variable: CONTACT_FROM_EMAIL
+    value: hello@fieldx.site
+    availability:
+      - RUNTIME
+
+  - variable: CONTACT_FROM_NAME
+    value: Field X
+    availability:
+      - RUNTIME
+
+  - variable: SUPABASE_URL
+    secret: fieldx-corporate-supabase-url
+    availability:
+      - RUNTIME
+
+  - variable: SUPABASE_SERVICE_ROLE_KEY
+    secret: fieldx-corporate-supabase-service-role-key
+    availability:
+      - RUNTIME
+
+  - variable: SUPABASE_ANON_KEY
+    secret: fieldx-corporate-supabase-anon-key
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: CRM_API_TOKEN
+    secret: fieldx-corporate-crm-api-token
+    availability:
+      - RUNTIME
