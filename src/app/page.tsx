@@ -7,7 +7,6 @@ export const revalidate = 300;
 export default async function HomePage() {
   const allColumnPosts = await getColumnPosts();
   const columnPosts = allColumnPosts.slice(0, 3);
-  const newsPosts = allColumnPosts.slice(0, 5);
 
-  return <HomeTemplate content={siteContent} columnPosts={columnPosts} newsPosts={newsPosts} />;
+  return <HomeTemplate content={siteContent} columnPosts={columnPosts} newsPosts={[]} />;
 }
