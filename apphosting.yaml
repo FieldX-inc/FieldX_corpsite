@@ -28,12 +28,6 @@ env:
       - BUILD
       - RUNTIME
 
-  - variable: NEXT_PUBLIC_CLARITY_ID
-    secret: fieldx-corporate-next-public-clarity-id
-    availability:
-      - BUILD
-      - RUNTIME
-
   - variable: MICROCMS_SERVICE_DOMAIN
     secret: fieldx-corporate-microcms-service-domain
     availability:
@@ -95,12 +89,6 @@ env:
   - variable: SUPABASE_SERVICE_ROLE_KEY
     secret: fieldx-corporate-supabase-service-role-key
     availability:
-      - RUNTIME
-
-  - variable: SUPABASE_ANON_KEY
-    secret: fieldx-corporate-supabase-anon-key
-    availability:
-      - BUILD
       - RUNTIME
 
   - variable: CRM_API_TOKEN

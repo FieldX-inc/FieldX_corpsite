@@ -34,7 +34,6 @@ The repository currently needs these runtime inputs:
 | `SITE_RELEASE_PHASE` | plain env | Safe to commit as `full` |
 | `NEXT_PUBLIC_SITE_URL` | plain env | `https://www.fieldx.site` |
 | `NEXT_PUBLIC_GTM_ID` | secret-like public config | Public in client bundle, but keep managed in Secret Manager for rollout control |
-| `NEXT_PUBLIC_CLARITY_ID` | secret-like public config | Public in client bundle, but keep managed in Secret Manager for rollout control |
 | `MICROCMS_SERVICE_DOMAIN` | secret | Needed during build/runtime for column pages |
 | `MICROCMS_API_KEY` | secret | Use read-only runtime key |
 | `MICROCMS_COLUMN_ENDPOINT` | plain env | Defaults to `column` |
@@ -47,7 +46,6 @@ The repository currently needs these runtime inputs:
 | `CONTACT_FROM_NAME` | plain env | `Field X` |
 | `SUPABASE_URL` | secret | Temporary until lead storage moves to Google Cloud |
 | `SUPABASE_SERVICE_ROLE_KEY` | secret | Runtime only |
-| `SUPABASE_ANON_KEY` | secret-like public config | Present in current env example; not currently required by runtime search, but carried for parity |
 | `CRM_API_TOKEN` | secret | Runtime auth token for lead-read API access |
 
 ## Secret Manager Names
@@ -56,7 +54,6 @@ Create these secrets before the first App Hosting rollout:
 
 ```txt
 fieldx-corporate-next-public-gtm-id
-fieldx-corporate-next-public-clarity-id
 fieldx-corporate-microcms-service-domain
 fieldx-corporate-microcms-api-key
 fieldx-corporate-smtp-host
@@ -64,7 +61,6 @@ fieldx-corporate-smtp-user
 fieldx-corporate-smtp-pass
 fieldx-corporate-supabase-url
 fieldx-corporate-supabase-service-role-key
-fieldx-corporate-supabase-anon-key
 fieldx-corporate-crm-api-token
 ```
 
