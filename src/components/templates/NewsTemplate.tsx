@@ -8,9 +8,10 @@ import type { ColumnPost } from "@/types/content";
 type NewsTemplateProps = {
   content: SiteLocaleContent;
   posts: ColumnPost[];
+  postHrefBasePath?: string;
 };
 
-export function NewsTemplate({ content, posts }: NewsTemplateProps) {
+export function NewsTemplate({ content, posts, postHrefBasePath = "/news" }: NewsTemplateProps) {
   return (
     <>
       <section className="fx-news-page-hero" aria-labelledby="news-page-title">
@@ -45,7 +46,7 @@ export function NewsTemplate({ content, posts }: NewsTemplateProps) {
             <ul className="fx-news-page-grid" aria-label={content.nav.news}>
               {posts.map((post) => (
                 <li key={post.slug}>
-                  <NewsCard post={post} />
+                  <NewsCard post={post} hrefBasePath={postHrefBasePath} />
                 </li>
               ))}
             </ul>
