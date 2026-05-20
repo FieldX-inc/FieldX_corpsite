@@ -68,7 +68,7 @@ export function HomeNewsOrganism({
             <ul className="fx-home-news-list" aria-label={heading}>
               {featuredPosts.map((post) => (
                 <li key={post.slug} className="fx-home-news-item">
-                  <Link href={`/column/${post.slug}`} className="fx-home-news-link">
+                  <Link href={`/news/${post.slug}`} className="fx-home-news-link">
                     <p className="fx-home-news-date">{formatPublishedAt(post.publishedAt)}</p>
                     <p className="fx-home-news-title">{post.title}</p>
                   </Link>
