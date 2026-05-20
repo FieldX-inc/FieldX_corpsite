@@ -6,14 +6,14 @@ import { WhatWeDoTemplate } from "@/components/templates";
 export const metadata: Metadata = {
   title: "事業内容",
   description:
-    "Field Xの事業内容。AIエージェントと業務設計により、課題整理から開発、導入、運用定着まで一気通貫で支援します。",
+    "Field Xは賃貸管理業務に特化したAIエージェントカンパニーです。Field XのAIエージェントがどのように、賃貸管理業務を支援し成果をもたらすのかご覧ください。",
   alternates: {
     canonical: "/service"
   },
   openGraph: {
     title: "事業内容",
     description:
-      "Field Xの事業内容。AIエージェントと業務設計により、課題整理から開発、導入、運用定着まで一気通貫で支援します。",
+      "Field Xは賃貸管理業務に特化したAIエージェントカンパニーです。Field XのAIエージェントがどのように、賃貸管理業務を支援し成果をもたらすのかご覧ください。",
     url: "/service"
   }
 };
