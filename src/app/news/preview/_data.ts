@@ -13,7 +13,7 @@ export const newsPreviewPosts: ColumnPost[] = [
       "現場の担当者が判断に集中できる業務設計を目指し、AIが情報整理と下書きを担う運用モデルの検証を進めます。",
     publishedAt: "2026-05-20T00:00:00.000Z",
     tags: ["プレスリリース"],
-    ogImage: "/images/contact/ai-case-study-bg.png",
+    ogImage: "/images/ogp/fieldx-ogp-20260520.png",
     toc: [],
     body: `
       <p>Field Xは、賃貸管理会社の現場業務を支援するAIエージェント構想について、提供準備を開始しました。対象となるのは、入居者・オーナー対応、社内メモ作成、書類確認、月次報告など、日々の運用で繰り返し発生する業務です。</p>
@@ -35,7 +35,7 @@ export const newsPreviewPosts: ColumnPost[] = [
       "AI導入の検討段階にある企業が、Field Xの支援範囲と思想を把握しやすい構成へ整理しました。",
     publishedAt: "2026-05-13T00:00:00.000Z",
     tags: ["お知らせ"],
-    ogImage: "/images/contact/ai-consultation-bg.png",
+    ogImage: "/images/ogp/fieldx-ogp-20260520.png",
     toc: [],
     body: `
       <p>Field Xは、コーポレートサイトの情報設計を更新しました。今回の更新では、AIを業務にどう組み込み、現場で継続運用できる状態へつなげるかという観点から、サービス紹介と導入支援の説明を見直しています。</p>
@@ -56,7 +56,7 @@ export const newsPreviewPosts: ColumnPost[] = [
       "業務選定、承認フロー、例外対応、運用定着の観点から、AI導入前に整理すべきポイントをまとめています。",
     publishedAt: "2026-05-06T00:00:00.000Z",
     tags: ["資料"],
-    ogImage: "/images/contact/ai-case-study-minimal-bg.png",
+    ogImage: "/images/ogp/fieldx-ogp-20260520.png",
     toc: [],
     body: `
       <p>Field Xは、AI導入を検討する企業向けに、導入前の確認ポイントをまとめた資料の配布を開始しました。</p>

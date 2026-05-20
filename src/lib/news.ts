@@ -11,7 +11,7 @@ export const publishedNewsPosts: ColumnPost[] = [
       "「様々なFieldのXを解き、社会を次代につなげる。」をミッションに掲げるField Xの事業内容と、AIエージェント開発に関する情報をよりわかりやすく発信していきます。",
     publishedAt: "2026-05-20T00:00:00.000Z",
     tags: ["お知らせ"],
-    ogImage: "/images/news/corporate-site-renewal.png",
+    ogImage: "/images/ogp/fieldx-ogp-20260520.png",
     toc: [],
     body: `
       <p>「様々なFieldのXを解き、社会を次代につなげる。」をミッションに掲げ、賃貸管理業務特化のAIエージェントを開発・提供する株式会社Field X（本社：東京都渋谷区、代表：佐藤 善彦）は、コーポレートサイトをリニューアルしました。</p>

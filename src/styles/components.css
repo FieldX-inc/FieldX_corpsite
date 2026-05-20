@@ -3085,8 +3085,8 @@
 }
 
 .fx-news-card {
-  border: 2px solid var(--fx-line-light);
-  border-radius: var(--fx-radius-md);
+  border: 1px solid rgba(24, 19, 19, 0.14);
+  border-radius: 0.25rem;
 }
 
 .fx-service-card {
@@ -3117,37 +3117,35 @@
 
 .fx-card-title {
   margin: 0;
-  font-family: var(--fx-font-display);
+  font-family: var(--fx-font-body);
   font-size: var(--fx-fs-card-title);
   line-height: var(--fx-lh-title);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .fx-card-body {
-  margin-top: 0.62rem;
-  font-size: 0.95rem;
+  margin-top: 0.72rem;
+  font-size: 0.92rem;
+  line-height: 1.72;
   max-width: 44ch;
+  color: rgba(17, 17, 17, 0.72);
   overflow-wrap: anywhere;
 }
 
 .fx-news-card {
   padding: 0;
   min-height: 100%;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.14)), var(--fx-surface);
+  background: #fff;
   overflow: hidden;
-  box-shadow: 0 24px 48px rgba(24, 19, 19, 0.06);
   transition:
-    transform 220ms ease,
-    box-shadow 220ms ease,
-    border-color 220ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease;
 }
 
 .fx-news-card:hover,
 .fx-news-card:focus-within {
-  transform: translateY(-4px);
-  border-color: rgba(225, 6, 0, 0.22);
-  box-shadow: 0 28px 58px rgba(24, 19, 19, 0.1);
+  border-color: rgba(255, 61, 56, 0.58);
+  background-color: rgba(255, 61, 56, 0.018);
 }
 
 .fx-news-thumbnail {
@@ -3155,33 +3153,17 @@
   width: 100%;
   border-radius: 0;
   background:
-    linear-gradient(135deg, rgba(225, 6, 0, 0.14), rgba(24, 19, 19, 0.08)),
-    repeating-linear-gradient(-45deg, rgba(225, 6, 0, 0.08) 0 14px, rgba(225, 6, 0, 0.02) 14px 28px);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+    linear-gradient(135deg, rgba(255, 61, 56, 0.1), rgba(17, 17, 17, 0.035)),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0));
   background-size: cover;
   background-position: center;
-  padding: 1rem 1rem 0;
   position: relative;
-}
-
-.fx-news-thumbnail-label {
-  font-family: var(--fx-font-display);
-  font-size: 0.7rem;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  color: rgba(255, 245, 242, 0.92);
-  padding: 0.4rem 0.68rem;
-  border-radius: var(--fx-radius-pill);
-  background: rgba(24, 19, 19, 0.42);
-  backdrop-filter: blur(8px);
 }
 
 .fx-news-card-body {
   display: grid;
-  gap: 0.8rem;
-  padding: 1rem 1.15rem 1.2rem;
+  gap: 0.9rem;
+  padding: 1.05rem 1.05rem 1.15rem;
 }
 
 .fx-news-card-header {
@@ -3202,15 +3184,16 @@
 .fx-news-card .fx-news-tag {
   margin: 0;
   width: fit-content;
-  border: 1px solid rgba(24, 19, 19, 0.12);
-  border-radius: var(--fx-radius-pill);
-  font-family: var(--fx-font-display);
-  font-size: 0.66rem;
+  border: 0;
+  border-left: 3px solid #ff3d38;
+  font-family: var(--fx-font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
   letter-spacing: 0;
   line-height: 1.15;
-  padding: 0.34rem 0.68rem 0.32rem;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.74);
+  padding: 0.08rem 0 0.08rem 0.48rem;
+  color: #ff3d38;
+  background: transparent;
 }
 
 .fx-news-card .fx-card-title {
@@ -3219,6 +3202,9 @@
 
 .fx-news-card-date {
   margin: 0;
+  color: rgba(17, 17, 17, 0.58);
+  font-family: var(--fx-font-body);
+  font-weight: 700;
 }
 
 .fx-news-grid--latest {
@@ -3244,7 +3230,6 @@
   align-items: center;
   padding-block: clamp(1.1rem, 1.5vw, 1.5rem);
   background: transparent;
-  box-shadow: none;
   transform: none;
 }
 
@@ -3252,18 +3237,13 @@
 .fx-news-grid--latest .fx-news-card:focus-within {
   transform: none;
   border-color: transparent;
-  box-shadow: none;
+  background: transparent;
 }
 
 .fx-news-grid--latest .fx-news-thumbnail {
   grid-column: 1;
   grid-row: 1 / span 3;
-  border-radius: var(--fx-radius-md);
-  padding: 0.75rem;
-}
-
-.fx-news-grid--latest .fx-news-thumbnail-label {
-  font-size: 0.66rem;
+  border-radius: 0.25rem;
 }
 
 .fx-news-grid--latest .fx-card-title,
@@ -6706,10 +6686,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .fx-news-card {
-    box-shadow: 0 18px 36px rgba(24, 19, 19, 0.05);
-  }
-
   .fx-footer-wordmark {
     font-size: clamp(3rem, 18vw, 8.8rem);
   }
@@ -6736,10 +6712,6 @@
 @media (max-width: 640px) {
   .fx-news-card-body {
     padding: 0.95rem 0.95rem 1.05rem;
-  }
-
-  .fx-news-thumbnail {
-    padding: 0.8rem 0.8rem 0;
   }
 
   .fx-article-meta-panel {
