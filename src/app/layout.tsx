@@ -4,6 +4,7 @@ import { M_PLUS_Rounded_1c, Noto_Sans_JP } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/components/organisms";
 import { siteContent } from "@/components/site/content";
 import { GoogleTagManager } from "@/components/site/GoogleTagManager";
+import { defaultOgImage } from "@/lib/metadata";
 import { getSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
@@ -37,8 +38,15 @@ export const metadata: Metadata = {
     description: siteContent.hero.body,
     url: "/",
     siteName: siteContent.company,
+    images: [defaultOgImage],
     locale: "ja_JP",
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteContent.company} | コーポレートサイト`,
+    description: siteContent.hero.body,
+    images: [defaultOgImage.url]
   }
 };
 
