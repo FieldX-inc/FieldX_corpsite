@@ -4,9 +4,10 @@ import type { ColumnPost } from "@/types/content";
 
 type NewsCardProps = {
   post: ColumnPost;
+  hrefBasePath?: string;
 };
 
-export function NewsCard({ post }: NewsCardProps) {
+export function NewsCard({ post, hrefBasePath = "/column" }: NewsCardProps) {
   const tagLabel = post.tags?.[0] ?? "リリース";
   const thumbnailStyle = post.ogImage
     ? {
@@ -29,7 +30,7 @@ export function NewsCard({ post }: NewsCardProps) {
           ) : null}
         </div>
         <SectionTitle as="h3" className="fx-card-title">
-          <TextAnchor href={`/column/${post.slug}`}>{post.title}</TextAnchor>
+          <TextAnchor href={`${hrefBasePath}/${post.slug}`}>{post.title}</TextAnchor>
         </SectionTitle>
         <BodyText className="fx-card-body">{post.description}</BodyText>
       </div>

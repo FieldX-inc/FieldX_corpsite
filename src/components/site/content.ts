@@ -296,20 +296,10 @@ export const siteContent: SiteLocaleContent = {
   companyProfile: {
     heading: "会社概要",
     items: [
-      { label: "会社名", value: "Field X" },
+      { label: "会社名", value: "株式会社Field X / Field X inc." },
       { label: "代表者", value: "佐藤 善彦" },
-      { label: "所在地", value: "東京都渋谷区神泉町10-15" },
-      { label: "設立", value: "2026年" },
-      {
-        label: "主な事業領域",
-        value: [
-          "AIコールエージェントの開発・導入",
-          "書類業務のAI自動化",
-          "業務オペレーションのAIエージェント化",
-          "ナレッジベース / RAGシステムの構築",
-          "AI活用プロダクトの開発"
-        ]
-      }
+      { label: "設立", value: "2026年3月" },
+      { label: "住所", value: "東京都渋谷区神泉町10-35" }
     ]
   },
   news: {
