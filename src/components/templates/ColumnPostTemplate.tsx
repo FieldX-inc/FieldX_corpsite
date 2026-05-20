@@ -1,5 +1,9 @@
+import Image from "next/image";
+
 import { BodyText, Surface, TextAnchor } from "@/components/atoms";
 import { EditorialHeading } from "@/components/molecules";
+import { ArticleMaterialsForm } from "@/components/organisms/ArticleMaterialsForm";
+import { formatDate } from "@/lib/format-date";
 import type { ColumnPost } from "@/types/content";
 
 type ColumnPostTemplateProps = {
@@ -8,6 +12,13 @@ type ColumnPostTemplateProps = {
 
 export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
   const lead = post.lead ?? post.description;
+  const plainText = post.body.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const readingMinutes = Math.max(1, Math.ceil(plainText.length / 600));
+  const metaItems = [
+    post.publishedAt ? formatDate(post.publishedAt) : undefined,
+    ...(post.tags ?? []),
+    `${readingMinutes}分で読めます`
+  ].filter((item): item is string => Boolean(item));
 
   return (
     <Surface
@@ -36,15 +47,29 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
                 kicker="Column"
                 level="h1"
               />
-              <BodyText className="fx-article-lead">{lead}</BodyText>
+              <div className="fx-article-meta" aria-label="記事情報">
+                {metaItems.map((item) => (
+                  <span key={item} className="fx-article-meta-item">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
           </header>
 
           {post.ogImage ? (
             <figure className="fx-article-cover">
-              <img src={post.ogImage} alt={post.title} className="fx-article-cover-image" />
+              <Image
+                src={post.ogImage}
+                alt={post.title}
+                fill
+                sizes="(min-width: 1180px) 720px, calc(100vw - 2rem)"
+                className="fx-article-cover-image"
+              />
             </figure>
           ) : null}
+
+          <BodyText className="fx-article-lead">{lead}</BodyText>
 
           {post.toc.length > 0 ? (
             <nav aria-label="記事目次" className="fx-article-toc">
@@ -68,6 +93,19 @@ export function ColumnPostTemplate({ post }: ColumnPostTemplateProps) {
             <div className="fx-mdx" dangerouslySetInnerHTML={{ __html: post.body }} />
           </div>
         </div>
+
+        <aside className="fx-article-sidebar" aria-labelledby="article-materials-title">
+          <div className="fx-article-sidebar-card">
+            <p className="fx-article-sidebar-kicker">Materials</p>
+            <h2 id="article-materials-title" className="fx-article-sidebar-title">
+              AI導入の検討資料を受け取る
+            </h2>
+            <p className="fx-article-sidebar-body">
+              Field Xのサービス概要と、業務整理からAI実装までの進め方をまとめた資料です。
+            </p>
+            <ArticleMaterialsForm />
+          </div>
+        </aside>
       </div>
     </Surface>
   );
