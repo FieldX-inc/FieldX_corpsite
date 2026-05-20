@@ -17,9 +17,7 @@ export function NewsCard({ post, hrefBasePath = "/column" }: NewsCardProps) {
 
   return (
     <article className="fx-news-card">
-      <div className="fx-news-thumbnail" aria-hidden="true" style={thumbnailStyle}>
-        <span className="fx-news-thumbnail-label">{post.ogImage ? tagLabel : "Column"}</span>
-      </div>
+      <div className="fx-news-thumbnail" aria-hidden="true" style={thumbnailStyle} />
       <div className="fx-news-card-body">
         <div className="fx-news-card-header">
           <p className="fx-news-tag">{tagLabel}</p>
