@@ -3129,7 +3129,11 @@
   line-height: 1.72;
   max-width: 44ch;
   color: rgba(17, 17, 17, 0.72);
+  display: -webkit-box;
+  overflow: hidden;
   overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .fx-news-card {
