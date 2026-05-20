@@ -1,7 +1,0 @@
-<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="675" fill="#ffffff"/>
-  <rect x="1" y="1" width="1198" height="673" stroke="#eceff3" stroke-width="2"/>
-  <path d="M0 675H1200V559C994 610 801 627 620 609C419 589 228 522 0 545V675Z" fill="#f7f8fa"/>
-  <path d="M0 675H1200V616C981 639 781 646 600 628C400 609 216 559 0 578V675Z" fill="#fff4f3"/>
-  <image href="/images/brand/field-x-logo-wide.png" x="352" y="260" width="496" height="145" preserveAspectRatio="xMidYMid meet"/>
-</svg>
