@@ -136,7 +136,7 @@ export const siteContent: SiteLocaleContent = {
   },
   hero: {
     title: "様々なFieldのXを解き、\n社会を次代につなげる。",
-    body: "賃貸管理業務をはじめ、社会生活に根ざした産業へ。Field Xは、AIによる自動化とAIエージェント群による自律化を実装し、社会をより良い形で次の世代につなげます。"
+    body: "Field Xは賃貸管理業務に特化したAIエージェントカンパニーです。最先端技術の社会実装を通じて、ヒトがヒトにしかできない業務に集中できる世界の実現を目指しています。"
   },
   poem: {
     eyebrowEn: "ABOUT",
