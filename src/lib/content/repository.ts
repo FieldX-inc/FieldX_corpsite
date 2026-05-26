@@ -4,7 +4,6 @@ import { cache } from "react";
 import matter from "gray-matter";
 import { z } from "zod";
 
-import { siteContent } from "@/components/site/content";
 import { getMicrocmsClient, getMicrocmsColumnEndpoint } from "@/lib/content/microcms";
 import { publishedNewsPosts } from "@/lib/news";
 import type {
@@ -350,17 +349,10 @@ export async function getAllPublishedRoutes(): Promise<string[]> {
     "/news"
   ];
 
-  routes.push(
-    ...siteContent.whatWeDo.services
-      .map((service) => service.slug)
-      .filter((slug): slug is string => Boolean(slug))
-      .map((slug) => `/service/${slug}`)
-  );
-
   const [posts, pages] = await Promise.all([getColumnPosts(), getLandingPages()]);
   routes.push(...posts.map((post) => `/column/${post.slug}`));
   routes.push(...publishedNewsPosts.map((post) => `/news/${post.slug}`));
   routes.push(...pages.map((page) => `/lp/${page.campaign}`));
 
-  return routes;
+  return [...new Set(routes)];
 }
